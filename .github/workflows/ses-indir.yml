@@ -1,0 +1,38 @@
+# Okur sesi (Piper) dosyalarını depodaki ses/ klasörüne indirir.
+# Böylece kurum ağında huggingface / jsdelivr / cdnjs kapalı olsa da ses, Okur'un kendi adresinden (github.io) iner.
+# Elle çalıştırmak için: GitHub > Actions > "Okur sesi dosyalarını indir" > Run workflow
+name: Okur sesi dosyalarını indir
+on:
+  workflow_dispatch:
+  push:
+    paths: ['.github/workflows/ses-indir.yml']
+permissions:
+  contents: write
+jobs:
+  indir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dosyaları indir
+        run: |
+          set -e
+          mkdir -p ses && cd ses
+          HF=https://huggingface.co/rhasspy/piper-voices/resolve/v1.0.0/tr/tr_TR
+          for v in fahrettin fettah dfki; do
+            curl -fsSL -o tr_TR-$v-medium.onnx      $HF/$v/medium/tr_TR-$v-medium.onnx
+            curl -fsSL -o tr_TR-$v-medium.onnx.json $HF/$v/medium/tr_TR-$v-medium.onnx.json
+          done
+          PW=https://cdn.jsdelivr.net/npm/@diffusionstudio/piper-wasm@1.0.0/build
+          curl -fsSL -o piper_phonemize.data $PW/piper_phonemize.data
+          curl -fsSL -o piper_phonemize.wasm $PW/piper_phonemize.wasm
+          curl -fsSL -o piper-DeOu3H9E.js https://cdn.jsdelivr.net/npm/@diffusionstudio/vits-web@1.0.3/dist/piper-DeOu3H9E.js
+          ORT=https://cdnjs.cloudflare.com/ajax/libs/onnxruntime-web/1.18.0
+          for f in ort.wasm.min.js ort-wasm-simd.wasm ort-wasm.wasm; do curl -fsSL -o $f $ORT/$f; done
+          ls -la
+      - name: Depoya kaydet
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ses
+          git diff --cached --quiet || git commit -m "Okur sesi dosyaları (ses/)"
+          git push

@@ -1,5 +1,5 @@
 /* okur çevrimdışı önbelleği. Yalnızca kendi önbelleğini siler (aynı adresteki diğer uygulamalara dokunmaz). */
-const P='okur-',V=P+'67';
+const P='okur-',V=P+'68';
 const SHELL=['./','index.html','manifest.webmanifest','icon.svg','icon-192.png','icon-512.png','icon-maskable.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.indexOf(P)===0&&k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
@@ -7,6 +7,7 @@ self.addEventListener('fetch',e=>{
   const r=e.request;if(r.method!=='GET')return;
   const u=new URL(r.url);
   if(/youtube\.com|ytimg\.com|googlevideo\.com|googleapis\.com/.test(u.hostname))return; /* her zaman ağdan */
+  if(/\/ses\/|\/ocr-studyo\/motor\//.test(u.pathname))return; /* büyük ses/OCR dosyaları: uygulama kendi önbelleğinde tutar, burada ikinci kopya yapılmaz */
   if(r.mode==='navigate'){
     /* Önce ağ (güncelleme gelsin); 3 sn'de yanıt yoksa önbellek: internetsiz açılış takılmaz. Geç gelen yanıt yine önbelleğe yazılır. */
     const net=fetch(r.url,{cache:'no-cache',credentials:'same-origin'}).then(res=>{if(res&&res.ok){const c=res.clone();caches.open(V).then(x=>x.put('index.html',c))}return res});
