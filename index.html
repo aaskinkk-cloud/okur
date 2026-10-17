@@ -803,6 +803,47 @@ html,body{max-width:100%;overflow-x:hidden}
   <input type="file" id="fileIn" multiple accept=".epub,.pdf,application/epub+zip,application/pdf" hidden>
 </div>
 
+<style id="sahne-css">
+/* v70: sabit sahne — alt gezinme tuşları/durum çubuğu açılıp kapanırken okuma alanı yeniden dizilmez */
+.sahne-sabit .reader{bottom:auto!important;height:var(--sahneH)!important}
+</style>
+<script>
+/* v70: SABİT SAHNE
+   Telefonun alt gezinme tuşları (ya da durum çubuğu) açılıp kapanınca yalnız ekran yüksekliği biraz değişir.
+   Önceden bu her seferinde kitabı baştan dizdiriyordu (EPUB yeniden çizim, PDF sayfa yeniden çizim, konum koruma,
+   boş ekran koruması üst üste) → siyah ekran / titreme. Artık: genişlik aynı ve yükseklik farkı küçükse okuma alanı
+   eski yükseklikte sabit tutulur, tuşlar sayfanın üstüne biner, hiçbir şey yeniden dizilmez. Tuşlar kalıcı olarak
+   açık kalırsa (menü kapalıyken 1,5 sn) tek seferlik, sakin bir yerleşim yapılır. Dönme gibi büyük değişimler normal işler. */
+(function(){
+  if(window.__sahne)return;window.__sahne=1;
+  var de=document.documentElement,W=innerWidth,H=innerHeight,pin=false,bekleT=0,serbest=false,ESIK=220;
+  function okuyor(){var b=document.body;return !!(b&&b.classList.contains('reading'))&&!document.querySelector('.akis.acik')}
+  function menuAcik(){try{return typeof RUI!=='undefined'&&!!RUI.bars}catch(e){return false}}
+  function tamDugme(){try{var b=document.getElementById('rFull');if(b)b.setAttribute('aria-pressed',!!(document.fullscreenElement||document.webkitFullscreenElement))}catch(e){}}
+  function sabitle(){if(pin)return;pin=true;de.style.setProperty('--sahneH',H+'px');de.classList.add('sahne-sabit')}
+  function coz(yeniden){clearTimeout(bekleT);pin=false;de.classList.remove('sahne-sabit');de.style.removeProperty('--sahneH');W=innerWidth;H=innerHeight;
+    if(yeniden){serbest=true;try{window.dispatchEvent(new Event('resize'))}catch(e){}serbest=false}}
+  function ayni(){return innerWidth===W&&Math.abs(innerHeight-H)<4}
+  function bekle(){clearTimeout(bekleT);bekleT=setTimeout(function(){
+      if(!pin)return;
+      if(ayni()){coz(false);return}            /* eski boya döndü: hiçbir şey dizilmez */
+      if(menuAcik()||document.hidden||!okuyor()){if(!okuyor())coz(true);else bekle();return}
+      coz(true)},1500)}                        /* tuşlar kalıcı açık: bir kez yerleştir */
+  function kucuk(){return okuyor()&&innerWidth===W&&Math.abs(innerHeight-H)<=ESIK}
+  window.addEventListener('resize',function(e){
+    if(serbest)return;
+    if(pin&&ayni()){coz(false);e.stopImmediatePropagation();return}
+    if(kucuk()&&!ayni()){sabitle();e.stopImmediatePropagation();bekle();return}
+    if(pin)coz(false);
+    W=innerWidth;H=innerHeight;
+  },true);
+  /* tam ekran girip çıkarken (menü açılınca alt tuşları göstermek dahil) aynı kural */
+  function fs(e){if(serbest||!okuyor()||innerWidth!==W)return;
+    sabitle();e.stopImmediatePropagation();tamDugme();bekle()}
+  document.addEventListener('fullscreenchange',fs,true);document.addEventListener('webkitfullscreenchange',fs,true);
+  window.__sahneDurum=function(){return{pin:pin,W:W,H:H}};
+})();
+</script>
 <script data-k>/*!
 
 JSZip v3.10.1 - A JavaScript class for generating and reading zip files

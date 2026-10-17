@@ -27,6 +27,9 @@ Tanıma bileşenleri ilk kullanımda internetten iner (~15 MB), sonra tarayıcı
 
 ## Sürüm
 
+**70** (17.10.2026)
+- **Alt gezinme tuşlarında siyah ekran / titreme giderildi:** Telefonun alt tuşları (veya durum çubuğu) açılıp kapanınca ekran yüksekliği biraz değişiyor, bu da her seferinde kitabı baştan dizdiriyordu (yeniden çizim + konum koruma + boş ekran koruması üst üste). Artık genişlik aynı ve yükseklik farkı küçükse okuma alanı sabit kalır, tuşlar sayfanın üstüne biner; hiçbir şey yeniden çizilmez. Tuşlar kalıcı açık kalırsa menü kapalıyken bir kez sakin yerleşim yapılır. Ekran döndürme normal çalışır. "Menü açılınca tam ekrandan çık" ayarı da artık titretmez.
+
 **69** (17.10.2026)
 - **Kaldığın yer hatası düzeltildi:** Kitap açılırken, tam ekran/pencere boyu koruma özelliği konumu kitap henüz yüklenirken (çoğu zaman 1. sayfada) alıp 1–2 sn sonra oraya geri atıyor ve bunu kaydediyordu. Artık açılışta kayıtlı konum korunur; açılış sırasındaki ara konumlar kaydı ezmez.
 - **En ileri okunan yer:** Her kitap için en ileri okuduğun yer ayrıca saklanır (geri dönüp okusan da kaybolmaz).
