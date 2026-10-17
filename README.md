@@ -27,6 +27,13 @@ Tanıma bileşenleri ilk kullanımda internetten iner (~15 MB), sonra tarayıcı
 
 ## Sürüm
 
+**69** (17.10.2026)
+- **Kaldığın yer hatası düzeltildi:** Kitap açılırken, tam ekran/pencere boyu koruma özelliği konumu kitap henüz yüklenirken (çoğu zaman 1. sayfada) alıp 1–2 sn sonra oraya geri atıyor ve bunu kaydediyordu. Artık açılışta kayıtlı konum korunur; açılış sırasındaki ara konumlar kaydı ezmez.
+- **En ileri okunan yer:** Her kitap için en ileri okuduğun yer ayrıca saklanır (geri dönüp okusan da kaybolmaz).
+- **Alttan "Kaldığın yer" menüsü:** Kitap açıldığında daha ileride bir yer varsa (en ileri okuduğun yer, en ileri yer imi, en son koyduğun yer imi) alttan seçenekler çıkar: dokun → oraya git, ya da **Burada kal**. "Bir daha sorma" o anki yerleri susturur. Sayfa çevirince menü kapanır.
+- **Yer imleri listesi:** Üstte "En ileri okuduğun yer" düğmesi; yer imlerinde **En son konan** ve **En ileri** etiketleri. Eski bir yer imine uğramak artık onu "son" yapmaz. Geride kalan bir yer imine dokununca hangisine gidileceği sorulur.
+- Ayarlar › **Kaldığın yeri sor** ile kapatılabilir. Yedek dışa/içe aktarmada en ileri yer de taşınır.
+
 **68** (15.10.2026)
 - **Sesi dosyaya kaydet (WAV / MP3):** Ekran paylaşımı kaldırıldı ("Paylaşım izni verilmedi" hatası yok). Metin **Okur sesiyle** (Fahrettin / Fettah / DFKI) doğrudan dosyaya çevrilir ve İndirilenler'e iner; okunmasını beklemek gerekmez, ilerleme ve kalan süre görünür, Vazgeç ile durdurulur. Bilgisayarda ve telefonda aynı çalışır. Okuma hızı ayarı dosyaya da uygulanır. Bilgisayarda eski yöntem (sistem sesi + ekran kaydı) seçenek olarak duruyor.
 - **Windows'ta Okur sesi:** Okur sesi telefona özgü değil, tarayıcının içinde çalışır; Windows'ta da Ayarlar › Sesli okuma › **Okur sesi** seçilince okur. Ses dosyaları artık önce Okur'un kendi adresinden (`ses/` klasörü) iner — kurum ağında huggingface/jsdelivr kapalı olsa da çalışır. `ses/` klasörü GitHub Actions'taki **"Okur sesi dosyalarını indir"** iş akışıyla dolar.

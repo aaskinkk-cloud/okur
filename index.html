@@ -702,6 +702,15 @@ html:not(.ok-tam) .sk{display:none !important}
 .bm-i.bm-soluk:hover,.bm-i.bm-soluk:focus-visible{opacity:.85}
 .bm-i.bm-soluk .bm-bas svg{fill:none;color:var(--rmut)}
 .bm-i.bm-soluk .bm-q{border-color:color-mix(in srgb,var(--rmut) 50%,transparent)}
+.dv-ust{margin:0 0 12px;color:var(--ink2);font-size:15px;line-height:1.45}
+.dv-liste{display:flex;flex-direction:column;gap:8px}
+.dv-sec{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 10px;width:100%;text-align:left;padding:12px 14px;border-radius:14px;border:1px solid color-mix(in srgb,var(--ink) 16%,transparent);background:var(--surface);color:var(--ink);font:inherit;cursor:pointer}
+.dv-sec b{font-size:16.5px}.dv-sec span{grid-column:1;font-size:13px;color:var(--ink2)}.dv-sec svg{grid-row:1/3;grid-column:2;opacity:.6}
+.dv-sec.ana{background:var(--accent);border-color:var(--accent);color:#fff}.dv-sec.ana span{color:color-mix(in srgb,#fff 85%,transparent)}.dv-sec.ana svg{opacity:1}
+.dv-sec.kal{background:transparent}
+.dv-unut{display:block;margin:12px auto 0;background:none;border:0;color:var(--ink2);font:inherit;font-size:13px;text-decoration:underline;cursor:pointer}
+.bm-ileri{margin:10px 0 4px}
+.bm-akt.bm-ileri-et{background:var(--accent);color:#fff}
 .bm-i.bm-aktif{box-shadow:inset 3px 0 0 #d6473b;background:color-mix(in srgb,#d6473b 7%,transparent)}
 .bm-akt{margin-left:auto;flex:none;font-style:normal;font-size:11px;font-weight:700;color:#d6473b;white-space:nowrap}
 .pg .bmk.soluk{opacity:.3;filter:grayscale(.7)}
@@ -1760,7 +1769,9 @@ const RUI={open:false,R:null,rec:null,last:null,hideT:0,pushed:false,sel:null,wa
     busy:t=>{$('#rLoadTxt').textContent=t},
   },
   async openBook(rec){try{TRD.sifirla()}catch(e){}
-    this.open=true;this.rec=rec;this.last=null;document.body.classList.add('reading');
+    this.open=true;this.rec=rec;this.last=null;this._acilis=true;document.body.classList.add('reading');
+    /* v69: en ileri okunan yer — eski kayıtlarda son konumdan başlatılır */
+    if(!rec.ileri&&rec.pos!=null)rec.ileri={pct:rec.pct||0,pos:rec.pos,konum:rec.sonKonum||'',bolum:rec.sonBolum||'',ts:rec.sonTs||Date.now()};
     const rd=$('#reader');rd.hidden=false;$('#rLoading').hidden=false;$('#rLoadTxt').textContent='Kitap açılıyor…';
     $('#epubMount').hidden=rec.type!=='epub';$('#pdfScroll').hidden=rec.type!=='pdf';
     $('#rTitle').textContent=rec.title;$('#rAuthor').textContent=rec.author||'';
@@ -1776,6 +1787,8 @@ const RUI={open:false,R:null,rec:null,last:null,hideT:0,pushed:false,sel:null,wa
       this.R=rec.type==='epub'?new EpubReader(env):new PdfReader(env);
       await this.R.init();
       $('#rLoading').hidden=true;rec.opened=Date.now();saveBook(rec);Sess.start(rec);this.wake();this.rfBtn();
+      /* açılışta düzen oturana kadar gelen ara konumlar kaydı ezmez; sonra ileride kalan yer varsa alttan sorulur */
+      setTimeout(()=>{if(this.open&&this.rec===rec){this._acilis=false;try{this.devamKontrol()}catch(e){console.warn('devam',e)}}},1300);
       if(ustPin()){this.setBars(false);this.vfit()}else this.setBars(true);
     }catch(e){console.error(e);toast('Kitap açılamadı: '+(e&&e.message||e),4500);this.close(true)}
   },
@@ -1920,7 +1933,7 @@ const RUI={open:false,R:null,rec:null,last:null,hideT:0,pushed:false,sel:null,wa
     $('#selPop').hidden=true;if(this.R&&this.R.applySetting)this.R.applySetting('lock');
     toast(S.lock?(Dokun.kaba()?'Kilit açık: kenarlara dokununca sayfa çevrilir · seçmek için uzun bas':'Kilit açık: tıklayınca sayfa çevrilir · fareyle seçim serbest'):'Kilit kapandı',2200)},
   sentRedraw(){const box=$('#ttsSent');if(!box)return;box.innerHTML='';if(!S.ttsSent||!this._sent||!TTS.on)return;try{this._sent.c.sentShow(this._sent.i,box)}catch{}},
-  step(d){if(!this.R)return;d>0?this.R.next():this.R.prev();Sess.page()},
+  step(d){if(!this.R)return;this._acilis=false;if(Sheet.cur&&Sheet.cur.devam)Sheet.close();d>0?this.R.next():this.R.prev();Sess.page()},
   progress(p){
     this.last=p;const rec=this.rec;if(!rec)return;Sag.kalinlik(p.pct);
     $('#stTopL').textContent=[rec.title,rec.author].filter(Boolean).join(' | ');$('#stTopR').textContent=innerWidth<=760?'':(p.chapter||'');
@@ -1929,13 +1942,40 @@ const RUI={open:false,R:null,rec:null,last:null,hideT:0,pushed:false,sel:null,wa
     {const sy=[p.kalB!=null?(rec.type==='pdf'?'Kalan '+p.kalB+' sayfa':'Bölüm '+p.kalB+' s.'):'',p.kalK!=null?'Kitap ≈'+p.kalK+' s.':''].filter(Boolean).join(' · ');
      const rm=rec.type==='pdf'?(p.remain||'').replace(/^Kalan \d+ sayfa ≈ /,'Kalan süre ≈ '):(p.remain||'');
      $('#rMid').innerHTML=(sy?'<b>'+esc(sy)+'</b>':'')+(rm?'<span>'+esc(rm)+'</span>':'')}
-    if(p.bookmarked&&this.R&&this.R.matchBm){const m=this.R.matchBm();if(m[0])this.bmAktifYap(m[0].id)}
     {const sr=$('#bmSerit');if(sr){sr.hidden=!p.bookmarked;sr.classList.toggle('pdf',rec.type==='pdf');if(!sr._b){sr._b=1;sr.onclick=e=>{e.stopPropagation();this.toggleBm()}}}}
     const bm=$('#rBm');bm.classList.toggle('on',!!p.bookmarked);bm.setAttribute('aria-pressed',!!p.bookmarked);{const mb=$('#rMini [data-m="bm"]');if(mb)mb.setAttribute('aria-pressed',!!p.bookmarked)}
+    if(this._acilis)return; /* açılış sırasındaki ara konumlar kaydedilmez */
     rec.pct=p.pct;rec.pos=p.posData;rec.sonBolum=p.chapter||'';rec.sonKonum=rec.type==='pdf'?(p.page||p.pos||''):(p.pos||'');rec.sonTs=Date.now();
+    if(!rec.ileri||this._sira(p)>this._sira(rec.ileri))rec.ileri={pct:p.pct,pos:p.posData,konum:rec.sonKonum,bolum:rec.sonBolum,page:p.page||0,ts:Date.now()};
     if(p.pct>=.985&&!rec.finished){rec.finished=true;toast('Kitabı bitirdin. Tebrikler!')}
     else if(p.pct<.9&&rec.finished&&!rec._manual){rec.finished=false}
     saveBookSoon(rec);
+  },
+  /* v69: KALDIĞIN YER — konum karşılaştırma (PDF: sayfa, EPUB: yüzde) */
+  _sira(x){if(!x)return 0;if(this.rec&&this.rec.type==='pdf')return x.page||(x.pos&&x.pos.p)||(+x.konum)||0;return x.pct||0},
+  _ileride(a,b){return this._sira(a)-this._sira(b)>(this.rec&&this.rec.type==='pdf'?.5:.003)},
+  _yerAd(x){if(!x)return'';if(this.rec.type==='pdf')return'Sayfa '+this._sira(x);const R=this.R,top=R&&R.book&&R.locReady?R.book.locations.total:0;
+    return(top?'Konum '+Math.max(1,Math.round((x.pct||0)*top))+' · ':'')+'%'+Math.round((x.pct||0)*100)},
+  yereGit(x){if(!this.R||!x)return;this._acilis=false;if(x.kind==='bookmark'){this.bmAktifYap(x.id);this.R.goAnnot(x);return}
+    if(this.rec.type==='pdf')this.R.goAnnot({page:this._sira(x)});else this.R.goAnnot({cfi:x.pos})},
+  /* ileride kalan yerler: en ileri okunan yer, en ileri yer imi, en son konan yer imi */
+  devamAdaylar(){const rec=this.rec,o=rec.devamOnay||0,c=[];
+    if(rec.ileri)c.push({x:rec.ileri,t:'En ileri okuduğun yer',b:rec.ileri.bolum});
+    const bms=(rec.annots||[]).filter(a=>a.kind==='bookmark');
+    if(bms.length){const enI=bms.reduce((m,a)=>this._sira(a)>this._sira(m)?a:m),enS=bms.reduce((m,a)=>(a.ts||0)>(m.ts||0)?a:m);
+      c.push({x:enI,t:'En ileri yer imin',b:enI.chapter});if(enS!==enI)c.push({x:enS,t:'En son koyduğun yer imi',b:enS.chapter})}
+    return c.filter(k=>(k.x.ts||0)>o)},
+  devamKontrol(){const rec=this.rec,cur=this.last;if(!rec||!this.R||!cur||S.devamSor===false)return;
+    let c=this.devamAdaylar().filter(k=>this._ileride(k.x,cur)).sort((a,b)=>this._sira(b.x)-this._sira(a.x));
+    c=c.filter((k,i)=>!c.slice(0,i).some(z=>!this._ileride(z.x,k.x)&&!this._ileride(k.x,z.x)));
+    if(!c.length)return;this.devamMenu(c,cur,'Kitap <b>'+esc(this._yerAd(cur))+'</b> konumunda açıldı. Daha ileride kaldığın yer var:',true)},
+  devamMenu(c,cur,ust,unut){
+    const sat=(k,i)=>`<button class="dv-sec${i===0?' ana':''}" data-i="${i}"><b>${esc(this._yerAd(k.x))}</b><span>${esc([k.t,k.b,k.x.ts?fmtDate(k.x.ts):''].filter(Boolean).join(' · '))}</span>${ic('chevR',18)}</button>`;
+    Sheet.open({title:'Kaldığın yer',dim:false,html:`<p class="dv-ust">${ust}</p><div class="dv-liste">${c.map(sat).join('')}<button class="dv-sec kal" data-kal><b>Burada kal</b><span>${esc(this._yerAd(cur))}</span></button></div>${unut?'<button class="dv-unut" data-unut>Burada kal ve bu yerler için bir daha sorma</button>':''}`,
+      onMount:(body,sh)=>{if(sh.cur)sh.cur.devam=1;body.onclick=e=>{const b=e.target.closest('[data-i],[data-kal],[data-unut]');if(!b)return;
+        if(b.dataset.i!=null){Sheet.close();this.yereGit(c[+b.dataset.i].x);toast('Kaldığın yere gidildi',1300);return}
+        if(b.hasAttribute('data-unut')){const r=this.rec,p=this.last;r.devamOnay=Date.now();if(p)r.ileri={pct:p.pct,pos:p.posData,konum:r.sonKonum,bolum:r.sonBolum,page:p.page||0,ts:r.devamOnay};saveBook(r);toast('Tamam, bu kitapta şimdilik sormayacağım',1600)}
+        Sheet.close()}}});
   },
   tbGoster(ms){const b=$('#ttsBar');b.classList.remove('tb-gizli');clearTimeout(this._tbT);if(ms)this._tbT=setTimeout(()=>{if(TTS.on)b.classList.add('tb-gizli')},ms)},
   tbGizle(){clearTimeout(this._tbT);$('#ttsBar').classList.add('tb-gizli')},
@@ -2036,15 +2076,21 @@ const RUI={open:false,R:null,rec:null,last:null,hideT:0,pushed:false,sel:null,wa
     const R=this.R,pdf=this.rec.type==='pdf',bms=this.rec.annots.filter(a=>a.kind==='bookmark').sort((x,y)=>(y.ts||0)-(x.ts||0));
     const top=R&&R.book&&R.locReady?R.book.locations.total:0;
     const yer=a=>pdf||a.page?'Sayfa '+a.page:(top?'Konum '+Math.max(1,Math.round((a.pct||0)*top)):'')+' · %'+Math.round((a.pct||0)*100);
-    const cur=this.last&&this.last.bookmarked,akt=this.aktifBmId();
+    const cur=this.last&&this.last.bookmarked,enS=bms[0],enI=bms.length?bms.reduce((m,a)=>this._sira(a)>this._sira(m)?a:m):null,akt=enS&&enS.id,il=this.rec.ileri,ilGit=il&&this.last&&this._ileride(il,this.last)&&!(enI&&!this._ileride(il,enI));
     b.innerHTML=`<div class="bm-ust"><button class="btn ${cur?'soft':'primary'} sm" data-bmekle>${ic('bookmark',16)}${cur?'Bu sayfadaki yer imini kaldır':'Bu sayfaya yer imi koy'}</button><small>İpucu: sayfanın <b>sağ üst köşesine</b> tıklayarak / dokunarak da ekleyip kaldırabilirsin. Kenar boşluklarına tıklamak sayfa çevirir.</small></div>`+
-      (bms.length?bms.map(a=>`<div class="note-i bm-i ${bms.length>1?(a.id===akt?'bm-aktif':'bm-soluk'):''}" data-id="${a.id}" role="button" tabindex="0"${a.id===akt&&bms.length>1?' aria-current="true"':''}><div class="bm-bas">${ic('bookmark',15)}<b>${esc(yer(a))}</b>${a.chapter?`<span>${esc(a.chapter)}</span>`:''}${a.id===akt&&bms.length>1?'<em class="bm-akt">Son bulunduğun</em>':''}</div><div class="q bm-q">${a.text?esc(a.text)+'…':'<i class="bm-yuk">…</i>'}</div>${a.note?`<div class="n">${esc(a.note)}</div>`:''}<div class="m"><span>${a.ts?fmtDate(a.ts):''}</span><span class="sp"></span><button data-en aria-label="Not ekle / düzenle" title="Not">${ic('edit',16)}</button><button data-rm aria-label="Yer imini sil" title="Sil">${ic('trash',16)}</button></div></div>`).join('')
+      (ilGit?`<button class="dv-sec ana bm-ileri" data-ilerigit><b>${esc(this._yerAd(il))}</b><span>${esc(['En ileri okuduğun yer',il.bolum,il.ts?fmtDate(il.ts):''].filter(Boolean).join(' · '))}</span>${ic('chevR',18)}</button>`:'')+
+      (bms.length?bms.map(a=>`<div class="note-i bm-i ${bms.length>1?(a.id===akt?'bm-aktif':'bm-soluk'):''}" data-id="${a.id}" role="button" tabindex="0"${a.id===akt&&bms.length>1?' aria-current="true"':''}><div class="bm-bas">${ic('bookmark',15)}<b>${esc(yer(a))}</b>${a.chapter?`<span>${esc(a.chapter)}</span>`:''}${bms.length>1&&a.id===akt?'<em class="bm-akt">En son konan</em>':''}${bms.length>1&&enI&&a.id===enI.id?'<em class="bm-akt bm-ileri-et">En ileri</em>':''}</div><div class="q bm-q">${a.text?esc(a.text)+'…':'<i class="bm-yuk">…</i>'}</div>${a.note?`<div class="n">${esc(a.note)}</div>`:''}<div class="m"><span>${a.ts?fmtDate(a.ts):''}</span><span class="sp"></span><button data-en aria-label="Not ekle / düzenle" title="Not">${ic('edit',16)}</button><button data-rm aria-label="Yer imini sil" title="Sil">${ic('trash',16)}</button></div></div>`).join('')
       :`<div class="dempty">Henüz yer imi yok.</div>`);
     b.onclick=e=>{
       if(e.target.closest('[data-bmekle]')){this.toggleBm();setTimeout(()=>this.drawerFill(),60);return}
+      if(e.target.closest('[data-ilerigit]')){this.yereGit(this.rec.ileri);this.drawerClose();toast('En ileri okuduğun yere gidildi',1300);return}
       const n=e.target.closest('.bm-i');if(!n)return;const a=this.rec.annots.find(x=>x.id===n.dataset.id);if(!a)return;
       if(e.target.closest('[data-rm]')){this.removeAnnot(a);toast('Yer imi silindi',1200);return}
       if(e.target.closest('[data-en]')){this.editNote(a);return}
+      /* v69: geride kalan bir yer imine gidilirken en ileri yer hatırlatılır */
+      const ileri=this.devamAdaylar().filter(k=>this._ileride(k.x,a)).sort((x,y)=>this._sira(y.x)-this._sira(x.x))[0];
+      if(ileri&&S.devamSor!==false){this.drawerClose();this.devamMenu([{x:a,t:'Seçtiğin yer imi',b:a.chapter},ileri],this.last||a,'Seçtiğin yer imi, daha ileride okuduğun yerden <b>geride</b>. Nereye gidelim?',false);
+        const sb=$('#sheetHost .dv-liste');if(sb){const k=sb.querySelector('[data-kal]');if(k)k.remove();const bs=sb.querySelectorAll('.dv-sec');bs[0].classList.remove('ana');bs[1].classList.add('ana')}return}
       this.bmAktifYap(a.id);R.goAnnot(a);this.drawerClose()};
     /* PDF yer imlerinde metin yoksa sayfadan kısa önizleme alınır (bir kez, kayda yazılır) */
     if(pdf&&R&&R.pdf)bms.filter(a=>!a.text&&a.page).slice(0,40).forEach(async a=>{try{const pg=await R.pdf.getPage(a.page),tc=await pg.getTextContent();let t=tc.items.map(i=>i.str).join(' ').replace(/\s+/g,' ').trim();try{t=TRD.duzelt(t)}catch(x){}a.text=t.slice(0,90);if(a.text)saveBook(this.rec);const el=b.querySelector(`.bm-i[data-id="${a.id}"] .bm-q`);if(el)el.innerHTML=a.text?esc(a.text)+'…':'<i>(bu sayfada metin yok)</i>'}catch(x){}});
@@ -2170,7 +2216,7 @@ const RUI={open:false,R:null,rec:null,last:null,hideT:0,pushed:false,sel:null,wa
     if(R.scroller&&R.scroller()){h+=`<div class="sec"><h4>Otomatik kaydırma</h4><div class="lrow"><span>Otomatik kaydır</span>${sw('auto',Auto.on)}</div>${slider('scrollSpeed',5,100,1,S.scrollSpeed,v=>v)}</div>`}
     if(!isPdf)h+=`<div class="sec"><h4>Satır bölme</h4><div class="lrow"><span>Cümle bitince yeni satır<small>Her cümle yeni satırda başlar, altında (paragraf sonu dahil) seçilen boşluk kalır; okuma kolaylaşır. Yer imleri, alıntılar ve kaldığın yer etkilenmez.</small></span>${sw('cbol',S.cbol!==false)}</div><div class="lrow"><span>Uzun cümleyi virgülden böl<small>İşaretliyse: her cümlede, cümlenin başından (ya da önceki bölmeden) itibaren en az seçtiğin kadar kelime geçtikten sonraki ilk virgülde (ya da ; :) alt satıra geçer. Sonda 3 kelimeden kısa parça bırakmaz. İşaretli değilse virgülden hiç bölmez.</small></span>${sw('cvir',S.cvir===true)}</div><div class="lrow"><span>Kaç kelimeden sonra virgülde bölünsün<small>Örnek 22: ilk 22 kelime tek parça kalır, sonraki ilk virgülde bölünür</small></span></div><div class="lrow"><span style="font-size:13.5px;color:var(--ink2)">Kelime sayısı (5–200)</span><span style="display:flex;gap:6px;align-items:center"><input type="number" inputmode="numeric" min="5" max="200" step="1" data-kel value="${S.cvKel||22}" style="width:84px;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:600 16px var(--sans,system-ui);text-align:center"><span class="kelhz" style="display:flex;gap:4px">${[20,30,40,50,60].map(n=>`<button class="btn soft sm" data-kelv="${n}" style="padding:6px 8px">${n}</button>`).join('')}</span></span></div><div class="lrow"><span>Cümle sonu boşluğu<small>Normal okumada ve akış ekranında geçerli</small></span></div><div class="bos-hz">${[[50,'Yarım satır'],[100,'Tam satır'],[150,'1,5 satır'],[200,'2 satır']].map(([v,l])=>`<button type="button" data-bosn="cbos" data-bosv="${v}" aria-pressed="${(S.cbos??100)==v}">${l}</button>`).join('')}</div>${slider('cbos',0,200,5,S.cbos??100,v=>(v/100).toLocaleString('tr')+' satır')}<div class="lrow"><span>Virgülden bölünen yerde boşluk<small>Uzun cümlenin bölündüğü yerin altına</small></span></div><div class="bos-hz">${[[50,'Yarım satır'],[100,'Tam satır'],[150,'1,5 satır'],[200,'2 satır']].map(([v,l])=>`<button type="button" data-bosn="cvbos" data-bosv="${v}" aria-pressed="${(S.cvbos??100)==v}">${l}</button>`).join('')}</div>${slider('cvbos',0,200,5,S.cvbos??100,v=>(v/100).toLocaleString('tr')+' satır')}</div>`;
     if(!isPdf)h+=`<div class="sec"><h4>Satır takibi</h4><div class="lrow"><span>Satır takip çizgisi<small>Bilgisayarda, sayfalı EPUB okurken: fareyle satırın üzerine gelince ya da ↑ ↓ ile satır satır ilerlerken satırın altında belli belirsiz ince çizgi (kısayol: L)</small></span>${sw('satir',S.satir!==false)}</div><div class="lrow"><span>Otomatik satır seç<small>Çizgi, ayarladığın süre dolunca kendiliğinden yumuşakça alt satıra geçer; sayfa bitince sonraki sayfaya döner. Fareyle bir satıra gelirsen ya da ↑ ↓ kullanırsan süre oradan yeniden başlar. (kısayol: O)</small></span>${sw('satirOto',!!S.satirOto)}</div><div class="lrow" style="display:block"><span>Satır başına süre</span>${slider('satirSn',1,30,0.5,S.satirSn||5,v=>(+v).toFixed(1).replace('.0','')+' sn')}</div></div>`;
-    h+=`<div class="sec"><h4>Yer imleri</h4><div class="lrow"><span>Köşeye dokununca yer imi<small>Yalnız sayfanın sağ üst köşesine tıklama/dokunma yer imi koyar; tekrarı kaldırır. Sol/sağ boşluklara tıklamak sayfa çevirir</small></span>${sw('bmTik',S.bmTik!==false)}</div></div>`;
+    h+=`<div class="sec"><h4>Yer imleri</h4><div class="lrow"><span>Köşeye dokununca yer imi<small>Yalnız sayfanın sağ üst köşesine tıklama/dokunma yer imi koyar; tekrarı kaldırır. Sol/sağ boşluklara tıklamak sayfa çevirir</small></span>${sw('bmTik',S.bmTik!==false)}</div><div class="lrow"><span>Kaldığın yeri sor<small>Kitap açılınca ya da geride kalan bir yer imine gidilince, daha ileride okuduğun yer varsa alttan seçenek çıkar</small></span>${sw('devamSor',S.devamSor!==false)}</div></div>`;
     if(!isPdf)h+=`<div class="sec"><h4>Süsleme</h4><div class="lrow"><span>Kitap süslemeleri<small>Sayfanın üst boşluğunda çok silik bir ayraç (bilgisayarda, sayfalı okumada)</small></span>${sw('sus',S.sus!==false)}</div>
        <div class="sus-l">${SUS_ADI.map(([k,a])=>`<button data-sus="${k}" aria-pressed="${(S.susSt||'zarif')===k}" title="${a}">${susSvg(k,84)}<small>${a}</small></button>`).join('')}</div>
        <div class="lrow"><span>Bölüm başlangıcı işareti<small>Bölüm başlıklarının altında küçük, silik bir süs</small></span>${sw('susBas',S.susBas!==false)}</div></div>`;
@@ -3537,13 +3583,13 @@ function statsSheet(){
 
 /* ---------- app settings & backup ---------- */
 function backupJSON(){
-  return JSON.stringify({okur:1,ts:Date.now(),settings:S,stats:A.stats,books:A.books.map(b=>({name:b.name,size:b.size,title:b.title,author:b.author,pct:b.pct,pos:b.pos,finished:b.finished,fav:b.fav,annots:b.annots,readSecs:b.readSecs,opened:b.opened,yorum:b.yorum||'',yorumTs:b.yorumTs||0}))});
+  return JSON.stringify({okur:1,ts:Date.now(),settings:S,stats:A.stats,books:A.books.map(b=>({name:b.name,size:b.size,title:b.title,author:b.author,pct:b.pct,pos:b.pos,finished:b.finished,fav:b.fav,annots:b.annots,readSecs:b.readSecs,opened:b.opened,ileri:b.ileri||null,yorum:b.yorum||'',yorumTs:b.yorumTs||0}))});
 }
 async function restoreJSON(txt){
   const d=JSON.parse(txt);if(!d||d.okur!==1)throw new Error('Geçersiz yedek');let n=0;
   for(const x of d.books||[]){const b=A.books.find(k=>k.name===x.name&&k.size===x.size);if(!b)continue;
     const ids=new Set(b.annots.map(a=>a.id));(x.annots||[]).forEach(a=>{if(!ids.has(a.id))b.annots.push(a)});
-    if((x.pct||0)>(b.pct||0)){b.pct=x.pct;b.pos=x.pos}b.finished=b.finished||x.finished;if(x.yorum&&(!b.yorum||(x.yorumTs||0)>(b.yorumTs||0))){b.yorum=x.yorum;b.yorumTs=x.yorumTs||0}b.fav=b.fav||x.fav;b.readSecs=Math.max(b.readSecs||0,x.readSecs||0);await saveBook(b);n++}
+    if((x.pct||0)>(b.pct||0)){b.pct=x.pct;b.pos=x.pos}if(x.ileri&&(!b.ileri||(x.ileri.pct||0)>(b.ileri.pct||0)))b.ileri=x.ileri;b.finished=b.finished||x.finished;if(x.yorum&&(!b.yorum||(x.yorumTs||0)>(b.yorumTs||0))){b.yorum=x.yorum;b.yorumTs=x.yorumTs||0}b.fav=b.fav||x.fav;b.readSecs=Math.max(b.readSecs||0,x.readSecs||0);await saveBook(b);n++}
   if(d.stats&&d.stats.days){for(const [k,v] of Object.entries(d.stats.days)){const c=A.stats.days[k];if(!c||c.s<v.s)A.stats.days[k]=v}await Stats.save()}
   return n;
 }
@@ -5990,14 +6036,17 @@ if(typeof RUI!=='undefined'){
       if(n.nodeType!==3){const w=k.document.createTreeWalker(n.childNodes[o]||n,NodeFilter.SHOW_TEXT);const t=w.nextNode();if(!t)return c;n=t;o=0}
       const r2=k.document.createRange(),y=Math.min(n.length,o+Math.max(12,Math.min(60,Math.floor((n.length-o)/3))));r2.setStart(n,y);r2.setEnd(n,y);return k.cfiFromRange(r2)||c}}catch(e){}return c};
   const konum=()=>{const R=RUI.R;if(!RUI.open||!R)return null;try{if(R.okCfi){const c=R.okCfi();return c?{R,t:'e',v:icCfi(R,c),bas:c}:null}if(R.getPos)return {R,t:'p',v:R.getPos(),bas:JSON.stringify(R.getPos())}}catch(e){}return null};
-  setInterval(()=>{if(!RUI.open||!RUI.R){sabit=null;kilit=null;inis=null;return}if(!kilit&&Date.now()-sonRz>1600){const k=konum();if(!k)return;
+  /* v69: kitap açılırken (düzen oturmadan) çapa alınmaz; açılışta boyut değişirse kayıtlı konuma dönülür.
+     Önceden açılış anındaki ilk sayfa (çoğu zaman s.1) çapa sanılıp 1,3 sn sonra oraya geri atılıyor ve kaydediliyordu. */
+  const acilisK=()=>{const R=RUI.R,r=RUI.rec;if(!R||!r||r.pos==null)return null;return R.okCfi?{R,t:'e',v:r.pos,bas:r.pos}:{R,t:'p',v:r.pos,bas:JSON.stringify(r.pos)}};
+  setInterval(()=>{if(!RUI.open||!RUI.R){sabit=null;kilit=null;inis=null;return}if(RUI._acilis){sabit=null;inis=null;return}if(!kilit&&Date.now()-sonRz>1600){const k=konum();if(!k)return;
     /* kullanıcı sayfa çevirmediyse (hâlâ geri getirdiğimiz yerdeyse) asıl çapa korunur: art arda tam ekran aç/kapa kaydırmaz */
     if(inis&&inis.R===k.R&&inis.bas===k.bas)return;inis=null;sabit=k}},250);
   const geri=()=>{const k=kilit;kilit=null;sonRz=Date.now();const R=RUI.R;if(!k||!R||k.R!==R||!RUI.open)return;
     try{if(k.t==='e'&&R.rendition){try{R.rendition.resize(R.mount.clientWidth,R.mount.clientHeight)}catch(e){}
         setTimeout(()=>{try{R.rendition.display(k.v)}catch(e){}},120);setTimeout(()=>{sabit=k;try{inis={R,bas:R.okCfi()}}catch(e){}},1100)}
       else if(k.t==='p'&&R.setPos){R.setPos(k.v);R.emit&&R.emit();sabit=k;setTimeout(()=>{try{inis={R,bas:JSON.stringify(R.getPos())}}catch(e){}},400)}}catch(e){console.warn('konum koru',e)}};
-  const rz=()=>{if(!RUI.open||!RUI.R)return;if(!kilit)kilit=(sabit&&sabit.R===RUI.R)?sabit:konum();sonRz=Date.now();clearTimeout(tm);tm=setTimeout(geri,1300)};
+  const rz=()=>{if(!RUI.open||!RUI.R)return;if(!kilit)kilit=RUI._acilis?acilisK():(sabit&&sabit.R===RUI.R)?sabit:konum();sonRz=Date.now();clearTimeout(tm);tm=setTimeout(geri,1300)};
   window.addEventListener('resize',rz,true);document.addEventListener('fullscreenchange',rz,true);document.addEventListener('webkitfullscreenchange',rz,true);
   RUI._konumKoru={rz,konum};
 }
