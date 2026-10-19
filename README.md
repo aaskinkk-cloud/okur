@@ -27,6 +27,11 @@ Tanıma bileşenleri ilk kullanımda internetten iner (~15 MB), sonra tarayıcı
 
 ## Sürüm
 
+**71** (19.10.2026)
+- **Sürüm etiketi düzeltildi:** v69 ve v70'te ekrandaki sürüm yazısı (`<meta name="surum">`) güncellenmemişti; her yerde "sürüm 68 · 15.10.2026" görünüyordu. Milli Emlak modülü sürümü `sw.js`'den okuduğu için etiket düzeltmesinin oraya da inmesi amacıyla sürüm 71'e yükseltildi.
+- **Güncelleme kontrolü:** Uygulama açılınca (ve uygulamaya geri dönülünce) sunucudaki sürüme bakar; daha yeniyse hemen indirir ve altta **"Yeni sürüm hazır – Yenile"** çıkar. Yavaş kurum ağında sayfa önbellekten açılsa da eski sürümde kalınmaz.
+- **Kural:** Her sürümde `sw.js` (`V=P+'…'`) ve `index.html` içindeki `<meta name="surum" content="…" data-tarih="…">` birlikte değiştirilir.
+
 **70** (17.10.2026)
 - **Alt gezinme tuşlarında siyah ekran / titreme giderildi:** Telefonun alt tuşları (veya durum çubuğu) açılıp kapanınca ekran yüksekliği biraz değişiyor, bu da her seferinde kitabı baştan dizdiriyordu (yeniden çizim + konum koruma + boş ekran koruması üst üste). Artık genişlik aynı ve yükseklik farkı küçükse okuma alanı sabit kalır, tuşlar sayfanın üstüne biner; hiçbir şey yeniden çizilmez. Tuşlar kalıcı açık kalırsa menü kapalıyken bir kez sakin yerleşim yapılır. Ekran döndürme normal çalışır. "Menü açılınca tam ekrandan çık" ayarı da artık titretmez.
 
