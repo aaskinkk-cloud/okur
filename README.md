@@ -1,5 +1,10 @@
 # Okur
 
+## 79 (23.10.2026) — Benim ayarlarım
+- **Varsayılan ayarlar:** İlk kurulumda / uygulama silinip yeniden yüklenince Ahmet'in ayarlarıyla açılır (23.10.2026 yedeği): Yosun tema, serif, yazı %100 (otomatik boyut kapalı), satır 1,25, paragraf arası boşluk, kenar boşluğu 0 (sol 8 / sağ 3 px), çerçevesiz, sayfa genişliği 350, yüzen üst bant, kaybolan menü, kilit, satır takibi, kitap açılınca tam ekran, sesli okuma 1,0×, vurgu rengi #9fd3b0.
+- **Temalar › Hazır görünümler:** En üstte **"Benim ayarlarım · Yosun"**; tek dokunuşla bu görünüme dönülür.
+- **Değiştirilen ayar:** "Menü açılınca tam ekrandan çık" kapatıldı. Açıkken ortaya her dokunuşta uygulama tam ekrandan çıkıp yeniden giriyordu: alttaki uyarı, sayfanın yeniden dizilmesi, yazı kaybolması ve sayfa atlaması buradan geliyordu. Ayarlar › Ekran'dan yeniden açılabilir (önerilmez).
+
 ## 78 (23.10.2026) — Tam ekran alanı
 - Tam ekranda üst menü en üste (sistem çubuğunun yerine), alt bant en alta çıkar; okuma alanı üstten ve alttan genişler.
 - Tam ekrana giriş/çıkış bilinçli geçiş sayılır: sayfa bir kez yerleşir ve aynı sayfada kalır. Alt gezinme tuşlarının geçici görünmesi yine yok sayılır (yeniden dizilme yok).
