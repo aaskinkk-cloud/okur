@@ -27,6 +27,12 @@ Tanıma bileşenleri ilk kullanımda internetten iner (~15 MB), sonra tarayıcı
 
 ## Sürüm
 
+**73** (22.10.2026)
+- **Kurulu uygulamada da titreme yok:** Küçük ekran boyu değişimleri (alt tuşlar, durum çubuğu) artık tam ekranda, kurulu uygulamada ve normal pencerede hiçbir zaman yeniden dizilme yapmaz; ekran uzarsa sahne büyür, sayfa yerinde kalır. Yalnız döndürmede yeniden yerleşir.
+- **Tam ekran uyarısı:** Kurulu uygulama zaten tam ekran olduğu için içeriden tam ekran isteği gönderilmez → Chrome'un "Tam ekrandan çıkmak için…" uyarısı çıkmaz. (Chrome sekmesinde tam ekrana her girişte bu uyarıyı tarayıcı kendisi gösterir; sayfa kapatamaz.)
+- **Kelimeye dokununca Google paneli:** Chrome'un "Dokunarak ara" paneli açılmasın diye sayfa ve EPUB çerçeveleri dokunuşu kendisi karşılar. Uzun basıp seçme çalışır.
+- "Sessiz ekran" bloğu diğer uygulamalarla ortaktır.
+
 **72** (22.10.2026)
 - **Tam ekranda alt tuşlar: titreme / yanıp sönme tamamen kaldırıldı** (Bütçe & Hedef'teki gibi). Tam ekrandayken alttaki gezinme tuşları yukarı itilince okuma alanı hiç yeniden dizilmez; tuşlar sayfanın üstüne biner, kaybolunca aynı sayfa olduğu gibi görünür. v70'teki "1,5 sn sonra yeniden yerleş" adımı kaldırıldı (tuşlar 2–3 sn açık kaldığı için önce kısa, sonra uzun boya iki kez diziliyordu).
 - Tam ekran dışında tuşlar kalıcı açılırsa bir kez sakin yerleşim yapılır (satırlar tuşların altında kalmaz). Ekran döndürme normal çalışır.
