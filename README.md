@@ -27,6 +27,9 @@ Tanıma bileşenleri ilk kullanımda internetten iner (~15 MB), sonra tarayıcı
 
 ## Sürüm
 
+**74** (22.10.2026)
+- **Kâğıt dokusu ayarı:** Görünüm ve okuma › Tema ve parlaklık altında, **Kâğıt** ve **Doğal kâğıt** temalarında "Kâğıt dokusu" kaydırıcısı (%0–100; 100 = önceki görünüm, 0 = düz kâğıt) ve **Sıfırla** düğmesi. Doku ve kenar gölgesi birlikte silikleşir; sayfa rengi ve yazı değişmez. Ayar kalıcıdır.
+
 **73** (22.10.2026)
 - **Kurulu uygulamada da titreme yok:** Küçük ekran boyu değişimleri (alt tuşlar, durum çubuğu) artık tam ekranda, kurulu uygulamada ve normal pencerede hiçbir zaman yeniden dizilme yapmaz; ekran uzarsa sahne büyür, sayfa yerinde kalır. Yalnız döndürmede yeniden yerleşir.
 - **Tam ekran uyarısı:** Kurulu uygulama zaten tam ekran olduğu için içeriden tam ekran isteği gönderilmez → Chrome'un "Tam ekrandan çıkmak için…" uyarısı çıkmaz. (Chrome sekmesinde tam ekrana her girişte bu uyarıyı tarayıcı kendisi gösterir; sayfa kapatamaz.)
