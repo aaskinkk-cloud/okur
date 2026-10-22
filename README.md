@@ -1,5 +1,10 @@
 # Okur
 
+## 78 (23.10.2026) — Tam ekran alanı
+- Tam ekranda üst menü en üste (sistem çubuğunun yerine), alt bant en alta çıkar; okuma alanı üstten ve alttan genişler.
+- Tam ekrana giriş/çıkış bilinçli geçiş sayılır: sayfa bir kez yerleşir ve aynı sayfada kalır. Alt gezinme tuşlarının geçici görünmesi yine yok sayılır (yeniden dizilme yok).
+- Test: tam ekrana giriş → alan 760→860 px, 1 yerleşim, sayfa aynı; tuşlar 4 kez aç/kapa → 0 ek yerleşim; çıkış → sayfa aynı.
+
 ## 77 (23.10.2026) — Tam ekran düğmesi geri
 - Kurulu uygulamada gizlenen tam ekran düğmesi yeniden görünür ve çalışır. Düğmeye basınca Chrome kendi "Tam ekrandan çıkmak için…" uyarısını bir kez gösterir (tarayıcı kuralı). Dokununca kendiliğinden tam ekran isteği gönderilmez.
 
