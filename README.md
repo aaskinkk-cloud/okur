@@ -27,6 +27,11 @@ Tanıma bileşenleri ilk kullanımda internetten iner (~15 MB), sonra tarayıcı
 
 ## Sürüm
 
+**72** (22.10.2026)
+- **Tam ekranda alt tuşlar: titreme / yanıp sönme tamamen kaldırıldı** (Bütçe & Hedef'teki gibi). Tam ekrandayken alttaki gezinme tuşları yukarı itilince okuma alanı hiç yeniden dizilmez; tuşlar sayfanın üstüne biner, kaybolunca aynı sayfa olduğu gibi görünür. v70'teki "1,5 sn sonra yeniden yerleş" adımı kaldırıldı (tuşlar 2–3 sn açık kaldığı için önce kısa, sonra uzun boya iki kez diziliyordu).
+- Tam ekran dışında tuşlar kalıcı açılırsa bir kez sakin yerleşim yapılır (satırlar tuşların altında kalmaz). Ekran döndürme normal çalışır.
+- Test: tam ekranda 6 kez tuş göster/gizle ve 5 sn açık bekleme → 0 yeniden çizim.
+
 **71** (19.10.2026)
 - **Sürüm etiketi düzeltildi:** v69 ve v70'te ekrandaki sürüm yazısı (`<meta name="surum">`) güncellenmemişti; her yerde "sürüm 68 · 15.10.2026" görünüyordu. Milli Emlak modülü sürümü `sw.js`'den okuduğu için etiket düzeltmesinin oraya da inmesi amacıyla sürüm 71'e yükseltildi.
 - **Güncelleme kontrolü:** Uygulama açılınca (ve uygulamaya geri dönülünce) sunucudaki sürüme bakar; daha yeniyse hemen indirir ve altta **"Yeni sürüm hazır – Yenile"** çıkar. Yavaş kurum ağında sayfa önbellekten açılsa da eski sürümde kalınmaz.
