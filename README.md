@@ -1,5 +1,9 @@
 # Okur
 
+## 80 (23.10.2026) — Ayarlar güncellendi, üst boşluk kaldırıldı
+- **Benim ayarlarım** (varsayılan + Hazır görünümler'deki "Benim ayarlarım · Yosun") 23.10.2026 01:09 yedeğine göre güncellendi: kenar boşluğu 8, sol 17 / sağ 7 px, harf aralığı 0,01, köşe yuvarlaklığı 2, cümle boşluğu %100 satır, üst bant sabit (yüzen).
+- **Telefonda EPUB:** sayfanın iç üst/alt boşluğu çubukların altına alındı; ilk satır üst simge çubuğunun hemen altından başlar, sayfaya en az bir satır daha sığar.
+
 ## 79 (23.10.2026) — Benim ayarlarım
 - **Varsayılan ayarlar:** İlk kurulumda / uygulama silinip yeniden yüklenince Ahmet'in ayarlarıyla açılır (23.10.2026 yedeği): Yosun tema, serif, yazı %100 (otomatik boyut kapalı), satır 1,25, paragraf arası boşluk, kenar boşluğu 0 (sol 8 / sağ 3 px), çerçevesiz, sayfa genişliği 350, yüzen üst bant, kaybolan menü, kilit, satır takibi, kitap açılınca tam ekran, sesli okuma 1,0×, vurgu rengi #9fd3b0.
 - **Temalar › Hazır görünümler:** En üstte **"Benim ayarlarım · Yosun"**; tek dokunuşla bu görünüme dönülür.
