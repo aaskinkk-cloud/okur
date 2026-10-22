@@ -1,5 +1,10 @@
 # Okur
 
+## 82 (23.10.2026) — Tam ekrana geçişte sayfa atlaması / boş sayfa
+- Ekran kaydında görüldü: tam ekrana girerken tarayıcı ekran boyunu birkaç adımda değiştiriyor, kitap 3–4 kez yeniden çiziliyordu (boş sayfa → önceki sayfa → boş → bir sonraki sayfa). Artık geçiş boyunca sayfa kâğıt rengi bir örtüyle gizlenir, ekran durulunca **tek kez** yerleşilir ve okunan satıra dönülür; örtü ~1,5 sn sonra kalkar.
+- Test: 4 adımlı boy değişimiyle tam ekrana giriş → aynı konum; çıkış → okunan satır ekranda.
+- **Chrome sekmesinde** alt tuşlar açılınca tarayıcı sayfanın tamamını aşağı itip geri alıyor (kayıtta görülen titreme); bunu sayfa engelleyemez. Ana ekrandan **yüklenmiş uygulamada** tuşlar sayfanın üstüne biner, sayfa kaymaz.
+
 ## 81 (23.10.2026) — Üst boşluk geri alındı
 - 80'deki "ilk satır çubuğun hemen altından başlasın" değişikliği geri alındı (yazı ön kameranın altına giriyordu); yazı yine bir satır aşağıdan başlar. 80'deki ayar güncellemesi (Benim ayarlarım) korunur.
 
