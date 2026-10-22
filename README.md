@@ -1,5 +1,8 @@
 # Okur
 
+## 81 (23.10.2026) — Üst boşluk geri alındı
+- 80'deki "ilk satır çubuğun hemen altından başlasın" değişikliği geri alındı (yazı ön kameranın altına giriyordu); yazı yine bir satır aşağıdan başlar. 80'deki ayar güncellemesi (Benim ayarlarım) korunur.
+
 ## 80 (23.10.2026) — Ayarlar güncellendi, üst boşluk kaldırıldı
 - **Benim ayarlarım** (varsayılan + Hazır görünümler'deki "Benim ayarlarım · Yosun") 23.10.2026 01:09 yedeğine göre güncellendi: kenar boşluğu 8, sol 17 / sağ 7 px, harf aralığı 0,01, köşe yuvarlaklığı 2, cümle boşluğu %100 satır, üst bant sabit (yüzen).
 - **Telefonda EPUB:** sayfanın iç üst/alt boşluğu çubukların altına alındı; ilk satır üst simge çubuğunun hemen altından başlar, sayfaya en az bir satır daha sığar.
