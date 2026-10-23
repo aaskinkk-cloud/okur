@@ -37,6 +37,7 @@ public class MainActivity extends Activity {
     private static final int DOSYA_SEC = 41;
     private WebView web;
     private ValueCallback<Uri[]> dosyaCb;
+    private android.widget.FrameLayout kap;
 
     @Override
     protected void onCreate(Bundle b) {
@@ -45,12 +46,26 @@ public class MainActivity extends Activity {
         w.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         if (Build.VERSION.SDK_INT >= 28) {
             WindowManager.LayoutParams lp = w.getAttributes();
-            lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_DEFAULT; // yazı ön kameranın altına girmez
+            lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES; // ekranın tamamı (kamera bölgesi dahil) kullanılır
             w.setAttributes(lp);
         }
         web = new WebView(this);
         web.setBackgroundColor(0xFFDAE4D4);
-        setContentView(web);
+        /* Kamera bölgesi siyah şerit olarak kalmasın: kap, sayfanın renginde boyanır; yazı kameranın altından başlar. */
+        kap = new android.widget.FrameLayout(this);
+        kap.setBackgroundColor(0xFFDAE4D4);
+        kap.addView(web, new android.widget.FrameLayout.LayoutParams(-1, -1));
+        setContentView(kap);
+        kap.setOnApplyWindowInsetsListener((v, ins) -> {
+            int ust = 0, sol = 0, sag = 0;
+            if (Build.VERSION.SDK_INT >= 28 && ins.getDisplayCutout() != null) {
+                ust = ins.getDisplayCutout().getSafeInsetTop();
+                sol = ins.getDisplayCutout().getSafeInsetLeft();
+                sag = ins.getDisplayCutout().getSafeInsetRight();
+            }
+            v.setPadding(sol, ust, sag, 0);
+            return ins;
+        });
 
         WebSettings s = web.getSettings();
         s.setJavaScriptEnabled(true);
@@ -131,8 +146,16 @@ public class MainActivity extends Activity {
         super.onActivityResult(req, res, d);
     }
 
+    private void renkUygula(String c) {
+        try {
+            int r = android.graphics.Color.parseColor(c.trim());
+            kap.setBackgroundColor(r); web.setBackgroundColor(r); getWindow().getDecorView().setBackgroundColor(r);
+        } catch (Exception e) { }
+    }
+
     /** Sayfadan gelen dosyaları (yedek, dışa aktarım) İndirilenler klasörüne yazar. */
     class Kopru {
+        @JavascriptInterface public void renk(String c) { runOnUiThread(() -> renkUygula(c)); }
         @JavascriptInterface public void kaydet(String ad, String tur, String b64) {
             try {
                 byte[] veri = Base64.decode(b64, Base64.DEFAULT);
@@ -157,6 +180,8 @@ public class MainActivity extends Activity {
 
     /** <a download href="blob:..."> tıklamalarını yakalayıp dosyayı Kopru.kaydet'e gönderir. */
     private static final String INDIR_JS =
+        "(function(){try{var m=function(){var x=document.querySelector('meta[name=theme-color]');if(x&&window.OkurAndroid)OkurAndroid.renk(x.content)};m();" +
+        "new MutationObserver(m).observe(document.head,{subtree:true,attributes:true,childList:true,attributeFilter:['content']})}catch(e){}})();" +
         "(function(){if(window.__okurIndir)return;window.__okurIndir=1;var o=HTMLAnchorElement.prototype.click;" +
         "HTMLAnchorElement.prototype.click=function(){var h=this.href||'',ad=this.getAttribute('download');" +
         "if(ad!==null&&/^(blob:|data:)/.test(h)&&window.OkurAndroid){fetch(h).then(function(r){return r.blob()}).then(function(b){" +

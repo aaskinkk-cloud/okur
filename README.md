@@ -3,6 +3,7 @@
 ## Android uygulaması (APK) — 83 (23.10.2026)
 **İndir:** https://github.com/aaskinkk-cloud/okur/releases/download/android/okur.apk
 
+- 1.3: Ön kamera bölgesindeki siyah şerit kaldırıldı: o bölge sayfanın renginde (temayla birlikte değişir), yazı yine kameranın altından başlar.
 - 1.2: Tam ekran kesinleştirildi (pencere tam ekran + yeni ve eski Android yöntemi birlikte, pencere hazır olunca yinelenir). Yeni APK eskisinin üzerine kurulur, veriler silinmez.
 
 - Telefon uygulaması gibi **kalıcı tam ekran**: açılışta tam ekran, hiç çıkmaz. Alttaki tuşlar yukarı kaydırılınca sayfanın **üstüne biner**, sayfa kaymaz/yeniden dizilmez, birkaç saniye sonra kendiliğinden gizlenir.
