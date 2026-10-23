@@ -38,6 +38,15 @@ public class MainActivity extends Activity {
     private WebView web;
     private ValueCallback<Uri[]> dosyaCb;
     private android.widget.FrameLayout kap;
+    private int kameraPx = 0;
+
+    /** Ön kamera yüksekliğini sayfaya bildirir (CSS: --kamera). Üst menü en üstte açılır, yazı kameranın altından başlar. */
+    private void kameraYaz() {
+        if (web == null) return;
+        float d = getResources().getDisplayMetrics().density;
+        int css = Math.round(kameraPx / d);
+        web.evaluateJavascript("document.documentElement.style.setProperty('--kamera','" + css + "px');try{RUI&&RUI.open&&RUI.vfit()}catch(e){}", null);
+    }
 
     @Override
     protected void onCreate(Bundle b) {
@@ -63,7 +72,8 @@ public class MainActivity extends Activity {
                 sol = ins.getDisplayCutout().getSafeInsetLeft();
                 sag = ins.getDisplayCutout().getSafeInsetRight();
             }
-            v.setPadding(sol, ust, sag, 0);
+            kameraPx = ust;
+            kameraYaz();
             return ins;
         });
 
@@ -80,7 +90,7 @@ public class MainActivity extends Activity {
         web.addJavascriptInterface(new Kopru(), "OkurAndroid");
 
         web.setWebViewClient(new WebViewClient() {
-            @Override public void onPageFinished(WebView v, String url) { v.evaluateJavascript(INDIR_JS, null); tamEkran(); }
+            @Override public void onPageFinished(WebView v, String url) { v.evaluateJavascript(INDIR_JS, null); kameraYaz(); tamEkran(); }
         });
         web.setWebChromeClient(new WebChromeClient() {
             @Override public boolean onShowFileChooser(WebView v, ValueCallback<Uri[]> cb, FileChooserParams p) {
