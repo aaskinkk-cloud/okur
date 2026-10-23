@@ -3,6 +3,7 @@
 ## Android uygulaması (APK) — 83 (23.10.2026)
 **İndir:** https://github.com/aaskinkk-cloud/okur/releases/download/android/okur.apk
 
+- Okur 86: Moon+ Reader görünümü kaldırıldı, Okur'un kendi düğmelerine dönüldü (yazının bir satır yukarıdan başlaması korunur).
 - Okur 85: **Moon+ Reader görünümü** (Android uygulamasında): üstte tema renginde şerit (geri · kitap adı · ⋮ menü); altta ilerleme çubuğu, sayfa okları ve iki sıra dolgun simge (İçindekiler, Ara, Yer imi, Sesli oku, Satır takibi, Akış, Görünüm / Kilit, Rastgele tema, Küçült, Büyüt, Yorumum, Sağ sayfa, Kitaplık); açık olanlar renkli görünür. Okuma yazısı bir satır yukarıdan başlar (kameranın altında kalır).
 - 1.4 / Okur 84: Ortaya dokununca açılan üst menü ekranın en üstünde (saat/pil çubuğunun yerinde) açılır; yazı yine ön kameranın altından başlar.
 - 1.3: Ön kamera bölgesindeki siyah şerit kaldırıldı: o bölge sayfanın renginde (temayla birlikte değişir), yazı yine kameranın altından başlar.
