@@ -1,5 +1,16 @@
 # Okur
 
+## Android uygulaması (APK) — 83 (23.10.2026)
+**İndir:** https://github.com/aaskinkk-cloud/okur/releases/download/android/okur.apk
+
+- Telefon uygulaması gibi **kalıcı tam ekran**: açılışta tam ekran, hiç çıkmaz. Alttaki tuşlar yukarı kaydırılınca sayfanın **üstüne biner**, sayfa kaymaz/yeniden dizilmez, birkaç saniye sonra kendiliğinden gizlenir.
+- Chrome'un "Tam ekrandan çıkmak için…" uyarısı ve kelimeye dokununca çıkan Google paneli bu uygulamada **yoktur**.
+- Ortaya dokununca menüler açılır, tekrar dokununca gizlenir. Yazı ön kameranın altına girmez.
+- Sayfa GitHub'daki Okur'dur: buraya gönderilen her güncelleme uygulamaya kendiliğinden gelir; APK'yı yeniden kurmak gerekmez.
+- Yedek al / dışa aktarım dosyaları **İndirilenler** klasörüne kaydedilir; kitap ve yedek seçimi telefonun dosya seçicisiyle yapılır.
+- Kaynak: `android/` klasörü; APK'yı GitHub Actions ("Okur Android APK") derler. İmza anahtarı (`android/okur.jks`) sabit tutulur, böylece yeni sürüm eskisinin üzerine kurulur ve veriler silinmez.
+- Not: Uygulamanın verisi Chrome'dakinden ayrıdır; ilk açılışta kitapları ekleyip **Yedeği yükle** ile kayıtları geri getir.
+
 ## 82 (23.10.2026) — Tam ekrana geçişte sayfa atlaması / boş sayfa
 - Ekran kaydında görüldü: tam ekrana girerken tarayıcı ekran boyunu birkaç adımda değiştiriyor, kitap 3–4 kez yeniden çiziliyordu (boş sayfa → önceki sayfa → boş → bir sonraki sayfa). Artık geçiş boyunca sayfa kâğıt rengi bir örtüyle gizlenir, ekran durulunca **tek kez** yerleşilir ve okunan satıra dönülür; örtü ~1,5 sn sonra kalkar.
 - Test: 4 adımlı boy değişimiyle tam ekrana giriş → aynı konum; çıkış → okunan satır ekranda.

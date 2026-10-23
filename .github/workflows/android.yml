@@ -1,0 +1,30 @@
+# Okur Android uygulamasını (APK) derler ve "android" sürümüne yükler.
+# İndirme: https://github.com/aaskinkk-cloud/okur/releases/download/android/okur.apk
+name: Okur Android APK
+on:
+  workflow_dispatch:
+  push:
+    paths: ['android/**', '.github/workflows/android.yml']
+permissions:
+  contents: write
+jobs:
+  derle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - uses: gradle/actions/setup-gradle@v4
+        with: { gradle-version: '8.9' }
+      - name: Derle
+        working-directory: android
+        run: gradle --no-daemon assembleRelease
+      - name: APK adını düzelt
+        run: cp android/app/build/outputs/apk/release/app-release.apk okur.apk
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: android
+          name: Okur Android
+          body: "Okur Android uygulaması — kalıcı tam ekran. Telefona indir ve aç (bilinmeyen kaynak izni ister)."
+          files: okur.apk
+          make_latest: true
