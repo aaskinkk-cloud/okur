@@ -1,5 +1,8 @@
 # Okur
 
+## 90 (27.10.2026)
+- Okuma kilidi süresi bitince okunan sayfaya **yer imi** konur (zaten varsa ikinci kez konmaz), kitap kapanır ve **kitaplığa** dönülür.
+
 ## 89 (27.10.2026)
 - Okuma kilidi sayacı sağ alt köşeye alındı; küçük ve çok silik, okumayı rahatsız etmez (acil çıkış: sayaca 3 sn basılı tut).
 - Basit modda üst çubukta **tam ekran** düğmesi de görünür.
