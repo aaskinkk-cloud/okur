@@ -1,5 +1,11 @@
 # Okur
 
+## 88 (27.10.2026) — Okuma kilidi
+- Üst çubukta **saat** simgesi: "Kaç dakika okumak istiyorsun?" (10 / 15 / 20 / 30 / 45 / 60 dk ya da elle yaz). Süre bitene kadar kitaptan çıkılmaz: geri tuşu, kitaplığa dönüş ve sekmeyi kapatma engellenir; sayfa çevirme, İçindekiler, Yer imi ve Aa çalışır.
+- Üstte geri sayım görünür. Uygulama kapanıp açılırsa aynı kitap kendiliğinden açılır, sayaç sürer. Süre bitince titreşim ve bildirim.
+- **Acil çıkış:** sayaca 3 saniye basılı tut.
+- Telefonda başka uygulamaya geçişi de engellemek için Android **Uygulama sabitleme** önerilir (açıklaması pencerede).
+
 ## 87 (27.10.2026) — Basit mod
 - **Ayarlar › Ekran › Basit mod:** yalnız okuma — üstte geri, kitap adı, İçindekiler, Yer imi ve Aa; altta ilerleme çubuğu. Arama, sesli okuma, satır takibi, tam ekran düğmesi ve hızlı menü gizlenir (ayardan geri açılır).
 - Cloudflare adresinde (pages.dev) varsayılan olarak açıktır.
