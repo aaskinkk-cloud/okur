@@ -1,5 +1,9 @@
 # Okur
 
+## 89 (27.10.2026)
+- Okuma kilidi sayacı sağ alt köşeye alındı; küçük ve çok silik, okumayı rahatsız etmez (acil çıkış: sayaca 3 sn basılı tut).
+- Basit modda üst çubukta **tam ekran** düğmesi de görünür.
+
 ## 88 (27.10.2026) — Okuma kilidi
 - Üst çubukta **saat** simgesi: "Kaç dakika okumak istiyorsun?" (10 / 15 / 20 / 30 / 45 / 60 dk ya da elle yaz). Süre bitene kadar kitaptan çıkılmaz: geri tuşu, kitaplığa dönüş ve sekmeyi kapatma engellenir; sayfa çevirme, İçindekiler, Yer imi ve Aa çalışır.
 - Üstte geri sayım görünür. Uygulama kapanıp açılırsa aynı kitap kendiliğinden açılır, sayaç sürer. Süre bitince titreşim ve bildirim.
