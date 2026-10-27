@@ -1,5 +1,9 @@
 # Okur
 
+## 87 (27.10.2026) — Basit mod
+- **Ayarlar › Ekran › Basit mod:** yalnız okuma — üstte geri, kitap adı, İçindekiler, Yer imi ve Aa; altta ilerleme çubuğu. Arama, sesli okuma, satır takibi, tam ekran düğmesi ve hızlı menü gizlenir (ayardan geri açılır).
+- Cloudflare adresinde (pages.dev) varsayılan olarak açıktır.
+
 ## Android uygulaması (APK) — 83 (23.10.2026)
 **İndir:** https://github.com/aaskinkk-cloud/okur/releases/download/android/okur.apk
 
