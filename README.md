@@ -66,6 +66,8 @@ Metin katmanı olmayan ya da bozuk olan PDF sayfaları Türkçe tanıma (Tessera
 
 Tanıma bileşenleri ilk kullanımda internetten iner (~15 MB), sonra tarayıcı önbelleğinde kalır.
 
+> 27.10.2026: Hesap geri açıldıktan sonra sayfa yeniden yayımlandı.
+
 ## Dosyalar
 
 | Dosya | Açıklama |
