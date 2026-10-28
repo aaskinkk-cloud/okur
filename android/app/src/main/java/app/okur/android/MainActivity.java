@@ -34,6 +34,9 @@ import java.io.OutputStream;
  */
 public class MainActivity extends Activity {
     private static final String ADRES = "https://aaskinkk-cloud.github.io/okur/";
+    /** GitHub açılmazsa (404, sunucu hatası, bağlantı yok) sayfa buradan açılır. */
+    private static final String YEDEK = "https://ahmet-uygulamalar.pages.dev/okur/";
+    private boolean yedekte = false;
     private static final int DOSYA_SEC = 41;
     private WebView web;
     private ValueCallback<Uri[]> dosyaCb;
@@ -91,6 +94,12 @@ public class MainActivity extends Activity {
 
         web.setWebViewClient(new WebViewClient() {
             @Override public void onPageFinished(WebView v, String url) { v.evaluateJavascript(INDIR_JS, null); kameraYaz(); tamEkran(); }
+            @Override public void onReceivedHttpError(WebView v, android.webkit.WebResourceRequest r, android.webkit.WebResourceResponse res) {
+                if (r.isForMainFrame() && res != null && (res.getStatusCode() == 404 || res.getStatusCode() >= 500)) yedegeGec(v);
+            }
+            @Override public void onReceivedError(WebView v, android.webkit.WebResourceRequest r, android.webkit.WebResourceError e) {
+                if (r.isForMainFrame()) yedegeGec(v);
+            }
         });
         web.setWebChromeClient(new WebChromeClient() {
             @Override public boolean onShowFileChooser(WebView v, ValueCallback<Uri[]> cb, FileChooserParams p) {
@@ -154,6 +163,20 @@ public class MainActivity extends Activity {
             return;
         }
         super.onActivityResult(req, res, d);
+    }
+
+    /** GitHub sayfası açılmazsa bir kez Cloudflare kopyasına geçer; o da açılmazsa yeniden deneme ekranı gösterir. */
+    private void yedegeGec(WebView v) {
+        if (!yedekte) {
+            yedekte = true;
+            runOnUiThread(() -> { Toast.makeText(MainActivity.this, "GitHub açılmadı — yedek adresten (Cloudflare) açılıyor", Toast.LENGTH_LONG).show(); v.loadUrl(YEDEK); });
+        } else {
+            runOnUiThread(() -> v.loadDataWithBaseURL(null,
+                "<html><body style='font:18px sans-serif;background:#dae4d4;color:#25362a;padding:40px 24px;text-align:center'>"
+                + "<p>Okur şu an açılamıyor.<br>İnternet bağlantını kontrol et.</p>"
+                + "<p><a href='" + ADRES + "' style='display:inline-block;margin-top:16px;padding:14px 22px;border-radius:12px;background:#2c6b3c;color:#fff;text-decoration:none'>Yeniden dene</a></p></body></html>",
+                "text/html", "utf-8", null));
+        }
     }
 
     private void renkUygula(String c) {
