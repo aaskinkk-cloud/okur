@@ -1,5 +1,8 @@
 # Okur
 
+## 91 (28.10.2026)
+- Kitaplık başlığında, sürümün yanında **kaynak etiketi**: yeşil **GitHub**, turuncu **Cloudflare · yedek**, mavi **Milli Emlak**, gri **Yerel dosya** — Okur'un o an hangi sunucudan çalıştığı görünür.
+
 ## 90 (27.10.2026)
 - Okuma kilidi süresi bitince okunan sayfaya **yer imi** konur (zaten varsa ikinci kez konmaz), kitap kapanır ve **kitaplığa** dönülür.
 
