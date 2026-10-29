@@ -189,6 +189,14 @@ public class MainActivity extends Activity {
     /** Sayfadan gelen dosyaları (yedek, dışa aktarım) İndirilenler klasörüne yazar. */
     class Kopru {
         @JavascriptInterface public void renk(String c) { runOnUiThread(() -> renkUygula(c)); }
+        /** Sayfa vurguları (alıntıları) buraya yazar; Bütçe & Hedef AlintiSaglayici üzerinden okur. */
+        @JavascriptInterface public void alintilar(String json) {
+            try {
+                File gecici = new File(getFilesDir(), AlintiSaglayici.DOSYA + ".tmp");
+                try (FileOutputStream o = new FileOutputStream(gecici)) { o.write((json == null ? "[]" : json).getBytes("UTF-8")); }
+                gecici.renameTo(new File(getFilesDir(), AlintiSaglayici.DOSYA));
+            } catch (Exception e) { }
+        }
         @JavascriptInterface public void kaydet(String ad, String tur, String b64) {
             try {
                 byte[] veri = Base64.decode(b64, Base64.DEFAULT);

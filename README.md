@@ -1,5 +1,9 @@
 # Okur
 
+## Bütçe & Hedef'e alıntı aktarımı (29.10.2026)
+- Android uygulamasında vurgular (alıntılar) uygulamanın içine de kaydedilir; **Bütçe & Hedef** uygulaması bunları Alıntılar sekmesine alır. Yalnız Bütçe uygulaması okuyabilir (imza denetimi); başka uygulama erişemez.
+- Yeni APK'yı kurduktan sonra Okur'u bir kez aç; mevcut tüm vurgular aktarılır, sonrakiler eklendikçe gider.
+
 ## 92 (29.10.2026)
 - Kitaplıkta "Son okunan kitap" kartında kitap adına dokununca da kitap açılır.
 - Kart kısaldı: düğme "Kaldığın yerden devam et" (tek satır), bilgi satırları tek satır; telefonda başlık en çok 2 satır.

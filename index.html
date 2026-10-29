@@ -1560,7 +1560,12 @@ const Sess={rec:null,acc:0,pages:0,last:0,timer:null,flushT:0,
   flush(){this.flushT=0;if(!this.rec)return;if(this.acc||this.pages){Stats.add(this.acc,this.pages);this.rec.readSecs=(this.rec.readSecs||0)+this.acc;this.acc=0;this.pages=0;Stats.save();saveBook(this.rec)}},
   stop(){this.flush();clearInterval(this.timer);this.rec=null}
 };
-const saveBook=b=>DB.put('books',b).catch(()=>{});
+const saveBook=b=>DB.put('books',b).catch(()=>{}).then(r=>{alintiYayin();return r});
+/* Android uygulamasında vurguları Bütçe & Hedef'in Alıntılar sekmesi için uygulamaya bildirir (Bütçe ayrı uygulama olduğu için Okur'un verisini doğrudan göremez) */
+let _ayT=null;
+function alintiYayin(){clearTimeout(_ayT);_ayT=setTimeout(async()=>{try{if(!(window.OkurAndroid&&OkurAndroid.alintilar))return;
+  const out=[];((await DB.all('books'))||[]).forEach(b=>(b.annots||[]).forEach(a=>{if(a&&a.kind==='highlight'&&a.text&&String(a.text).trim())out.push({id:String(a.id),metin:String(a.text).replace(/\s+/g,' ').trim(),not:a.note||'',kitap:b.title||'',yazar:b.author||'',ts:a.ts||0})}));
+  OkurAndroid.alintilar(JSON.stringify(out))}catch(e){}},700)}
 let _saveT=0;const saveBookSoon=b=>{clearTimeout(_saveT);_saveT=setTimeout(()=>saveBook(b),700)};
 
 /* ---------- library ---------- */
@@ -3781,6 +3786,7 @@ async function appSettingsSheet(){
   hydrate();applyAppTheme();
   await DB.open();
   try{A.books=(await DB.all('books'))||[];A.books.forEach(b=>{b.annots=b.annots||[]})}catch{A.books=[]}
+  alintiYayin();
   await Stats.load();
   bindLibrary();RUI.init();renderLibrary();
   if(typeof ePub==='undefined'||typeof pdfjsLib==='undefined')toast('Okuyucu bileşenleri yüklenemedi',5000);
