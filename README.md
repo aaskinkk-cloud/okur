@@ -1,5 +1,11 @@
 # Okur
 
+## 92 (29.10.2026)
+- Kitaplıkta "Son okunan kitap" kartında kitap adına dokununca da kitap açılır.
+- Kart kısaldı: düğme "Kaldığın yerden devam et" (tek satır), bilgi satırları tek satır; telefonda başlık en çok 2 satır.
+- Kitap açılınca üst ve alt menü gelmez (tam ekran, yalnız metin); ekrana dokununca gelir. Üst bant varsayılanı "Kaybolan" yapıldı (Ayarlar › Üst bant › Sabit ile geri alınır).
+- Kitap içindeki bölüm başlıkları (h1–h3) klasik: Palatino, ortalı, büyük, hafif harf aralığı, altında ince çizgi.
+
 ## 91 (28.10.2026)
 - Kitaplık başlığında, sürümün yanında **kaynak etiketi**: yeşil **GitHub**, turuncu **Cloudflare · yedek**, mavi **Milli Emlak**, gri **Yerel dosya** — Okur'un o an hangi sunucudan çalıştığı görünür.
 
