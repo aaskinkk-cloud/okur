@@ -4,6 +4,11 @@
 - Android uygulamasında vurgular (alıntılar) uygulamanın içine de kaydedilir; **Bütçe & Hedef** uygulaması bunları Alıntılar sekmesine alır. Yalnız Bütçe uygulaması okuyabilir (imza denetimi); başka uygulama erişemez.
 - Yeni APK'yı kurduktan sonra Okur'u bir kez aç; mevcut tüm vurgular aktarılır, sonrakiler eklendikçe gider.
 
+## 98 (30.10.2026)
+- Odak cümle: hız 100 kelime/dk'dan başlar (100 · 125 · 150 · 200 · 250).
+- Odak şeridi (‹ Oto hız › ✕) artık yalnız menü açıkken, alt çubuğun hemen üstünde görünür; okurken yazının üstünü kapatmaz.
+- Herhangi bir cümleye (önceki/sonraki paragraf dahil) dokununca o cümle öne çıkar; öne çıkmış cümleye dokununca sonrakine geçer. Boşluğa dokunma eskisi gibi (kenar: ilerle/geri, orta: menü). Sesli okuma açıkken odak sesi izler.
+
 ## 97 (30.10.2026)
 - Tam ekran düğmesi artık yazı kutusunun sağ üst köşesinde sade bir simge (alt satırdaki büyük düğme kaldırıldı); alt satır: durum yazısı + Bitti.
 - Tam ekranda başlık bölümü (Kitap Hakkındaki Yorumum, kitap adı, yazar) aynı görünümde üstte kalır; yazı alanı aşağı doğru ekranın sonuna kadar uzar.
