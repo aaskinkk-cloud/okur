@@ -4,6 +4,9 @@
 - Android uygulamasında vurgular (alıntılar) uygulamanın içine de kaydedilir; **Bütçe & Hedef** uygulaması bunları Alıntılar sekmesine alır. Yalnız Bütçe uygulaması okuyabilir (imza denetimi); başka uygulama erişemez.
 - Yeni APK'yı kurduktan sonra Okur'u bir kez aç; mevcut tüm vurgular aktarılır, sonrakiler eklendikçe gider.
 
+## 101 (30.10.2026)
+- **Odak cümle şeridinde hızı elle yaz:** şeritteki *100 k/dk ✎* yazısına dokun → kutuya değeri yaz (20–900) → Tamam/Enter. Eskiden yalnız 100·125·150·200·250 arasında dönüyordu. (Hız yazısı *Oto* açıkken görünür.)
+
 ## 100 (30.10.2026)
 - **Hızı elle yaz (Akış okuma):** alt çubuktaki hız yazısına (ör. *220 k/dk*) dokun → kutuya istediğin değeri yaz → Tamam/Enter. Sessizde kelime/dakika 40–900, seslide hız katı 0,5–2,5×. Aynı kutu Ayarlar › Okuma hızı satırında da var.
 - **Alt çubuğu gizle simgesi:** çubuğun üstünde küçük **⌄** — dokununca düğmeler gizlenir, okuma alanı açılır. Gizliyken en altta küçük **⌃** çıkar; dokununca geri gelir.
