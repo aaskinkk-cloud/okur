@@ -4,6 +4,10 @@
 - Android uygulamasında vurgular (alıntılar) uygulamanın içine de kaydedilir; **Bütçe & Hedef** uygulaması bunları Alıntılar sekmesine alır. Yalnız Bütçe uygulaması okuyabilir (imza denetimi); başka uygulama erişemez.
 - Yeni APK'yı kurduktan sonra Okur'u bir kez aç; mevcut tüm vurgular aktarılır, sonrakiler eklendikçe gider.
 
+## 97 (30.10.2026)
+- Tam ekran düğmesi artık yazı kutusunun sağ üst köşesinde sade bir simge (alt satırdaki büyük düğme kaldırıldı); alt satır: durum yazısı + Bitti.
+- Tam ekranda başlık bölümü (Kitap Hakkındaki Yorumum, kitap adı, yazar) aynı görünümde üstte kalır; yazı alanı aşağı doğru ekranın sonuna kadar uzar.
+
 ## 96 (30.10.2026)
 - Yorumum yazma ekranına **Tam ekran** düğmesi (Bitti'nin yanında): yazı alanı tüm ekranı kaplar, kitap adı üstte küçük, yazı 18 px; "Küçült" ya da Esc ile döner. Kayıt yazdıkça sürer.
 
