@@ -4,6 +4,11 @@
 - Android uygulamasında vurgular (alıntılar) uygulamanın içine de kaydedilir; **Bütçe & Hedef** uygulaması bunları Alıntılar sekmesine alır. Yalnız Bütçe uygulaması okuyabilir (imza denetimi); başka uygulama erişemez.
 - Yeni APK'yı kurduktan sonra Okur'u bir kez aç; mevcut tüm vurgular aktarılır, sonrakiler eklendikçe gider.
 
+## 94 (30.10.2026)
+- **Odak cümle** (üst çubukta üç çizgili simge, basit modda da görünür; yalnız EPUB): okunan cümle tam renkli ve hafif zeminli, diğer metin soluk.
+- Dokunma / ses tuşu / ‹ › ile cümle cümle ilerler; sağa kaydırma önceki cümle. Sayfanın son cümlesinden sonra sayfa kendiliğinden çevrilir.
+- Alttaki soluk düğme şeridi: ‹ · Oto · hız (150/200/250/300 kelime/dk) · › · ✕. Oto açıkken cümle uzunluğuna göre kendiliğinden ilerler.
+
 ## 93 (30.10.2026)
 - "Kaldığın yerden devam et" düğmesi taşıyordu: artık kartın tam genişliğinde; bölüm adı ve konum düğmenin içinde ikinci satır, solda simge kutusu, sağda ›.
 
