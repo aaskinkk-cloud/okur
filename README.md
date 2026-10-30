@@ -4,6 +4,9 @@
 - Android uygulamasında vurgular (alıntılar) uygulamanın içine de kaydedilir; **Bütçe & Hedef** uygulaması bunları Alıntılar sekmesine alır. Yalnız Bütçe uygulaması okuyabilir (imza denetimi); başka uygulama erişemez.
 - Yeni APK'yı kurduktan sonra Okur'u bir kez aç; mevcut tüm vurgular aktarılır, sonrakiler eklendikçe gider.
 
+## 99 (30.10.2026)
+- **Sayfa sonunda yarım cümle bırakma** (varsayılan açık; Görünüm › Satır bölme): sayfaya sığmayan son cümle bütün olarak sonraki sayfada başlar, sayfanın altında boşluk kalabilir. Cümlenin önüne görünmez sütun kırığı (span.okb) eklenir; CFI hesabında yok sayıldığı için kaldığın yer, yer imleri ve alıntılar değişmez. Yazı boyu/ekran değişince yeniden hesaplanır, okunan yer korunur. Bir sayfadan uzun cümleler bölünmeden kalır.
+
 ## 98 (30.10.2026)
 - Odak cümle: hız 100 kelime/dk'dan başlar (100 · 125 · 150 · 200 · 250).
 - Odak şeridi (‹ Oto hız › ✕) artık yalnız menü açıkken, alt çubuğun hemen üstünde görünür; okurken yazının üstünü kapatmaz.
