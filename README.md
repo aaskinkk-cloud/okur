@@ -4,6 +4,9 @@
 - Android uygulamasında vurgular (alıntılar) uygulamanın içine de kaydedilir; **Bütçe & Hedef** uygulaması bunları Alıntılar sekmesine alır. Yalnız Bütçe uygulaması okuyabilir (imza denetimi); başka uygulama erişemez.
 - Yeni APK'yı kurduktan sonra Okur'u bir kez aç; mevcut tüm vurgular aktarılır, sonrakiler eklendikçe gider.
 
+## 96 (30.10.2026)
+- Yorumum yazma ekranına **Tam ekran** düğmesi (Bitti'nin yanında): yazı alanı tüm ekranı kaplar, kitap adı üstte küçük, yazı 18 px; "Küçült" ya da Esc ile döner. Kayıt yazdıkça sürer.
+
 ## 95 (30.10.2026)
 - Odak cümle + sesli okuma: odak artık sesin okuduğu cümleyi izler (kendi zamanlayıcısı ses açıkken durur), kayma yok.
 - Odak açıkken cümle zemin vurgusu yok (ne odağın ne sesli okumanın kutusu); yalnız okunan cümle tam renk, gerisi soluk. Normal sesli okumada zemin vurgusu sürer.
