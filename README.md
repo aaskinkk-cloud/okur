@@ -4,6 +4,11 @@
 - Android uygulamasında vurgular (alıntılar) uygulamanın içine de kaydedilir; **Bütçe & Hedef** uygulaması bunları Alıntılar sekmesine alır. Yalnız Bütçe uygulaması okuyabilir (imza denetimi); başka uygulama erişemez.
 - Yeni APK'yı kurduktan sonra Okur'u bir kez aç; mevcut tüm vurgular aktarılır, sonrakiler eklendikçe gider.
 
+## 95 (30.10.2026)
+- Odak cümle + sesli okuma: odak artık sesin okuduğu cümleyi izler (kendi zamanlayıcısı ses açıkken durur), kayma yok.
+- Odak açıkken cümle zemin vurgusu yok (ne odağın ne sesli okumanın kutusu); yalnız okunan cümle tam renk, gerisi soluk. Normal sesli okumada zemin vurgusu sürer.
+- Üst çubuk sığmayınca yatay kayan bant olur; geri düğmesi solda sabit, sağ kenarda devamı olduğunu gösteren solma.
+
 ## 94 (30.10.2026)
 - **Odak cümle** (üst çubukta üç çizgili simge, basit modda da görünür; yalnız EPUB): okunan cümle tam renkli ve hafif zeminli, diğer metin soluk.
 - Dokunma / ses tuşu / ‹ › ile cümle cümle ilerler; sağa kaydırma önceki cümle. Sayfanın son cümlesinden sonra sayfa kendiliğinden çevrilir.
