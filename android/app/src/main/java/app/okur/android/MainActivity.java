@@ -37,6 +37,9 @@ public class MainActivity extends Activity {
     /** GitHub açılmazsa (404, sunucu hatası, bağlantı yok) sayfa buradan açılır. */
     private static final String YEDEK = "https://ahmet-uygulamalar.pages.dev/okur/";
     private boolean yedekte = false;
+    /* 1.8: açılışta bağlantı henüz hazır değilse ilk deneme düşüyor → önce aynı adres yeniden denenir, sonra önbellekten, sonra yedek; hata ekranı kendiliğinden yeniden dener */
+    private int deneme = 0, otoDeneme = 0;
+    private boolean sayfaHata = false;
     private static final int DOSYA_SEC = 41;
     private WebView web;
     private ValueCallback<Uri[]> dosyaCb;
@@ -93,12 +96,15 @@ public class MainActivity extends Activity {
         web.addJavascriptInterface(new Kopru(), "OkurAndroid");
 
         web.setWebViewClient(new WebViewClient() {
-            @Override public void onPageFinished(WebView v, String url) { v.evaluateJavascript(INDIR_JS, null); kameraYaz(); tamEkran(); }
+            @Override public void onPageStarted(WebView v, String url, android.graphics.Bitmap fav) { if (url != null && url.startsWith("http")) sayfaHata = false; }
+            @Override public void onPageFinished(WebView v, String url) {
+                if (url != null && url.startsWith("http") && !sayfaHata) { deneme = 0; otoDeneme = 0; v.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT); }
+                v.evaluateJavascript(INDIR_JS, null); kameraYaz(); tamEkran(); }
             @Override public void onReceivedHttpError(WebView v, android.webkit.WebResourceRequest r, android.webkit.WebResourceResponse res) {
-                if (r.isForMainFrame() && res != null && (res.getStatusCode() == 404 || res.getStatusCode() >= 500)) yedegeGec(v);
+                if (r.isForMainFrame() && res != null && (res.getStatusCode() == 404 || res.getStatusCode() >= 500)) { sayfaHata = true; yedegeGec(v, "HTTP " + res.getStatusCode()); }
             }
             @Override public void onReceivedError(WebView v, android.webkit.WebResourceRequest r, android.webkit.WebResourceError e) {
-                if (r.isForMainFrame()) yedegeGec(v);
+                if (r.isForMainFrame()) { sayfaHata = true; yedegeGec(v, e.getErrorCode() + " " + e.getDescription()); }
             }
         });
         web.setWebChromeClient(new WebChromeClient() {
@@ -165,18 +171,22 @@ public class MainActivity extends Activity {
         super.onActivityResult(req, res, d);
     }
 
-    /** GitHub sayfası açılmazsa bir kez Cloudflare kopyasına geçer; o da açılmazsa yeniden deneme ekranı gösterir. */
-    private void yedegeGec(WebView v) {
-        if (!yedekte) {
-            yedekte = true;
-            runOnUiThread(() -> { Toast.makeText(MainActivity.this, "GitHub açılmadı — yedek adresten (Cloudflare) açılıyor", Toast.LENGTH_LONG).show(); v.loadUrl(YEDEK); });
-        } else {
-            runOnUiThread(() -> v.loadDataWithBaseURL(null,
+    /** 1.8: GitHub açılmazsa: 1) 1,5 sn sonra yeniden dene 2) önbellekteki kopyayı aç 3) Cloudflare 4) hata ekranı — 5 sn'de bir kendiliğinden yeniden dener. */
+    private void yedegeGec(WebView v, String neden) {
+        runOnUiThread(() -> {
+            if (!yedekte && deneme == 0) { deneme = 1; v.postDelayed(() -> v.loadUrl(ADRES), 1500); return; }
+            if (!yedekte && deneme == 1) { deneme = 2; v.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); v.postDelayed(() -> v.loadUrl(ADRES), 800); return; }
+            if (!yedekte) { yedekte = true; v.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+                Toast.makeText(MainActivity.this, "GitHub açılmadı (" + neden + ") — yedek adresten (Cloudflare) açılıyor", Toast.LENGTH_LONG).show(); v.loadUrl(YEDEK); return; }
+            otoDeneme++;
+            v.loadDataWithBaseURL(null,
                 "<html><body style='font:18px sans-serif;background:#dae4d4;color:#25362a;padding:40px 24px;text-align:center'>"
-                + "<p>Okur şu an açılamıyor.<br>İnternet bağlantını kontrol et.</p>"
+                + "<p>Okur şu an açılamıyor.<br>İnternet bağlantını kontrol et.</p><p style='font-size:13px;opacity:.6'>" + neden + "</p>"
+                + (otoDeneme <= 6 ? "<p style='font-size:14px;opacity:.75'>Birkaç saniye içinde kendiliğinden yeniden denenecek…</p>" : "")
                 + "<p><a href='" + ADRES + "' style='display:inline-block;margin-top:16px;padding:14px 22px;border-radius:12px;background:#2c6b3c;color:#fff;text-decoration:none'>Yeniden dene</a></p></body></html>",
-                "text/html", "utf-8", null));
-        }
+                "text/html", "utf-8", null);
+            if (otoDeneme <= 6) v.postDelayed(() -> { yedekte = false; deneme = 1; v.loadUrl(ADRES); }, 5000);
+        });
     }
 
     private void renkUygula(String c) {
