@@ -4,6 +4,9 @@
 - Android uygulamasında vurgular (alıntılar) uygulamanın içine de kaydedilir; **Bütçe & Hedef** uygulaması bunları Alıntılar sekmesine alır. Yalnız Bütçe uygulaması okuyabilir (imza denetimi); başka uygulama erişemez.
 - Yeni APK'yı kurduktan sonra Okur'u bir kez aç; mevcut tüm vurgular aktarılır, sonrakiler eklendikçe gider.
 
+## 103 (31.10.2026)
+- **Mektup başlıkları** (varsayılan açık; Görünüm › Satır bölme): mektup kitaplarında her mektubun başına çizgiler arasında "✉ 20 Eylül 1943" gibi tarihli başlık. Mektubun başı alıcı/adres satırları, tarih (20. IX. 1943 → 20 Eylül 1943) ve "Sevgili…, Sayın…, Canım…" hitabından bulunur; imza satırı (S. Ali) önceki mektupta kalır. Romanlardaki tek tük hitap için başlık konmaz. Yalnız sınıf/öznitelik eklenir: metin, kaldığın yer, yer imleri değişmez.
+
 ## 102 (30.10.2026)
 - **Odak şeridini gizle:** şeridin sonundaki küçük **⌄** şeridi küçültür; odak açık kalır, yalnız küçük **⌃ Odak** düğmesi görünür. Ona dokununca şerit geri gelir. Seçim hatırlanır.
 
