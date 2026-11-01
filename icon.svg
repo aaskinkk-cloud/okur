@@ -1,1 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#1e6b63"/><g fill="none" stroke="#f6f1e4" stroke-width="30" stroke-linejoin="round" stroke-linecap="round"><path d="M256 168c-34-26-84-36-136-30v216c52-6 102 4 136 30 34-26 84-36 136-30V138c-52-6-102 4-136 30z"/><path d="M256 168v216"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+ <defs>
+  <linearGradient id="z" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a8a7e"/><stop offset="1" stop-color="#134a45"/></linearGradient>
+  <linearGradient id="a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd977"/><stop offset="1" stop-color="#e9a227"/></linearGradient>
+  <filter id="g" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#06231f" flood-opacity=".35"/></filter>
+ </defs>
+ <rect width="512" height="512" rx="112" fill="url(#z)"/>
+ <g id="on">
+ <g filter="url(#g)">
+  <path d="M256 168c-34-22-82-30-128-26v196c46-4 94 4 128 26z" fill="#fbf8f0"/>
+  <path d="M256 168c34-22 82-30 128-26v196c-46-4-94 4-128 26z" fill="#efe9da"/>
+  <path d="M256 168v196" stroke="#c9bfa8" stroke-width="4"/>
+  <path d="M158 196c26-2 52 2 74 12M158 228c26-2 52 2 74 12M158 260c26-2 52 2 74 12" stroke="#9fb7b0" stroke-width="9" stroke-linecap="round" fill="none"/>
+ </g>
+ <g filter="url(#g)">
+  <circle cx="352" cy="338" r="72" fill="url(#a)" stroke="#fff4d2" stroke-width="8"/>
+  <text x="352" y="366" text-anchor="middle" font-family="DejaVu Sans,Arial,sans-serif" font-weight="700" font-size="82" fill="#7a4d06">₺</text>
+ </g>
+ </g>
+</svg>

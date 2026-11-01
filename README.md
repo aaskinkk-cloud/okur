@@ -1,4 +1,14 @@
-# Okur
+# Okur & Bütçe
+
+## Okur & Bütçe — 104 (01.11.2026) · iki uygulama tek çatı altında
+- **Okur** ile **Bütçe & Hedef** artık tek uygulama: üstte "Okur | Bütçe & Hedef" geçiş anahtarı, tek simge (açık kitap + altın lira), tek APK.
+- Dosyalar: `index.html` = kabuk (geçiş anahtarı, renk/kamera boşluğu, güncelleme afişi, çevrimdışı önbellek) · `okur.html` = Okur (eski index.html) · `butce.html` + `sifre.html` = Bütçe & Hedef (butce reposundan alındı; **bundan sonra Bütçe değişiklikleri burada yapılır**).
+- Kitap açılınca üst anahtar gizlenir, kitap tam ekranı kullanır; kitaplığa dönünce geri gelir. Bant rengi açık uygulamanın zeminini alır (Android'de durum çubuğu da).
+- Veri ortak: iki uygulama aynı adreste olduğu için kitaplar, vurgular ve bütçe kayıtları aynı depoda. Bütçe sekmesine geçince Okur'daki yeni alıntılar hemen Alıntılar'a gelir.
+- Kabukta: Okur'un Milli Emlak gömülü modu ve Bütçe'nin Milli Emlak köprüsü kapalı; sürüm denetimi ve "Yeni sürüm hazır" yalnız kabukta. Bütçe'nin ana sayfa (ev) düğmesi Okur'a geçer.
+- Android'de dosya indirmeleri (yedek, dışa aktarım) iki çerçevede de uygulama üzerinden İndirilenler'e kaydedilir.
+- Adres değişmedi: aaskinkk-cloud.github.io/okur/ (`?app=butce` ile Bütçe açılır). Sürüm numarası kabukla (index.html meta "surum") ve sw.js V ile birlikte artırılır.
+- Android uygulaması (aynı paket, Okur'un verisi korunur): ad "Okur & Bütçe", yeni simge. Bütçe APK'sındaki kayıtlar ayrı depoda olduğundan bir kez yedekle aktarılır (Bütçe APK › yedek al → Okur & Bütçe › Bütçe › yedek yükle).
 
 ## Bütçe & Hedef'e alıntı aktarımı (29.10.2026)
 - Android uygulamasında vurgular (alıntılar) uygulamanın içine de kaydedilir; **Bütçe & Hedef** uygulaması bunları Alıntılar sekmesine alır. Yalnız Bütçe uygulaması okuyabilir (imza denetimi); başka uygulama erişemez.

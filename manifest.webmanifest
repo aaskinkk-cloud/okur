@@ -1,9 +1,9 @@
 {
  "id": "okur",
- "name": "Okur",
- "short_name": "Okur",
- "description": "EPUB ve PDF okuyucu",
- "start_url": "./?app=okur",
+ "name": "Okur & Bütçe",
+ "short_name": "Okur & Bütçe",
+ "description": "Kitap okuyucu (EPUB/PDF) ile Bütçe & Hedef tek uygulamada",
+ "start_url": "./",
  "scope": "./",
  "display": "fullscreen",
  "orientation": "any",
@@ -39,5 +39,29 @@
  "display_override": [
   "fullscreen",
   "standalone"
+ ],
+ "shortcuts": [
+  {
+   "name": "Okur",
+   "short_name": "Okur",
+   "url": "./?app=okur",
+   "icons": [
+    {
+     "src": "icon-192.png",
+     "sizes": "192x192"
+    }
+   ]
+  },
+  {
+   "name": "Bütçe & Hedef",
+   "short_name": "Bütçe",
+   "url": "./?app=butce",
+   "icons": [
+    {
+     "src": "icon-192.png",
+     "sizes": "192x192"
+    }
+   ]
+  }
  ]
 }
