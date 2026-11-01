@@ -1,5 +1,10 @@
 # Okur & Bütçe
 
+## 106 (01.11.2026) · Okur ⇄ Bütçe geçişi başlıkta
+- Üstteki ayrı "Okur | Bütçe & Hedef" anahtar çubuğu kaldırıldı. Geçiş artık uygulamaların kendi başlığında: Okur'da büyük "Okur" yazısının yanında **🎯 Bütçe & Hedef** hapı (cam görünümlü, temaya uyar), Bütçe'de başlığın yanında **📖 Okur** hapı (ev düğmesinin yerine).
+- Okur başlığı örnekteki gibi: çerçevesiz büyük kitap simgesi + serif "Okur"; telefonda sürüm etiketi başlıkta gizli (Ayarlar'da görünür). Başlık ekranın en üstünden başlar (kamera boşluğu kadar pay).
+- Kabuk `window.OB.sec('okur'|'butce')` ile geçiş yapar.
+
 ## 105 (01.11.2026) · Kitaplık yeni tasarım
 - **Resimli başlık:** büyük "Okur" yazısı, tema sözü, sağda çizim (göl ve dağlar, kitap yığını üstünde ince belli çay bardağı; gece ormanı; kütüphane rafları ve lamba; sepya kır manzarası; turkuaz dalgalar). Arama kutusu başlığın içinde, hap biçiminde.
 - **Kitaplık temaları** (başlıktaki palet simgesi): Uygulamaya göre (açıkta Göl, koyuda Orman) · Göl · Orman · Kâğıt · Turkuaz · Kütüphane · Sade. Kitaplık, sayfalar ve pencereler o temanın renklerini alır; okuma sayfasının teması ayrıdır. Seçim hatırlanır.

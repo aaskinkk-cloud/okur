@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <title>Okur &amp; Bütçe</title>
-<meta name="surum" content="105" data-ad="Okur &amp; Bütçe" data-tarih="01.11.2026">
+<meta name="surum" content="106" data-ad="Okur &amp; Bütçe" data-tarih="01.11.2026">
 <meta name="theme-color" content="#eef0ea">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
@@ -39,6 +39,8 @@ body.okumada #fOkur{top:0;height:100%}
 .yuk.bitti{opacity:0}
 .yuk i{display:block;width:26px;height:26px;margin:0 auto 10px;border-radius:50%;border:3px solid color-mix(in srgb,var(--acc) 25%,transparent);border-top-color:var(--acc);animation:don 0.8s linear infinite}
 @keyframes don{to{transform:rotate(360deg)}}
+/* 105: geçiş artık uygulamaların kendi başlığında (Okur'da "Bütçe & Hedef", Bütçe'de "Okur" hapı); üst bant yalnız kamera boşluğu */
+.ust{padding:var(--kam) 0 0;box-shadow:none}.ust .sec{display:none}
 #obUpd{position:fixed;left:50%;transform:translateX(-50%);bottom:16px;z-index:9;background:#111;color:#fff;padding:10px 10px 10px 16px;border-radius:14px;display:flex;gap:12px;align-items:center;font:600 14px system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.35)}
 #obUpd button{border:0;border-radius:10px;padding:8px 14px;font:inherit;background:#fff;color:#111;cursor:pointer}
 </style>
@@ -73,7 +75,7 @@ window.OB_KABUK=true;
   /* ---- ön kamera boşluğu (Android uygulaması --kamera değişkenini bu sayfaya yazar) ---- */
   const kamOku=()=>(R.style.getPropertyValue('--kamera')||'').trim()||'0px';
   let kam=kamOku();
-  const ustOlc=()=>{R.style.setProperty('--kam',kam);R.style.setProperty('--ustH',($('#ust').offsetHeight||60)+'px')};
+  const ustOlc=()=>{R.style.setProperty('--kam',kam);R.style.setProperty('--ustH',$('#ust').offsetHeight+'px')};
 
   /* ---- renk: üst bant etkin uygulamanın zeminini alır; Android kabuğuna da bu renk bildirilir ---- */
   const hex=c=>{const m=String(c).match(/rgba?\(([\d.]+)[ ,]+([\d.]+)[ ,]+([\d.]+)(?:[ ,/]+([\d.]+))?/);if(!m)return/^#/.test(c)?c:null;if(m[4]!==undefined&&+m[4]===0)return null;
@@ -139,6 +141,7 @@ window.OB_KABUK=true;
   new MutationObserver(()=>{const y=kamOku();if(y!==kam){kam=y;ustOlc();kamDagit()}}).observe(R,{attributes:true,attributeFilter:['style']});
   /* Bütçe'nin "ana sayfa" düğmesi kabukta Okur'a döner */
   window.modulKapat=()=>sec('okur');
+  window.OB={sec:sec,akt:()=>akt};
 
   /* ---- çevrimdışı önbellek ve "Yeni sürüm hazır" (tek yerden) ---- */
   const swOk=(location.protocol==='https:'||/^(localhost|127\.0\.0\.1)$/.test(location.hostname))&&('serviceWorker' in navigator)&&!/claude|googleusercontent|script\.google/.test(location.hostname);

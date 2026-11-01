@@ -580,6 +580,18 @@ body{font-size:16px}
   <button class="ib" onclick="A.menu()" aria-label="Menü"><svg class="ic"><use href="#i-menu"/></svg></button>
 </header>
 <main id="v"></main>
+<style>/* Okur & Bütçe kabuğunda: Okur'a geçiş hapı başlıkta */
+.ob-gec{flex:none;display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 15px 0 11px;border-radius:999px;border:1px solid var(--kenar);background:var(--kart);color:var(--yazi);font:600 14px/1 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;white-space:nowrap;box-shadow:0 4px 14px -10px rgba(0,0,0,.45);cursor:pointer}
+.ob-gec:active{transform:scale(.97)}.ob-gec svg{width:20px;height:20px;color:var(--ana)}
+html.ob-kabukta #anaBtn{display:none!important}
+html.ob-kabukta .brand b{font-size:25px}
+@media (max-width:400px){html.ob-kabukta .brand b{font-size:21px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+@media (max-width:359px){.ob-gec span{display:none}.ob-gec{width:42px;padding:0;justify-content:center}}
+</style>
+<script>(function(){var k=false;try{k=window.parent!==window&&!!window.parent.OB_KABUK}catch(e){}if(!k)return;
+  var h=document.querySelector('header.top');if(!h)return;var b=document.createElement('button');b.type='button';b.className='ob-gec';b.title='Okur';b.setAttribute('aria-label','Okur');
+  b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></svg><span>Okur</span>';b.onclick=function(){try{window.parent.OB.sec('okur')}catch(e){}};
+  h.insertBefore(b,h.querySelector('#anaBtn'));document.documentElement.classList.add('ob-kabukta')})()</script>
 <nav class="tabs" id="tabs" aria-label="Sekmeler"></nav>
 <div class="hm" id="hm" hidden></div>
 <div class="scrim" id="scrim" hidden onclick="A.kapat()"></div>
