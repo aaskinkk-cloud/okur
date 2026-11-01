@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <title>Okur &amp; Bütçe</title>
-<meta name="surum" content="106" data-ad="Okur &amp; Bütçe" data-tarih="01.11.2026">
+<meta name="surum" content="107" data-ad="Okur &amp; Bütçe" data-tarih="01.11.2026">
 <meta name="theme-color" content="#eef0ea">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
@@ -40,7 +40,7 @@ body.okumada #fOkur{top:0;height:100%}
 .yuk i{display:block;width:26px;height:26px;margin:0 auto 10px;border-radius:50%;border:3px solid color-mix(in srgb,var(--acc) 25%,transparent);border-top-color:var(--acc);animation:don 0.8s linear infinite}
 @keyframes don{to{transform:rotate(360deg)}}
 /* 105: geçiş artık uygulamaların kendi başlığında (Okur'da "Bütçe & Hedef", Bütçe'de "Okur" hapı); üst bant yalnız kamera boşluğu */
-.ust{padding:var(--kam) 0 0;box-shadow:none}.ust .sec{display:none}
+.ust{padding:var(--kam) 0 0;box-shadow:none;background:var(--ustbg,var(--bg))}.ust .sec{display:none}
 #obUpd{position:fixed;left:50%;transform:translateX(-50%);bottom:16px;z-index:9;background:#111;color:#fff;padding:10px 10px 10px 16px;border-radius:14px;display:flex;gap:12px;align-items:center;font:600 14px system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.35)}
 #obUpd button{border:0;border-radius:10px;padding:8px 14px;font:inherit;background:#fff;color:#111;cursor:pointer}
 </style>
@@ -89,7 +89,8 @@ window.OB_KABUK=true;
     R.style.setProperty('--bg',bg);R.style.setProperty('--fg',koyu?'#eef2ee':'#1d2a24');
     R.style.setProperty('--kart',koyu?'rgba(255,255,255,.14)':'#ffffff');R.style.colorScheme=koyu?'dark':'light';
     const v=vurgu(doc);if(v)R.style.setProperty('--acc',v);
-    let tc=bg;
+    let tc=bg;R.style.removeProperty('--ustbg');
+    if(akt==='okur'&&!body.classList.contains('okumada')){try{const u=doc.querySelector('meta[name=okur-ust-renk]');if(u&&u.content){tc=u.content;R.style.setProperty('--ustbg',tc)}}catch(e){}}
     if(body.classList.contains('okumada')){try{const m=doc.querySelector('meta[name=theme-color]');if(m&&m.content)tc=m.content}catch(e){}}
     const meta=$('meta[name=theme-color]');if(meta.content!==tc)meta.content=tc;
   }

@@ -1,5 +1,9 @@
 # Okur & Bütçe
 
+## 107 (01.11.2026) · Sistem çubuğu tasarımda · Kâğıt'ta rastgele alıntı
+- Kitaplıkta üstteki sistem çubuğu (saat/pil satırı) ve kamera boşluğu artık başlık çiziminin üst rengini alır (Göl, Orman, Kâğıt, Turkuaz, Kütüphane; Sade'de zemin rengi) — üstte ayrı beyaz şerit kalmaz. Okur `meta[name=okur-ust-renk]` yazar, kabuk bandı ve `theme-color`'ı ona göre boyar; kitap açıkken eskisi gibi kitabın rengi.
+- **Kâğıt** temasında başlıktaki söz Alıntılar'dan gelir: kitaplardaki vurgular + Bütçe & Hedef › Alıntılar, rastgele (240 karakterden uzunlar hariç). Kitaplık her açılışta ve kitaptan dönünce yenilenir; söze dokununca başka bir alıntı. Altında "— Kitap, Yazar". Alıntı yoksa eski söz.
+
 ## 106 (01.11.2026) · Okur ⇄ Bütçe geçişi başlıkta
 - Üstteki ayrı "Okur | Bütçe & Hedef" anahtar çubuğu kaldırıldı. Geçiş artık uygulamaların kendi başlığında: Okur'da büyük "Okur" yazısının yanında **🎯 Bütçe & Hedef** hapı (cam görünümlü, temaya uyar), Bütçe'de başlığın yanında **📖 Okur** hapı (ev düğmesinin yerine).
 - Okur başlığı örnekteki gibi: çerçevesiz büyük kitap simgesi + serif "Okur"; telefonda sürüm etiketi başlığın sağ alt köşesinde küçük. Başlık ekranın en üstünden başlar (kamera boşluğu kadar pay).
