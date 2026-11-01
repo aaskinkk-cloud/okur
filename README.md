@@ -1,5 +1,15 @@
 # Okur & Bütçe
 
+## 105 (01.11.2026) · Kitaplık yeni tasarım
+- **Resimli başlık:** büyük "Okur" yazısı, tema sözü, sağda çizim (göl ve dağlar, kitap yığını üstünde ince belli çay bardağı; gece ormanı; kütüphane rafları ve lamba; sepya kır manzarası; turkuaz dalgalar). Arama kutusu başlığın içinde, hap biçiminde.
+- **Kitaplık temaları** (başlıktaki palet simgesi): Uygulamaya göre (açıkta Göl, koyuda Orman) · Göl · Orman · Kâğıt · Turkuaz · Kütüphane · Sade. Kitaplık, sayfalar ve pencereler o temanın renklerini alır; okuma sayfasının teması ayrıdır. Seçim hatırlanır.
+- **Araçlar** yuvarlak simge + altında ad (PDF düzenle, Dönüştür, Sesli metin, İndir, Alıntılar, İstatistik, Ayarlar, Kitap ekle); telefonda 4'lü iki sıra.
+- **İstatistik şeridi:** kitap sayısı, toplam okuma süresi, favori sayısı, okuma serisi (yoksa okuma oranı); dokununca istatistikler / favoriler.
+- **Son okunan kitap** kartı: eğik kapak gölgesi, "Son okunan kitap" etiketi, iri başlık, hap biçiminde "Kaldığın yerden devam et".
+- **Favori Kitaplarım** rafı (yatay kaydırmalı, "Tümünü gör"), **Kitaplığım** başlığı, hap süzgeçler, kartlarda ilerleme yüzdesi.
+- **Alt gezinme (telefon):** Ana Sayfa · Kitaplık · İstatistik · Favoriler · Ayarlar; okurken gizli.
+- Var olan düğmeler aynı kimlikleriyle yeni yerlerine taşındı; hiçbir işlev kaldırılmadı.
+
 ## Okur & Bütçe — 104 (01.11.2026) · iki uygulama tek çatı altında
 - **Okur** ile **Bütçe & Hedef** artık tek uygulama: üstte "Okur | Bütçe & Hedef" geçiş anahtarı, tek simge (açık kitap + altın lira), tek APK.
 - Dosyalar: `index.html` = kabuk (geçiş anahtarı, renk/kamera boşluğu, güncelleme afişi, çevrimdışı önbellek) · `okur.html` = Okur (eski index.html) · `butce.html` + `sifre.html` = Bütçe & Hedef (butce reposundan alındı; **bundan sonra Bütçe değişiklikleri burada yapılır**).
