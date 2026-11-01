@@ -1,5 +1,10 @@
 # Okur & Bütçe
 
+## 108 (01.11.2026) · Alıntı tüm temalarda
+- Başlıktaki söz **tüm temalarda** Alıntılar'dan rastgele gelir (kitap vurguları + Bütçe & Hedef › Alıntılar); altında "— Kitap, Yazar". Her açılışta, kitaptan dönünce ve söze dokununca yenilenir; alıntı yoksa temanın sözü.
+- **En çok 2 satır:** önce 70 karaktere kadar olanlardan, yoksa 110, yoksa 240 karaktere kadar olanlardan seçilir; yine de taşarsa 2. satır sonunda "…" ile kesilir. Telefonda Göl ve Kütüphane'de söz çizimin altına girmez.
+- Sistem çubuğu tüm temalarda başlık rengini alır (107).
+
 ## 107 (01.11.2026) · Sistem çubuğu tasarımda · Kâğıt'ta rastgele alıntı
 - Kitaplıkta üstteki sistem çubuğu (saat/pil satırı) ve kamera boşluğu artık başlık çiziminin üst rengini alır (Göl, Orman, Kâğıt, Turkuaz, Kütüphane; Sade'de zemin rengi) — üstte ayrı beyaz şerit kalmaz. Okur `meta[name=okur-ust-renk]` yazar, kabuk bandı ve `theme-color`'ı ona göre boyar; kitap açıkken eskisi gibi kitabın rengi.
 - **Kâğıt** temasında başlıktaki söz Alıntılar'dan gelir: kitaplardaki vurgular + Bütçe & Hedef › Alıntılar, rastgele (240 karakterden uzunlar hariç). Kitaplık her açılışta ve kitaptan dönünce yenilenir; söze dokununca başka bir alıntı. Altında "— Kitap, Yazar". Alıntı yoksa eski söz.
