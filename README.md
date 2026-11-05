@@ -1,5 +1,9 @@
 # Okur & Bütçe
 
+## 110 (05.11.2026) · Araçlar akordeonu · Alıntılar alt gezinmede
+- Kitaplıktaki araçlar (Kitap ekle, PDF düzenle, Dönüştür, Sesli metin, İndir, Alıntılar, İstatistik, Ayarlar) **Araçlar** başlıklı açılır-kapanır bölümde; her açılışta **kapalı** gelir, başlıkta araçların adları kısaca yazar, dokununca açılır.
+- Alt gezinmeye **Alıntılar** sekmesi eklendi (Ana Sayfa · Kitaplık · Alıntılar · İstatistik · Favoriler · Ayarlar); ekrana sığmazsa çubuk sağa kayar.
+
 ## 109 (05.11.2026) · Alıntılar Okur'da · Notlar · üç kaynaklı rastgele söz
 - **Alıntılar Okur'a taşındı** (Araçlar › Alıntılar): Bütçe & Hedef'teki Alıntılar sekmesinin tüm işlevleri — Kategori / Yazar / Kitap'a göre listeleme, süzgeç hapları (Tümü, ★ Favoriler, kategoriler), arama, Yeni, Düzenle (metin, yazar, kitap, kategori), ★ favori, Kopyala, Paylaş, Yukarı/Aşağı taşı, Sil (+ Geri al), Rastgele. Kitaptan gelen alıntıda **Kitapta** düğmesi vurguya götürür. Kayıtlar eskisi gibi Bütçe verisinde (`butceHedef.v1` › `alintilar`): veri taşınmadı, kaybolmaz; yedek/geri yükleme aynı. Kitap vurguları sayfa açılınca eşitlenir (silinen geri gelmez). Bütçe & Hedef'te Alıntı sekmesi kaldırıldı.
 - **Bütçe & Hedef › Notlar** (yeni sekme, Zikir'in yanında): liste yalnız ilk satır + oluşturulma tarihi; dokununca tam not pencerede (uzun not kaydırılır). Yazma ekranı **sarı not kâğıdı** (krem-sarı, koyu kahve yazı, ince çizgiler), yazdıkça kaydedilir; oluşturulma tarihi değişmez, son düzenleme ayrıca tutulur. Sil (geri alınabilir), Kopyala. Veri: `D.notlar` — Bütçe yedeğine dahil.
