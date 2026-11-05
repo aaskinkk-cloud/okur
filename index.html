@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <title>Okur &amp; Bütçe</title>
-<meta name="surum" content="108" data-ad="Okur &amp; Bütçe" data-tarih="01.11.2026">
+<meta name="surum" content="109" data-ad="Okur &amp; Bütçe" data-tarih="01.11.2026">
 <meta name="theme-color" content="#eef0ea">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
@@ -142,7 +142,14 @@ window.OB_KABUK=true;
   new MutationObserver(()=>{const y=kamOku();if(y!==kam){kam=y;ustOlc();kamDagit()}}).observe(R,{attributes:true,attributeFilter:['style']});
   /* Bütçe'nin "ana sayfa" düğmesi kabukta Okur'a döner */
   window.modulKapat=()=>sec('okur');
-  window.OB={sec:sec,akt:()=>akt};
+  /* v109: bağlantılar — q:alıntı, k:kitap (Okur) · n:not, z:zikir (Bütçe & Hedef). Hedef çerçeve hazır olana kadar bekler. */
+  const bekle=(k,fn,ad)=>{let n=0;const t=()=>{let w=null;try{w=F[k].contentWindow}catch(e){}if(w&&typeof w[ad]==='function'){try{w[ad].apply(w,fn)}catch(e){}return}if(++n<60)setTimeout(t,150)};t()};
+  const git=h=>{h=String(h||'');const t=h.split(':')[0],id=h.slice(2);
+    if(t==='n'){sec('butce');bekle('butce',[id],'bhNotAc')}
+    else if(t==='z'){sec('butce');bekle('butce',[id],'bhZikirAc')}
+    else if(t==='q'||t==='k'){sec('okur');bekle('okur',[h],'okurGit')}};
+  const kitaplar=()=>{try{const w=F.okur.contentWindow;return typeof w.okurKitaplar==='function'?w.okurKitaplar():[]}catch(e){return[]}};
+  window.OB={sec:sec,akt:()=>akt,git:git,kitaplar:kitaplar};
 
   /* ---- çevrimdışı önbellek ve "Yeni sürüm hazır" (tek yerden) ---- */
   const swOk=(location.protocol==='https:'||/^(localhost|127\.0\.0\.1)$/.test(location.hostname))&&('serviceWorker' in navigator)&&!/claude|googleusercontent|script\.google/.test(location.hostname);

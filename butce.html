@@ -536,6 +536,48 @@ body{font-size:16px}
 .hk-yeni{width:100%;justify-content:center;margin:0 0 12px}
 @media (max-width:380px){.hkart-ic{gap:4px;padding:10px 10px 8px}.hk-hc .hc{font-size:15px;padding:7px 6px}.hk-tut .hc{font-size:16.5px}.hk-hc span{font-size:10px;padding-right:3px}}
 </style>
+<style>
+/* 4.1: Notlar — liste sade, yazma ekranı sarı not kâğıdı */
+.nt-ust{display:flex;gap:8px;align-items:center;margin:4px 0 12px}.nt-ust .inp{flex:1;min-width:0}.nt-ust .btn{flex:none;white-space:nowrap}
+.nt-liste{display:flex;flex-direction:column;border-radius:16px;overflow:hidden;background:var(--kart);box-shadow:var(--golge,0 1px 3px rgba(0,0,0,.08));border:1px solid var(--kenar)}
+.nt-sat{display:flex;align-items:baseline;gap:12px;width:100%;padding:14px 16px;border:0;border-bottom:1px solid var(--kenar);background:none;color:var(--yazi);font:inherit;text-align:left;cursor:pointer}
+.nt-sat:last-child{border-bottom:0}.nt-sat:active{background:color-mix(in srgb,var(--ana) 8%,transparent)}
+.nt-ilk{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15.5px}
+.nt-tar{flex:none;font-size:12px;color:var(--soluk);display:inline-flex;align-items:center;gap:4px}.nt-tar .ic{width:13px;height:13px}
+.nt-bos{text-align:center;color:var(--soluk);padding:34px 20px}.nt-bos .ic{width:44px;height:44px;opacity:.5}
+html.nt-acik,html.nt-acik body{overflow:hidden}
+.nt-kat{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:max(14px,env(safe-area-inset-top)) 12px max(14px,env(safe-area-inset-bottom))}
+.nt-kapak{position:absolute;inset:0;background:rgba(40,30,15,.42);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.nt-pen{position:relative;display:flex;flex-direction:column;gap:10px;width:min(640px,100%);max-height:100%;min-height:0}
+.nt-kat.yazim .nt-pen{height:100%}
+.nt-kagit{--sat:30px;position:relative;display:flex;flex-direction:column;min-height:0;flex:1 1 auto;border-radius:6px 6px 14px 14px;color:#5a3b1e;
+  background:#fdf4c6 linear-gradient(180deg,#fff9dc,#fbefb8);box-shadow:0 18px 40px -14px rgba(60,40,10,.55),0 2px 0 rgba(255,255,255,.6) inset;overflow:hidden}
+.nt-kagit::before{content:"";position:absolute;left:0;right:0;top:0;height:10px;background:linear-gradient(180deg,rgba(214,176,70,.35),transparent)}
+.nt-bas{display:flex;align-items:center;gap:8px;padding:12px 14px 6px 18px;font:600 12.5px/1.3 system-ui,sans-serif;color:#9a7544;flex:none}
+.nt-bas span{flex:1;min-width:0}
+.nt-x{width:34px;height:34px;border:0;border-radius:50%;background:rgba(122,84,30,.1);color:#6b4a22;font-size:22px;line-height:1;cursor:pointer;flex:none}
+.nt-metin,#ntYaz{flex:1 1 auto;min-height:0;overflow-y:auto;margin:0;padding:2px 20px 22px;font:18px/var(--sat) Georgia,"Iowan Old Style","Palatino Linotype",serif;color:#5a3b1e;white-space:pre-wrap;overflow-wrap:anywhere;
+  background-image:repeating-linear-gradient(180deg,transparent 0,transparent calc(var(--sat) - 1px),rgba(160,120,50,.22) calc(var(--sat) - 1px),rgba(160,120,50,.22) var(--sat));background-attachment:local;background-position:0 2px}
+#ntYaz{width:100%;box-sizing:border-box;border:0;outline:0;resize:none;background-color:transparent;caret-color:#8a5a1c;-webkit-text-size-adjust:100%}
+#ntYaz::placeholder{color:rgba(90,59,30,.4)}
+.nt-oku .nt-metin{max-height:calc(100vh - 170px)}
+.nt-bag{color:#8a4d12;text-decoration:underline;text-decoration-color:rgba(138,77,18,.45);text-decoration-thickness:2px;text-underline-offset:3px;cursor:pointer;background:rgba(214,160,40,.16);border-radius:3px}
+.nt-arac{display:flex;gap:8px;align-items:center;flex:none}.nt-arac .btn{white-space:nowrap}.nt-arac .btn:not(.ana){background:var(--kart)}
+.nt-baglar{display:flex;flex-wrap:wrap;gap:6px;flex:none;max-height:110px;overflow:auto}.nt-baglar:empty{display:none}
+.nt-cip{display:inline-flex;align-items:center;gap:6px;max-width:100%;padding:4px 4px 4px 9px;border-radius:999px;background:var(--kart);color:var(--yazi);font-size:12.5px;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.nt-cip .ic{width:13px;height:13px;flex:none}.nt-cip b{font-weight:600;white-space:nowrap}.nt-cip small{color:var(--soluk);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.nt-cip.kopuk{outline:1px dashed var(--kirmizi)}
+.nt-cip button{border:0;background:none;color:var(--soluk);width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:17px;line-height:1;flex:none;display:grid;place-items:center}
+.nt-secici{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;justify-content:center;background:rgba(40,30,15,.35)}
+.nt-pen2{width:min(640px,100%);max-height:78%;display:flex;flex-direction:column;gap:8px;padding:0 12px 14px;border-radius:18px 18px 0 0;background:var(--kart);color:var(--yazi);box-shadow:0 -10px 30px rgba(0,0,0,.25)}
+.nt-pen2 .nt-bas{color:var(--soluk);padding:12px 2px 2px}.nt-pen2 .nt-x{background:color-mix(in srgb,var(--yazi) 8%,transparent);color:var(--yazi)}
+.nt-sek{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:3px;border-radius:12px;background:color-mix(in srgb,var(--yazi) 7%,transparent)}
+.nt-sek button{height:34px;border:0;border-radius:9px;background:none;color:var(--soluk);font:600 13.5px system-ui,sans-serif;cursor:pointer}.nt-sek button.on{background:var(--kart);color:var(--yazi);box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.nt-sl{overflow-y:auto;min-height:0;display:flex;flex-direction:column;gap:6px}
+.nt-se{display:flex;flex-direction:column;gap:2px;width:100%;padding:10px 12px;border:1px solid var(--kenar);border-radius:12px;background:none;color:var(--yazi);text-align:left;font:inherit;font-size:14px;cursor:pointer}
+.nt-se span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.nt-se small{color:var(--soluk);font-size:12px}
+.nt-sbos{color:var(--soluk);text-align:center;padding:18px}
+</style>
 </head>
 <body>
 <noscript><h1>Bütçe &amp; Hedef</h1><p>Bütçe &amp; Hedef: aylık bütçe ve ödeme takibi, birikim hedefleri, fındık sezonu hesabı, düğün takı defteri, zikir sayacı ve alıntılar. Ücretsiz, Türkçe, telefonda internetsiz çalışır; veriler yalnız cihazında kalır.</p></noscript>
@@ -558,7 +600,7 @@ body{font-size:16px}
 <symbol id="i-asagi" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
 <symbol id="i-kopya" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2"/><path d="M15.5 8.5V6A2 2 0 0 0 13.5 4H6a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2.5"/></symbol>
 <symbol id="i-paylas" viewBox="0 0 24 24"><path d="M12 15V3.8M7.5 8 12 3.5 16.5 8"/><path d="M5 12.5V19a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19v-6.5"/></symbol>
-<symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+<symbol id="i-not" viewBox="0 0 24 24"><path d="M6 3h9l4 4v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M15 3v4h4"/><path d="M8.5 11.5h7M8.5 15h7M8.5 18.5h4"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
 <symbol id="i-yazdir" viewBox="0 0 24 24"><path d="M7 8V3.5h10V8"/><rect x="3.5" y="8" width="17" height="8.5" rx="2"/><path d="M7 13.5h10v7H7z"/></symbol>
 <symbol id="i-indir" viewBox="0 0 24 24"><path d="M12 3.8V15M7.5 10.5 12 15l4.5-4.5"/><path d="M4.5 16.5v2a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-2"/></symbol>
 <symbol id="i-yukle" viewBox="0 0 24 24"><path d="M3.5 18.5v-11A2 2 0 0 1 5.5 5.5h4l2 2h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/><path d="M12 17v-6M9.5 13.5 12 11l2.5 2.5"/></symbol>
@@ -602,7 +644,7 @@ html.ob-kabukta .brand b{font-size:25px}
 <script>
 (function(){
 'use strict';
-const SURUM='4.0';
+const SURUM='4.1';
 const KEY='butceHedef.v1',UKEY='butceHedef.ui';
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -647,6 +689,7 @@ function onar(d){
   if(!Array.isArray(d.zikirler))d.zikirler=[];
   if(!Array.isArray(d.alintilar))d.alintilar=[];
   if(!Array.isArray(d.okurAtla))d.okurAtla=[];
+  if(!Array.isArray(d.notlar))d.notlar=[];d.notlar.forEach(n=>{if(!Array.isArray(n.baglar))n.baglar=[];if(!n.olusturma)n.olusturma=Date.now()});
   try{d.alintilar.forEach(alintiOnar)}catch(e){}
   if(!d.meta)d.meta={olusturma:Date.now(),yedek:0};
   try{if(zGoc(d))gocOldu=1}catch(e){}
@@ -695,7 +738,7 @@ function toast(msg,btn,fn){
 }
 function sheet(html){$('#sheet').innerHTML=html;$('#sheet').hidden=false;$('#scrim').hidden=false}
 function kapat(){$('#sheet').hidden=true;$('#scrim').hidden=true}
-const SEKMELER=[['butce','Bütçe','butce'],['findik','Fındık','findik'],['hedef','Hedef','hedef'],['dugun','Düğün','dugun'],['zikir','Zikir','zikir'],['alinti','Alıntı','alinti'],['sifre','Şifre','sifre']];
+const SEKMELER=[['butce','Bütçe','butce'],['findik','Fındık','findik'],['hedef','Hedef','hedef'],['dugun','Düğün','dugun'],['zikir','Zikir','zikir'],['notlar','Notlar','not'],['sifre','Şifre','sifre']] /* 4.1: Alıntılar Okur'a taşındı; yerine Notlar */;
 function tabsCiz(){$('#tabs').innerHTML=SEKMELER.map(s=>'<button class="'+(U.tab===s[0]?'on':'')+'" onclick="A.sekme(\''+s[0]+'\')"><svg class="ic tab-ic"><use href="#i-'+s[2]+'"/></svg>'+s[1]+'</button>').join('')}
 function sekme(t){
   if(t===U.tab){window.scrollTo({top:0,behavior:'smooth'});return}
@@ -705,7 +748,7 @@ function sekme(t){
 function ciz(){
   tabsCiz();
   if(U.tab==='sifre'){sifreCiz();return}
-  const f={butce:butceHtml,findik:findikHtml,hedef:hedefHtml,dugun:dugunHtml,zikir:zikirHtml,alinti:alintiHtml}[U.tab]||butceHtml;
+  const f={butce:butceHtml,findik:findikHtml,hedef:hedefHtml,dugun:dugunHtml,zikir:zikirHtml,alinti:alintiHtml,notlar:notlarHtml}[U.tab]||butceHtml;
   $('#v').innerHTML=f()+'<div class="surum">Bütçe &amp; Hedef · sürüm '+SURUM+'</div>';
   try{ozetKucult()}catch(e){}
 }
@@ -1707,6 +1750,95 @@ function anaSayfa(){try{kaydet(true);Kopru.gonder(true)}catch(e){}
     setTimeout(()=>{if(window.closed)return;if(ana){try{window.top.location.href=ana}catch(e){location.href=ana}}
       else{toast('Ana sayfa adresi kayıtlı değil — bir kez kaydet, düğme hep oraya gitsin',3500);A.anaAyar()}},300)},120)}
 function anaDugme(){const b=$('#anaBtn');if(b)b.hidden=false}
+
+/* ---------- 4.1: Notlar — sarı not kâğıdı ----------
+   D.notlar=[{id,metin,olusturma,duzenleme,baglar:[{m:'ifade',h:'q:ALINTI|n:NOT|k:KİTAP|z:ZİKİR'}]}] — Bütçe yedeğine dahildir.
+   Bağlantı metne işaret konmadan ayrı tutulur: not metni temiz kalır, ifadenin metindeki ilk geçtiği yer tıklanabilir olur. */
+const NOT={ara:'',acik:null,duz:null,sel:[0,0],t:0};
+const ntTarih=t=>t?new Date(t).toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'}):'';
+const ntSaat=t=>t?new Date(t).toLocaleString('tr-TR',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}):'';
+const ntIlk=m=>(String(m||'').split('\n').map(x=>x.trim()).find(Boolean)||'');
+function ntBul(id){return D.notlar.find(n=>n.id===id)}
+function ntHedefAd(h){const [t,x,y]=String(h||'').split(':');
+  if(t==='q'){const q=D.alintilar.find(a=>a.id===x);return q?'Alıntı: '+(q.metin||'').slice(0,40):'Alıntı (silinmiş)'}
+  if(t==='n'){const n=ntBul(x);return n?'Not: '+ntIlk(n.metin).slice(0,40):'Not (silinmiş)'}
+  if(t==='z'){const z=D.zikirler.find(a=>a.id===x);return z?'Zikir: '+(z.ad||'').slice(0,40):'Zikir (silinmiş)'}
+  if(t==='k'){let ad='';try{const l=window.parent.OB.kitaplar();const b=l.find(k=>k.id===x);ad=b?b.ad:''}catch(e){}return 'Kitap: '+(ad||'Okur kitabı')}
+  return h}
+/* metni bağlantılarıyla HTML'e çevirir (her ifadenin ilk serbest geçtiği yer) */
+function ntHtml(n){const m=String(n.metin||''),r=[];
+  (n.baglar||[]).forEach((b,i)=>{if(!b||!b.m)return;let f=0,p;while((p=m.indexOf(b.m,f))>-1){const e=p+b.m.length;if(!r.some(x=>p<x.e&&e>x.s)){r.push({s:p,e,b,i});break}f=p+1}});
+  r.sort((a,b)=>a.s-b.s);let h='',k=0;r.forEach(x=>{h+=esc(m.slice(k,x.s))+'<a class="nt-bag" data-h="'+esc(x.b.h)+'" title="'+esc(ntHedefAd(x.b.h))+'">'+esc(m.slice(x.s,x.e))+'</a>';k=x.e});
+  return h+esc(m.slice(k))}
+function notlarHtml(){const q=NOT.ara.trim().toLocaleLowerCase('tr');
+  const l=D.notlar.slice().sort((a,b)=>(b.olusturma||0)-(a.olusturma||0)).filter(n=>!q||String(n.metin||'').toLocaleLowerCase('tr').includes(q));
+  return '<div class="nt-ust"><input class="inp" type="search" placeholder="Notlarda ara" value="'+esc(NOT.ara)+'" oninput="A.ntAra(this.value)"><button class="btn ana" onclick="A.ntYeni()"><svg class="ic"><use href="#i-arti"/></svg>Yeni not</button></div>'+
+    (l.length?'<div class="nt-liste">'+l.map(n=>'<button class="nt-sat" onclick="A.ntGor(\''+n.id+'\')"><span class="nt-ilk">'+(esc(ntIlk(n.metin))||'<i>Boş not</i>')+'</span><span class="nt-tar">'+ntTarih(n.olusturma)+((n.baglar||[]).length?' · <svg class="ic"><use href="#i-link"/></svg>'+n.baglar.length:'')+'</span></button>').join('')+'</div>'
+      :'<div class="nt-bos"><svg class="ic"><use href="#i-not"/></svg><p>'+(q?'Aramaya uyan not yok.':'Günlük düşüncelerin, kısa hatırlatmaların, önemli bilgiler… İlk notunu “Yeni not” ile yaz.')+'</p></div>')}
+function ntKapat(){const o=$('#ntKat');if(o)o.remove();document.documentElement.classList.remove('nt-acik');NOT.acik=NOT.duz=null}
+function ntKatman(html,cls){ntKapat();const o=document.createElement('div');o.id='ntKat';o.className='nt-kat '+(cls||'');o.innerHTML='<div class="nt-kapak" onclick="A.ntKapat()"></div><div class="nt-pen" role="dialog" aria-modal="true">'+html+'</div>';
+  document.body.appendChild(o);document.documentElement.classList.add('nt-acik');
+  o.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();A.ntKapat()}});return o}
+/* görüntüleme: tam metin, bağlantılar tıklanır */
+function ntGor(id){const n=ntBul(id);if(!n)return;
+  const o=ntKatman('<div class="nt-kagit nt-oku"><div class="nt-bas"><span>'+ntSaat(n.olusturma)+(n.duzenleme&&n.duzenleme-n.olusturma>60000?' · düzenlendi '+ntSaat(n.duzenleme):'')+'</span><button class="nt-x" onclick="A.ntKapat()" aria-label="Kapat">×</button></div>'+
+    '<div class="nt-metin">'+(ntHtml(n)||'<i>Boş not</i>')+'</div></div>'+
+    '<div class="nt-arac"><button class="btn" onclick="A.ntKopya(\''+id+'\')"><svg class="ic"><use href="#i-kopya"/></svg>Kopyala</button><button class="btn" style="color:var(--kirmizi)" onclick="A.ntSil(\''+id+'\')"><svg class="ic"><use href="#i-sil"/></svg>Sil</button><span style="flex:1"></span><button class="btn ana" onclick="A.ntDuzen(\''+id+'\')"><svg class="ic"><use href="#i-kalem"/></svg>Düzenle</button></div>');
+  NOT.acik=id;o.querySelector('.nt-metin').addEventListener('click',e=>{const a=e.target.closest('.nt-bag');if(a){e.preventDefault();ntGit(a.dataset.h)}})}
+function ntGit(h){const [t,x]=String(h||'').split(':');
+  if(t==='n'){if(ntBul(x))ntGor(x);else toast('Bağlı not silinmiş');return}
+  if(t==='z'){if(!D.zikirler.some(z=>z.id===x)){toast('Bağlı zikir silinmiş');return}ntKapat();U.zOne=x;if(U.tab!=='zikir')sekme('zikir');else ciz();window.scrollTo(0,0);return}
+  ntKapat();try{window.parent.OB.git(h)}catch(e){toast('Bu bağlantı Okur & Bütçe uygulamasında açılır')}}
+/* yazma: sarı not kâğıdı, yazdıkça kaydedilir */
+function ntDuzen(id){const n=ntBul(id);if(!n)return;
+  const o=ntKatman('<div class="nt-kagit nt-yaz"><div class="nt-bas"><span id="ntDurum">'+(n.olusturma?ntTarih(n.olusturma):'')+'</span><button class="nt-x" onclick="A.ntBitti()" aria-label="Bitti">×</button></div>'+
+    '<textarea id="ntYaz" placeholder="Aklından geçeni yaz…" spellcheck="true">'+esc(n.metin||'')+'</textarea></div>'+
+    '<div class="nt-baglar" id="ntBaglar"></div>'+
+    '<div class="nt-arac"><button class="btn" onpointerdown="event.preventDefault()" onclick="A.ntBagla()" title="Seçtiğin kelimeye bağlantı ver"><svg class="ic"><use href="#i-link"/></svg>Bağlantı</button><span style="flex:1"></span><button class="btn ana" onclick="A.ntBitti()">Bitti</button></div>','yazim');
+  NOT.duz=id;const ta=o.querySelector('#ntYaz');const sec=()=>{NOT.sel=[ta.selectionStart,ta.selectionEnd]};
+  ['select','keyup','mouseup','touchend','input'].forEach(ev=>ta.addEventListener(ev,sec));
+  ta.addEventListener('input',()=>{clearTimeout(NOT.t);$('#ntDurum').textContent='Kaydediliyor…';NOT.t=setTimeout(()=>ntYazKaydet(),500)});
+  ntBagCiz();setTimeout(()=>{ta.focus();if(!n.metin)ta.setSelectionRange(0,0)},60)}
+function ntYazKaydet(){const id=NOT.duz,n=ntBul(id),ta=$('#ntYaz');if(!n||!ta)return;clearTimeout(NOT.t);
+  if(n.metin!==ta.value){n.metin=ta.value;n.duzenleme=Date.now();kaydet(true)}
+  const d=$('#ntDurum');if(d)d.textContent='Kaydedildi · '+new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'})}
+function ntBagCiz(){const n=ntBul(NOT.duz),el=$('#ntBaglar');if(!n||!el)return;const m=String(($('#ntYaz')||{}).value||n.metin||'');
+  el.innerHTML=(n.baglar||[]).map((b,i)=>'<span class="nt-cip'+(m.indexOf(b.m)<0?' kopuk':'')+'" title="'+esc(ntHedefAd(b.h))+'"><svg class="ic"><use href="#i-link"/></svg><b>'+esc(b.m.length>24?b.m.slice(0,23)+'…':b.m)+'</b><small>'+esc(ntHedefAd(b.h))+(m.indexOf(b.m)<0?' · ifade metinde yok':'')+'</small><button onclick="A.ntBagDegis('+i+')" aria-label="Bağlantıyı değiştir"><svg class="ic"><use href="#i-kalem"/></svg></button><button onclick="A.ntBagSil('+i+')" aria-label="Bağlantıyı kaldır">×</button></span>').join('')}
+/* bağlantı seçici: Alıntı · Not · Kitap · Zikir */
+const NTS={tur:'q',ara:'',ifade:'',degis:-1};
+function ntSecici(){const id=NOT.duz,ki=(()=>{try{return window.parent.OB.kitaplar()}catch(e){return[]}})();
+  const q=NTS.ara.trim().toLocaleLowerCase('tr'),uy=s=>!q||String(s||'').toLocaleLowerCase('tr').includes(q);
+  const L={q:D.alintilar.filter(a=>uy(a.metin+' '+(a.yazar||'')+' '+(a.kitap||''))).slice(0,80).map(a=>['q:'+a.id,a.metin,[a.yazar,a.kitap].filter(Boolean).join(' · ')]),
+    n:D.notlar.filter(n=>n.id!==id&&uy(n.metin)).slice(0,80).map(n=>['n:'+n.id,ntIlk(n.metin)||'Boş not',ntTarih(n.olusturma)]),
+    k:ki.filter(b=>uy(b.ad+' '+b.yazar)).slice(0,80).map(b=>['k:'+b.id,b.ad,b.yazar]),
+    z:D.zikirler.filter(z=>uy(z.ad+' '+z.metin)).slice(0,80).map(z=>['z:'+z.id,z.ad||ntIlk(z.metin),z.kat])}[NTS.tur]||[];
+  const p=$('#ntSec');if(!p)return;
+  p.querySelector('.nt-sek').innerHTML=[['q','Alıntı'],['n','Not'],['k','Kitap'],['z','Zikir']].map(([k,a])=>'<button class="'+(NTS.tur===k?'on':'')+'" onclick="A.ntSecTur(\''+k+'\')">'+a+'</button>').join('');
+  p.querySelector('.nt-sl').innerHTML=L.length?L.map(x=>'<button class="nt-se" onclick="A.ntSecBagla(this.dataset.h)" data-h="'+esc(x[0])+'"><span>'+esc(String(x[1]||'').slice(0,140))+'</span>'+(x[2]?'<small>'+esc(x[2])+'</small>':'')+'</button>').join(''):'<p class="nt-sbos">'+(NTS.tur==='k'&&!ki.length?'Kitap listesi Okur & Bütçe uygulamasında görünür.':'Kayıt bulunamadı.')+'</p>'}
+function ntSeciciAc(ifade,degis){NTS.ifade=ifade;NTS.degis=degis;NTS.ara='';
+  const p=document.createElement('div');p.id='ntSec';p.className='nt-secici';p.innerHTML='<div class="nt-pen2"><div class="nt-bas"><span>“'+esc(ifade.length>40?ifade.slice(0,39)+'…':ifade)+'” neye bağlansın?</span><button class="nt-x" onclick="A.ntSecKapat()" aria-label="Kapat">×</button></div><div class="nt-sek"></div><input class="inp" type="search" placeholder="Ara" oninput="A.ntSecAra(this.value)"><div class="nt-sl"></div></div>';
+  $('#ntKat').appendChild(p);ntSecici()}
+const NTA={
+  ntAra:v=>{NOT.ara=v;const y=document.activeElement&&document.activeElement.selectionStart;ciz();const i=$('.nt-ust input');if(i){i.focus();try{i.setSelectionRange(y,y)}catch(e){}}},
+  ntYeni:()=>{const n={id:yid('N'),metin:'',olusturma:Date.now(),duzenleme:Date.now(),baglar:[]};D.notlar.unshift(n);kaydet(true);ciz();ntDuzen(n.id)},
+  ntGor,ntDuzen,
+  ntKapat:()=>{if(NOT.duz){A.ntBitti();return}ntKapat()},
+  ntBitti:()=>{const id=NOT.duz;ntYazKaydet();const n=ntBul(id);if(n&&!String(n.metin||'').trim()&&!(n.baglar||[]).length){D.notlar=D.notlar.filter(x=>x.id!==id);kaydet(true);ntKapat();ciz();return}ntKapat();ciz();if(n)ntGor(id)},
+  ntSil:id=>{if(!confirm('Bu not silinsin mi?'))return;anlik();D.notlar=D.notlar.filter(x=>x.id!==id);D.notlar.forEach(n=>{n.baglar=(n.baglar||[]).filter(b=>b.h!=='n:'+id)});kaydet(true);ntKapat();ciz();geriAlToast('Not silindi')},
+  ntKopya:id=>{const n=ntBul(id);if(n)kopyala(n.metin||'')},
+  ntBagla:()=>{const ta=$('#ntYaz');if(!ta)return;let [a,b]=[ta.selectionStart,ta.selectionEnd];if(a===b){[a,b]=NOT.sel}
+    const m=ta.value.slice(Math.min(a,b),Math.max(a,b)).trim();if(!m){toast('Önce bağlantı vereceğin kelimeyi ya da ifadeyi seç');return}
+    if(m.length>120){toast('Daha kısa bir ifade seç (en çok 120 harf)');return}ntYazKaydet();ntSeciciAc(m,-1)},
+  ntBagDegis:i=>{const n=ntBul(NOT.duz);if(!n||!n.baglar[i])return;ntSeciciAc(n.baglar[i].m,i)},
+  ntBagSil:i=>{const n=ntBul(NOT.duz);if(!n)return;n.baglar.splice(i,1);n.duzenleme=Date.now();kaydet(true);ntBagCiz();toast('Bağlantı kaldırıldı')},
+  ntSecTur:t=>{NTS.tur=t;ntSecici()},ntSecAra:v=>{NTS.ara=v;ntSecici()},ntSecKapat:()=>{const p=$('#ntSec');if(p)p.remove()},
+  ntSecBagla:h=>{const n=ntBul(NOT.duz);if(!n)return;if(!Array.isArray(n.baglar))n.baglar=[];
+    if(NTS.degis>=0&&n.baglar[NTS.degis])n.baglar[NTS.degis].h=h;else n.baglar.push({m:NTS.ifade,h});n.duzenleme=Date.now();kaydet(true);A.ntSecKapat();ntBagCiz();toast('Bağlantı eklendi · notu açınca ifadeye dokununca gider')}
+};
+Object.assign(A,NTA);
+/* Okur & Bütçe kabuğundan: başlıktaki rastgele sözden ya da bağlantıdan not / zikir aç */
+window.bhNotAc=id=>{if(!ntBul(id)){toast('Bu not silinmiş');return}if(U.tab!=='notlar')sekme('notlar');setTimeout(()=>ntGor(id),60)};
+window.bhZikirAc=id=>{if(!D.zikirler.some(z=>z.id===id)){toast('Bu zikir silinmiş');return}U.zOne=id;if(U.tab!=='zikir')sekme('zikir');else ciz();window.scrollTo(0,0)};
 
 /* ---------- Başlat ---------- */
 (function(){
