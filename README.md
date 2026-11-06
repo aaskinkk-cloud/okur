@@ -7,6 +7,12 @@
 
 
 
+## 123 (06.11.2026) · Kitaptan geri ok · Notlar en yeniden eskiye · Enter ile sonraki satır
+- Kitap okurken alttaki **Konum** çubuğunun sonunda **← geri ok**: dokununca kitap kapanır, ana sayfaya dönülür.
+- **Notlar** (Bütçe 4.8): en üstte her zaman **"Yeni not yaz…"** satırı; yazılan notlar onun altında **en yeniden eskiye** dizilir. Aşağıdaki boş satırlara dokununca da üstteki satırda yazılır.
+- Not yazarken **Enter**: not kaydedilir, satırdan çıkılır, imleç yeniden en üstteki boş satıra geçer (Shift+Enter alt satır). Android klavyesi için `beforeinput` yedeği.
+- **"Notlar" başlığı** üst çubuğa, Okur düğmesinin yanına taşındı; kâğıttaki arama alanı genişledi.
+- İndir › Chrome simgesi Android 1.10'da Chrome'u ayrı pencere/sekmede açar (değişiklik yok; eski APK uygulama içinde açar).
 ## 122 (06.11.2026) · "Kaldığın yer" penceresi kâğıt kart
 - Kitap açılınca çıkan **Kaldığın yer** penceresi küçüldü ve yarı saydam oldu: ekranın altında yüzen krem kâğıt kart (ince kahve çerçeve, buzlu cam), başlık kitap yazı tipinde. Önerilen yer "Kaldığın yerden devam et" düğmesiyle aynı kâğıt kart biçiminde; "Burada kal" kesik çizgili, açıklamalar en çok 2 satır.
 ## 121 (06.11.2026) · Devam düğmesi · Notlar Okur'da · ana sayfa sadeleşti
