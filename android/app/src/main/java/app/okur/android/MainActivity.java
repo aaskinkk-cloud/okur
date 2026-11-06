@@ -183,14 +183,19 @@ public class MainActivity extends Activity {
             tarKap = new LinearLayout(this); tarKap.setOrientation(LinearLayout.VERTICAL); tarKap.setBackgroundColor(0xFFFFFFFF);
             LinearLayout bar = new LinearLayout(this); bar.setOrientation(LinearLayout.HORIZONTAL); bar.setGravity(Gravity.CENTER_VERTICAL);
             bar.setBackgroundColor(0xFF2C6B3C); bar.setPadding(dp(2), kameraPx + dp(2), dp(2), dp(2));
-            TextView geri = tarDugme("‹"), kapat = tarDugme("✕");
+            TextView geri = tarDugme("‹"), kapat = tarDugme("✕"), dis = tarDugme("⇱");
+            dis.setContentDescription("Chrome'da aç");
+            dis.setOnClickListener(v -> { String u = tar.getUrl(); if (u == null) return; Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(u)); i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                try { i.setPackage("com.android.chrome"); startActivity(i); } catch (Exception e) { try { i.setPackage(null); startActivity(i); } catch (Exception e2) { } } });
             geri.setOnClickListener(v -> { if (tar.canGoBack()) tar.goBack(); else tarayiciKapat(); });
             kapat.setOnClickListener(v -> tarayiciKapat());
             tarBaslik = new TextView(this); tarBaslik.setTextColor(0xFFFFFFFF); tarBaslik.setTextSize(15); tarBaslik.setSingleLine(true);
             tarBaslik.setEllipsize(android.text.TextUtils.TruncateAt.END);
-            bar.addView(geri); bar.addView(tarBaslik, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)); bar.addView(kapat);
+            bar.addView(geri); bar.addView(tarBaslik, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)); bar.addView(dis); bar.addView(kapat);
             tar = new WebView(this);
             WebSettings ts = tar.getSettings(); ts.setJavaScriptEnabled(true); ts.setDomStorageEnabled(true); ts.setLoadWithOverviewMode(true); ts.setUseWideViewPort(true);
+            /* 1.9: bazı devlet siteleri (ör. Kültür Bakanlığı e-Kitap) uygulama içi tarayıcı imzasını ("; wv") reddediyor → olağan Chrome kimliği */
+            try { ts.setUserAgentString(ts.getUserAgentString().replace("; wv", "").replaceAll(" Version/[0-9.]+", "")); } catch (Exception e) { }
             ts.setSupportZoom(true); ts.setBuiltInZoomControls(true); ts.setDisplayZoomControls(false); ts.setAllowFileAccess(false);
             try { CookieManager.getInstance().setAcceptThirdPartyCookies(tar, true); } catch (Exception e) { }
             tar.setWebViewClient(new WebViewClient() {

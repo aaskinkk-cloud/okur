@@ -614,6 +614,20 @@ html.nt-acik,html.nt-acik body{overflow:hidden}
 .nt-se{display:flex;flex-direction:column;gap:2px;width:100%;padding:10px 12px;border:1px solid var(--kenar);border-radius:12px;background:none;color:var(--yazi);text-align:left;font:inherit;font-size:14px;cursor:pointer}
 .nt-se span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.nt-se small{color:var(--soluk);font-size:12px}
 .nt-sbos{color:var(--soluk);text-align:center;padding:18px}
+
+/* 4.6: Notlar — ince çizgiler, yumuşak kahve yazı (Yeni not yaz… rengi), yatık seçeneği, kâğıda uygun sayfa zemini */
+.nt-defter .nt-satirlar{background-image:repeating-linear-gradient(180deg,transparent 0,transparent calc(var(--sat) - 1px),rgba(160,120,50,.13) calc(var(--sat) - 1px),rgba(160,120,50,.13) var(--sat))!important}
+.nt-defter .nt-sat2:not(.nt-yeni-sat),.nt-defter .nt-sat-yaz textarea{color:rgba(90,59,30,.66)!important}
+.nt-defter.yatik .nt-sat2,.nt-defter.yatik .nt-sat-yaz textarea{font-style:italic}
+.nt-defter .nt-yeni-sat:empty{cursor:text}
+.nt-oku .nt-metin{cursor:text}
+.nt-ipucu2{font-size:12px;color:var(--soluk)}
+.nt-satir-b[aria-pressed="true"]{background:rgba(122,84,30,.22)}
+html.nt-sekme body{background:#f4ead0}
+html.nt-sekme .top{background:#f4ead0}
+html.nt-sekme .tabs{background:#fbf3da;border-top-color:#e6d6a8}
+html.nt-sekme .tabs button.on{background:rgba(214,170,60,.22);color:#7a5220}
+html.nt-sekme .surum{color:#a08a62}
 </style>
 </head>
 <body>
@@ -681,7 +695,7 @@ html.ob-kabukta .brand b{font-size:25px}
 <script>
 (function(){
 'use strict';
-const SURUM='4.5';
+const SURUM='4.6';
 const KEY='butceHedef.v1',UKEY='butceHedef.ui';
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -782,7 +796,7 @@ function sekme(t){
   U.tab=t;uiKaydet();if(t==='butce'){zSec();aSec()}if(t==='alinti')setTimeout(()=>okurAl(),0);
   ciz();window.scrollTo(0,0);
 }
-function ciz(){
+function ciz(){try{document.documentElement.classList.toggle('nt-sekme',U.tab==='notlar')}catch(e){}
   tabsCiz();
   if(U.tab==='sifre'){sifreCiz();return}
   const f={butce:butceHtml,findik:findikHtml,hedef:hedefHtml,dugun:dugunHtml,zikir:zikirHtml,alinti:alintiHtml,notlar:notlarHtml}[U.tab]||butceHtml;
@@ -1809,14 +1823,22 @@ function ntHtml(n){const m=String(n.metin||''),r=[];
   return h+esc(m.slice(k))}
 const ntIki=()=>{try{return localStorage.getItem('nt.satir')==='2'}catch(e){return false}};
 const ntGoster=m=>{const L=String(m||'').split('\n').map(x=>x.trim()).filter(Boolean);return ntIki()?L.slice(0,2).join('\n'):(L[0]||'')};
+const ntYatik=()=>{try{return localStorage.getItem('nt.yatik')==='1'}catch(e){return false}};
+/* 4.6: her not kâğıtta kendi satırında durur (n.satir); boş satıra dokununca tam orada yeni not yazılır */
+function ntSatirlar(){const l=D.notlar.slice().sort((a,b)=>(b.olusturma||0)-(a.olusturma||0)),dolu=new Map();let deg=0;
+  l.forEach(n=>{if(Number.isInteger(n.satir)&&n.satir>=0&&!dolu.has(n.satir))dolu.set(n.satir,n)});
+  l.forEach(n=>{if(dolu.get(n.satir)===n)return;let k=0;while(dolu.has(k))k++;n.satir=k;dolu.set(k,n);deg++});
+  if(deg)kaydet(true);return dolu}
 function notlarHtml(){const q=NOT.ara.trim().toLocaleLowerCase('tr');
-  const l=D.notlar.slice().sort((a,b)=>(b.olusturma||0)-(a.olusturma||0)).filter(n=>!q||String(n.metin||'').toLocaleLowerCase('tr').includes(q));
-  /* 4.3: satıra dokununca o satırda yazılır (pencere açılmaz); ⤢ ile tam pencere. En üstte boş satır: hemen yeni not. */
-  return '<div class="nt-kagit nt-defter'+(ntIki()?' iki':'')+'"><div class="nt-bas"><b class="nt-baslik">Notlar</b><input class="nt-ara" type="search" placeholder="Ara" value="'+esc(NOT.ara)+'" oninput="A.ntAra(this.value)" aria-label="Notlarda ara">'+
-    '<button class="nt-satir-b" onclick="A.ntSatir()" aria-label="Satır sayısı" title="Notlar 1 ya da 2 satır görünsün">'+(ntIki()?'2 satır':'1 satır')+'</button><button class="nt-x nt-arti" onclick="A.ntYeni()" aria-label="Yeni not (tam pencere)" title="Yeni not">+</button></div>'+
-    '<div class="nt-satirlar" id="ntSatirlar" onclick="if(event.target===this){const y=this.querySelector(\'.nt-yeni-sat\');if(y)A.ntYerinde(\'\',y)}">'+(q?'':'<div class="nt-sat2 nt-yeni-sat" role="button" tabindex="0" onclick="A.ntYerinde(\'\',this)">Yeni not yaz…</div>')+
-    l.map(n=>'<div class="nt-sat2" role="button" tabindex="0" data-id="'+n.id+'" onclick="A.ntGor(\''+n.id+'\')">'+(esc(ntGoster(n.metin))||'<i>Boş not</i>')+((n.baglar||[]).length?'<svg class="ic"><use href="#i-link"/></svg>':'')+'</div>').join('')+
-    (l.length||!q?'':'<p class="nt-sat2 nt-ipucu">Aramaya uyan not yok.</p>')+'</div></div>'}
+  const bas='<div class="nt-kagit nt-defter'+(ntIki()?' iki':'')+(ntYatik()?' yatik':'')+'"><div class="nt-bas"><b class="nt-baslik">Notlar</b><input class="nt-ara" type="search" placeholder="Ara" value="'+esc(NOT.ara)+'" oninput="A.ntAra(this.value)" aria-label="Notlarda ara">'+
+    '<button class="nt-satir-b" onclick="A.ntYatik()" aria-pressed="'+ntYatik()+'" title="Yatık (italik) yazı">'+(ntYatik()?'<i>Yatık</i>':'Düz')+'</button><button class="nt-satir-b" onclick="A.ntSatir()" aria-label="Satır sayısı" title="Notlar 1 ya da 2 satır görünsün">'+(ntIki()?'2 satır':'1 satır')+'</button><button class="nt-x nt-arti" onclick="A.ntYeni()" aria-label="Yeni not (pencere)" title="Yeni not">+</button></div>';
+  if(q){const l=D.notlar.slice().sort((a,b)=>(b.olusturma||0)-(a.olusturma||0)).filter(n=>String(n.metin||'').toLocaleLowerCase('tr').includes(q));
+    return bas+'<div class="nt-satirlar">'+l.map(n=>'<div class="nt-sat2" role="button" tabindex="0" data-id="'+n.id+'" onclick="A.ntGor(\''+n.id+'\')">'+ntSatHtml(n)+'</div>').join('')+(l.length?'':'<p class="nt-sat2 nt-ipucu">Aramaya uyan not yok.</p>')+'</div></div>'}
+  const dolu=ntSatirlar(),son=dolu.size?Math.max(...dolu.keys()):-1,top=Math.max(son+8,20);let h='',ipucu=false;
+  for(let i=0;i<top;i++){const n=dolu.get(i);
+    if(n)h+='<div class="nt-sat2" role="button" tabindex="0" data-id="'+n.id+'" data-s="'+i+'" onclick="A.ntGor(\''+n.id+'\')">'+ntSatHtml(n)+'</div>';
+    else{h+='<div class="nt-sat2 nt-yeni-sat" role="button" tabindex="0" data-s="'+i+'" onclick="A.ntYerinde(\'\',this)" aria-label="Bu satıra not yaz">'+(ipucu?'':'Yeni not yaz…')+'</div>';ipucu=true}}
+  return bas+'<div class="nt-satirlar" id="ntSatirlar">'+h+'</div></div>'}
 /* yerinde yazma: satır yazı alanına döner, yazdıkça kaydedilir; çıkınca liste yenilenir */
 const NYS={id:null,t:0,el:null,yeni:false};
 const ntSatHtml=n=>(esc(ntGoster(n.metin))||'<i>Boş not</i>')+((n.baglar||[]).length?'<svg class="ic"><use href="#i-link"/></svg>':'');
@@ -1826,7 +1848,7 @@ function ntYerinde(id,el){if(!el||el.classList.contains('nt-sat-yaz'))return;
   el.innerHTML='<textarea placeholder="Yaz… (bitince boş yere dokun)" spellcheck="true" aria-label="Not"></textarea>';
   const ta=el.querySelector('textarea');ta.value=n?String(n.metin||''):'';NYS.id=id||null;NYS.yeni=!id;
   const kaydetY=()=>{clearTimeout(NYS.t);const v=ta.value;let x=NYS.id?ntBul(NYS.id):null;
-    if(!x){if(!v.trim())return;x={id:yid('N'),metin:'',olusturma:Date.now(),duzenleme:Date.now(),baglar:[]};D.notlar.unshift(x);NYS.id=x.id}
+    if(!x){if(!v.trim())return;x={id:yid('N'),metin:'',olusturma:Date.now(),duzenleme:Date.now(),baglar:[]};const sa=parseInt(el.dataset.s,10);if(sa>=0)x.satir=sa;D.notlar.unshift(x);NYS.id=x.id}
     if(x.metin!==v){x.metin=v;x.duzenleme=Date.now();kaydet(true)}};
   ta.addEventListener('input',()=>{clearTimeout(NYS.t);NYS.t=setTimeout(kaydetY,400)});
   ta.addEventListener('blur',()=>{if(NYS.el===el)ntYerindeBitir()});
@@ -1837,8 +1859,8 @@ function ntYerindeBitir(){const el=NYS.el;if(!el)return;try{NYS.kaydet&&NYS.kayd
   const yeni=NYS.yeni,x=NYS.id?ntBul(NYS.id):null;NYS.el=null;NYS.id=null;NYS.kaydet=null;NYS.yeni=false;
   if(x&&!String(x.metin||'').trim()&&!(x.baglar||[]).length){D.notlar=D.notlar.filter(z=>z.id!==x.id);kaydet(true)}
   const kalan=x&&ntBul(x.id);el.classList.remove('nt-sat-yaz');
-  if(yeni){el.innerHTML='Yeni not yaz…';el.setAttribute('onclick',"A.ntYerinde('',this)");
-    if(kalan){const r=document.createElement('div');r.className='nt-sat2';r.setAttribute('role','button');r.tabIndex=0;r.dataset.id=kalan.id;r.setAttribute('onclick',"A.ntGor('"+kalan.id+"')");r.innerHTML=ntSatHtml(kalan);el.after(r)}}
+  if(yeni){if(kalan){el.classList.remove('nt-yeni-sat');el.dataset.id=kalan.id;el.setAttribute('onclick',"A.ntGor('"+kalan.id+"')");el.innerHTML=ntSatHtml(kalan)}
+    else{el.innerHTML='';el.setAttribute('onclick',"A.ntYerinde('',this)")}}
   else if(kalan){el.innerHTML=ntSatHtml(kalan);el.setAttribute('onclick',"A.ntGor('"+kalan.id+"')")}
   else el.remove()}
 function ntKapat(){const o=$('#ntKat');if(o)o.remove();document.documentElement.classList.remove('nt-acik');NOT.acik=NOT.duz=null}
@@ -1849,8 +1871,8 @@ function ntKatman(html,cls){ntKapat();const o=document.createElement('div');o.id
 function ntGor(id){const n=ntBul(id);if(!n)return;
   const o=ntKatman('<div class="nt-kagit nt-oku"><div class="nt-bas"><span>'+ntSaat(n.olusturma)+(n.duzenleme&&n.duzenleme-n.olusturma>60000?' · düzenlendi '+ntSaat(n.duzenleme):'')+'</span><button class="nt-x" onclick="A.ntKapat()" aria-label="Kapat">×</button></div>'+
     '<div class="nt-metin">'+(ntHtml(n)||'<i>Boş not</i>')+'</div></div>'+
-    '<div class="nt-arac"><button class="btn" onclick="A.ntKopya(\''+id+'\')"><svg class="ic"><use href="#i-kopya"/></svg>Kopyala</button><button class="btn" style="color:var(--kirmizi)" onclick="A.ntSil(\''+id+'\')"><svg class="ic"><use href="#i-sil"/></svg>Sil</button><span style="flex:1"></span><button class="btn ana" onclick="A.ntDuzen(\''+id+'\')"><svg class="ic"><use href="#i-kalem"/></svg>Düzenle</button></div>');
-  NOT.acik=id;o.querySelector('.nt-metin').addEventListener('click',e=>{const a=e.target.closest('.nt-bag');if(a){e.preventDefault();ntGit(a.dataset.h)}})}
+    '<div class="nt-arac"><button class="btn" onclick="A.ntKopya(\''+id+'\')"><svg class="ic"><use href="#i-kopya"/></svg>Kopyala</button><button class="btn" style="color:var(--kirmizi)" onclick="A.ntSil(\''+id+'\')"><svg class="ic"><use href="#i-sil"/></svg>Sil</button><span style="flex:1"></span><span class="nt-ipucu2">Düzenlemek için yazıya dokun</span></div>');
+  NOT.acik=id;o.querySelector('.nt-metin').addEventListener('click',e=>{const a=e.target.closest('.nt-bag');if(a){e.preventDefault();ntGit(a.dataset.h);return}ntDuzen(id)})}
 function ntGit(h){const [t,x]=String(h||'').split(':');
   if(t==='n'){if(ntBul(x))ntGor(x);else toast('Bağlı not silinmiş');return}
   if(t==='z'){if(!D.zikirler.some(z=>z.id===x)){toast('Bağlı zikir silinmiş');return}ntKapat();U.zOne=x;if(U.tab!=='zikir')sekme('zikir');else ciz();window.scrollTo(0,0);return}
@@ -1885,7 +1907,8 @@ function ntSeciciAc(ifade,degis){NTS.ifade=ifade;NTS.degis=degis;NTS.ara='';
   const p=document.createElement('div');p.id='ntSec';p.className='nt-secici';p.innerHTML='<div class="nt-pen2"><div class="nt-bas"><span>“'+esc(ifade.length>40?ifade.slice(0,39)+'…':ifade)+'” neye bağlansın?</span><button class="nt-x" onclick="A.ntSecKapat()" aria-label="Kapat">×</button></div><div class="nt-sek"></div><input class="inp" type="search" placeholder="Ara" oninput="A.ntSecAra(this.value)"><div class="nt-sl"></div></div>';
   $('#ntKat').appendChild(p);ntSecici()}
 const NTA={
-  ntYerinde,ntSatir:()=>{ntYerindeBitir();try{localStorage.setItem('nt.satir',ntIki()?'1':'2')}catch(e){}ciz()},
+  ntYerinde,ntYatik:()=>{ntYerindeBitir();try{localStorage.setItem('nt.yatik',ntYatik()?'0':'1')}catch(e){}ciz()},
+  ntSatir:()=>{ntYerindeBitir();try{localStorage.setItem('nt.satir',ntIki()?'1':'2')}catch(e){}ciz()},
   ntAra:v=>{NOT.ara=v;const y=document.activeElement&&document.activeElement.selectionStart;ciz();const i=$('.nt-ara');if(i){i.focus();try{i.setSelectionRange(y,y)}catch(e){}}},
   ntYeni:()=>{const n={id:yid('N'),metin:'',olusturma:Date.now(),duzenleme:Date.now(),baglar:[]};D.notlar.unshift(n);kaydet(true);ciz();ntDuzen(n.id)},
   ntGor,ntDuzen,

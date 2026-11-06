@@ -2,6 +2,11 @@
 
 
 
+
+## 118 (06.11.2026) · Notlar serbest satır · Android 1.9 tarayıcı
+- **Notlar:** her not kâğıtta kendi satırında durur; **hangi boş satıra dokunursan orada yazılır** (not o satırda kalır). Dolu satıra dokununca pencere açılır; pencerede **yazıya dokununca düzenleme** açılır (Düzenle düğmesi kaldırıldı).
+- Kâğıttaki yazı "Yeni not yaz…" tonunda yumuşak kahve; başlıkta **Düz / Yatık** (italik) seçimi (hatırlanır). Çizgiler daha ince. Notlar sekmesindeyken sayfa zemini, üst ve alt çubuk kâğıda uygun krem tonlarında. Bütçe sürümü 4.6.
+- **Android 1.9 (uygulama içi tarayıcı):** bazı devlet siteleri (Kültür Bakanlığı e-Kitap aramasında "The requested URL was rejected") uygulama içi tarayıcı imzasını reddediyordu → tarayıcı artık olağan Chrome kimliğiyle açılır. Üst çubuğa **⇱ Chrome'da aç** düğmesi eklendi (site yine reddederse aynı sayfa Chrome'da açılır).
 ## 117 (06.11.2026) · Notlar satırı geniş, dolu satır pencere açar
 - Notlar kâğıdında yazı satırı kâğıdın neredeyse tüm genişliğinde; satır sonundaki ⤢ (tam pencere) düğmesi kaldırıldı.
 - Boş "Yeni not yaz…" satırına dokununca yerinde yazılır; **yazısı olan satıra dokununca** not penceresi açılır (tarih, bağlantılar, Düzenle orada).
