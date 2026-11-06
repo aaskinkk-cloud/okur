@@ -1,5 +1,8 @@
 # Okur & Bütçe
 
+
+## 116 (06.11.2026) · Notlar: + küçük pencere açar
+- Bütçe › Notlar'da **+** (ve tam pencere) artık ekranı kaplayan büyük kâğıt yerine üstte **küçük sarı not penceresi** açar (6 satır yükseklik, uzun notta içi kayar, klavye açılınca da görünür). Satıra dokunup yerinde yazma aynen sürer. Bütçe sürümü 4.4.
 ## 115 (06.11.2026) · İndir sekmesi Kitaplık'ın yerinde · eski sürümde takılma biter
 - Alt gezinmede **Kitaplık sekmesi kaldırıldı, yerine İndir** geldi. Sekmeler şöyle: Ana Sayfa · İndir · Alıntılar · İstatistik · Favoriler · Ayarlar. Kitaplık zaten Ana Sayfa'da.
 - Uygulama sunucuda yeni sürüm görürse "Yeni sürüm hazır" demeden önce **kendiliğinden bir kez** ağdan yeniden yükleniyor.

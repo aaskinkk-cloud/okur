@@ -577,7 +577,11 @@ html.nt-acik,html.nt-acik body{overflow:hidden}
 .nt-kat{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:max(14px,env(safe-area-inset-top)) 12px max(14px,env(safe-area-inset-bottom))}
 .nt-kapak{position:absolute;inset:0;background:rgba(40,30,15,.42);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
 .nt-pen{position:relative;display:flex;flex-direction:column;gap:10px;width:min(640px,100%);max-height:100%;min-height:0}
-.nt-kat.yazim .nt-pen{height:100%}
+.nt-kat.yazim .nt-pen{height:auto}
+/* 4.4: + ile açılan yazma penceresi küçük bir açılır pencere; uzun notta içi kayar */
+.nt-kat.yazim{align-items:flex-start;padding-top:max(56px,env(safe-area-inset-top))}
+.nt-kat.yazim .nt-kagit{flex:0 0 auto}
+.nt-kat.yazim #ntYaz{flex:0 0 auto;min-height:calc(var(--sat) * 6);max-height:46vh;max-height:46dvh}
 .nt-kagit{--sat:30px;position:relative;display:flex;flex-direction:column;min-height:0;flex:1 1 auto;border-radius:6px 6px 14px 14px;color:#5a3b1e;
   background:#fdf4c6 linear-gradient(180deg,#fff9dc,#fbefb8);box-shadow:0 18px 40px -14px rgba(60,40,10,.55),0 2px 0 rgba(255,255,255,.6) inset;overflow:hidden}
 .nt-kagit::before{content:"";position:absolute;left:0;right:0;top:0;height:10px;background:linear-gradient(180deg,rgba(214,176,70,.35),transparent)}
@@ -672,7 +676,7 @@ html.ob-kabukta .brand b{font-size:25px}
 <script>
 (function(){
 'use strict';
-const SURUM='4.3';
+const SURUM='4.4';
 const KEY='butceHedef.v1',UKEY='butceHedef.ui';
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
