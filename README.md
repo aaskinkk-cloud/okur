@@ -1,5 +1,12 @@
 # Okur & Bütçe
 
+## 111 (06.11.2026) · Notlar defter görünümü · sekmeler arası geçiş
+- **Bütçe › Notlar** sekmesi sarı not kâğıdı gibi: çizgili sayfada her satırda bir notun ilk satırı, üstte "Notlar", arama ve +. Liste tarih göstermez; tarih yalnız dokununca açılan pencerede.
+- **Bütçe & Hedef alt sekmeleri** sıkışmaz; sığmazsa sağa kayar. Sonda **📖 Okur** sekmesi Okur'a geçer.
+- **Okur alt gezinmesine Bütçe** sekmesi (en sonda): Bütçe & Hedef'e geçer.
+- **Okur › Araçlar:** okuma özeti (Kitap · Okuma süresi · Favori · Okuma oranı/serisi) Araçlar bölümünün içine, araçların altına taşındı.
+- Bütçe sürümü 4.2.
+
 ## 110 (05.11.2026) · Araçlar akordeonu · Alıntılar alt gezinmede
 - Kitaplıktaki araçlar (Kitap ekle, PDF düzenle, Dönüştür, Sesli metin, İndir, Alıntılar, İstatistik, Ayarlar) **Araçlar** başlıklı açılır-kapanır bölümde; her açılışta **kapalı** gelir, başlıkta araçların adları kısaca yazar, dokununca açılır.
 - Alt gezinmeye **Alıntılar** sekmesi eklendi (Ana Sayfa · Kitaplık · Alıntılar · İstatistik · Favoriler · Ayarlar); ekrana sığmazsa çubuk sağa kayar.

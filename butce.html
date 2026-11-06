@@ -544,6 +544,22 @@ body{font-size:16px}
 .nt-sat:last-child{border-bottom:0}.nt-sat:active{background:color-mix(in srgb,var(--ana) 8%,transparent)}
 .nt-ilk{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15.5px}
 .nt-tar{flex:none;font-size:12px;color:var(--soluk);display:inline-flex;align-items:center;gap:4px}.nt-tar .ic{width:13px;height:13px}
+.nt-kagit.nt-defter{--sat:34px;min-height:calc(100vh - 200px);min-height:calc(100dvh - 190px);margin-bottom:12px}
+.nt-defter .nt-bas{padding:12px 12px 8px 18px;gap:10px}
+.nt-baslik{font:700 19px/1 Georgia,"Iowan Old Style",serif;color:#7a5220;flex:none}
+.nt-ara{flex:1;min-width:0;height:34px;border:0;border-radius:999px;padding:0 12px;background:rgba(122,84,30,.09);color:#5a3b1e;font:15px system-ui,sans-serif;outline:0}
+.nt-ara::placeholder{color:rgba(90,59,30,.45)}
+.nt-arti{font-size:26px!important;background:rgba(122,84,30,.14)!important}
+.nt-satirlar{flex:1;padding:0 18px 24px;background-image:repeating-linear-gradient(180deg,transparent 0,transparent calc(var(--sat) - 1px),rgba(160,120,50,.24) calc(var(--sat) - 1px),rgba(160,120,50,.24) var(--sat));min-height:calc(var(--sat) * 14)}
+.nt-sat2{display:flex;align-items:center;gap:6px;width:100%;height:var(--sat);padding:0 2px;margin:0;border:0;background:none;color:#5a3b1e;font:18px/var(--sat) Georgia,"Iowan Old Style","Palatino Linotype",serif;text-align:left;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nt-sat2 .ic{width:14px;height:14px;flex:none;opacity:.55}
+.nt-sat2:active{background:rgba(214,160,40,.14)}
+.nt-ipucu{color:rgba(90,59,30,.5);font-style:italic;cursor:default;display:block}
+/* 4.2: alt sekmeler sıkışmaz, sığmazsa sağa kayar */
+.tabs{display:flex!important;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;gap:2px}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:1 0 66px;min-width:66px;white-space:nowrap}
+.tabs .tab-okur{color:var(--ana)}
 .nt-bos{text-align:center;color:var(--soluk);padding:34px 20px}.nt-bos .ic{width:44px;height:44px;opacity:.5}
 html.nt-acik,html.nt-acik body{overflow:hidden}
 .nt-kat{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:max(14px,env(safe-area-inset-top)) 12px max(14px,env(safe-area-inset-bottom))}
@@ -600,7 +616,7 @@ html.nt-acik,html.nt-acik body{overflow:hidden}
 <symbol id="i-asagi" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
 <symbol id="i-kopya" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="11.5" height="11.5" rx="2"/><path d="M15.5 8.5V6A2 2 0 0 0 13.5 4H6a2 2 0 0 0-2 2v7.5a2 2 0 0 0 2 2h2.5"/></symbol>
 <symbol id="i-paylas" viewBox="0 0 24 24"><path d="M12 15V3.8M7.5 8 12 3.5 16.5 8"/><path d="M5 12.5V19a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19v-6.5"/></symbol>
-<symbol id="i-not" viewBox="0 0 24 24"><path d="M6 3h9l4 4v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M15 3v4h4"/><path d="M8.5 11.5h7M8.5 15h7M8.5 18.5h4"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+<symbol id="i-okur" viewBox="0 0 24 24"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5C17 4.5 14 5 12 6.5z"/><path d="M12 6.5v13"/></symbol><symbol id="i-not" viewBox="0 0 24 24"><path d="M6 3h9l4 4v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z"/><path d="M15 3v4h4"/><path d="M8.5 11.5h7M8.5 15h7M8.5 18.5h4"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
 <symbol id="i-yazdir" viewBox="0 0 24 24"><path d="M7 8V3.5h10V8"/><rect x="3.5" y="8" width="17" height="8.5" rx="2"/><path d="M7 13.5h10v7H7z"/></symbol>
 <symbol id="i-indir" viewBox="0 0 24 24"><path d="M12 3.8V15M7.5 10.5 12 15l4.5-4.5"/><path d="M4.5 16.5v2a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-2"/></symbol>
 <symbol id="i-yukle" viewBox="0 0 24 24"><path d="M3.5 18.5v-11A2 2 0 0 1 5.5 5.5h4l2 2h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/><path d="M12 17v-6M9.5 13.5 12 11l2.5 2.5"/></symbol>
@@ -644,7 +660,7 @@ html.ob-kabukta .brand b{font-size:25px}
 <script>
 (function(){
 'use strict';
-const SURUM='4.1';
+const SURUM='4.2';
 const KEY='butceHedef.v1',UKEY='butceHedef.ui';
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -739,7 +755,7 @@ function toast(msg,btn,fn){
 function sheet(html){$('#sheet').innerHTML=html;$('#sheet').hidden=false;$('#scrim').hidden=false}
 function kapat(){$('#sheet').hidden=true;$('#scrim').hidden=true}
 const SEKMELER=[['butce','Bütçe','butce'],['findik','Fındık','findik'],['hedef','Hedef','hedef'],['dugun','Düğün','dugun'],['zikir','Zikir','zikir'],['notlar','Notlar','not'],['sifre','Şifre','sifre']] /* 4.1: Alıntılar Okur'a taşındı; yerine Notlar */;
-function tabsCiz(){$('#tabs').innerHTML=SEKMELER.map(s=>'<button class="'+(U.tab===s[0]?'on':'')+'" onclick="A.sekme(\''+s[0]+'\')"><svg class="ic tab-ic"><use href="#i-'+s[2]+'"/></svg>'+s[1]+'</button>').join('')}
+function tabsCiz(){$('#tabs').innerHTML=SEKMELER.map(s=>'<button class="'+(U.tab===s[0]?'on':'')+'" onclick="A.sekme(\''+s[0]+'\')"><svg class="ic tab-ic"><use href="#i-'+s[2]+'"/></svg>'+s[1]+'</button>').join('')+(window.__obKabuk?'<button class="tab-okur" onclick="A.okuraGec()" title="Okur\'a geç"><svg class="ic tab-ic"><use href="#i-okur"/></svg>Okur</button>':'')}
 function sekme(t){
   if(t===U.tab){window.scrollTo({top:0,behavior:'smooth'});return}
   U.tab=t;uiKaydet();if(t==='butce'){zSec();aSec()}if(t==='alinti')setTimeout(()=>okurAl(),0);
@@ -1772,9 +1788,10 @@ function ntHtml(n){const m=String(n.metin||''),r=[];
   return h+esc(m.slice(k))}
 function notlarHtml(){const q=NOT.ara.trim().toLocaleLowerCase('tr');
   const l=D.notlar.slice().sort((a,b)=>(b.olusturma||0)-(a.olusturma||0)).filter(n=>!q||String(n.metin||'').toLocaleLowerCase('tr').includes(q));
-  return '<div class="nt-ust"><input class="inp" type="search" placeholder="Notlarda ara" value="'+esc(NOT.ara)+'" oninput="A.ntAra(this.value)"><button class="btn ana" onclick="A.ntYeni()"><svg class="ic"><use href="#i-arti"/></svg>Yeni not</button></div>'+
-    (l.length?'<div class="nt-liste">'+l.map(n=>'<button class="nt-sat" onclick="A.ntGor(\''+n.id+'\')"><span class="nt-ilk">'+(esc(ntIlk(n.metin))||'<i>Boş not</i>')+'</span><span class="nt-tar">'+ntTarih(n.olusturma)+((n.baglar||[]).length?' · <svg class="ic"><use href="#i-link"/></svg>'+n.baglar.length:'')+'</span></button>').join('')+'</div>'
-      :'<div class="nt-bos"><svg class="ic"><use href="#i-not"/></svg><p>'+(q?'Aramaya uyan not yok.':'Günlük düşüncelerin, kısa hatırlatmaların, önemli bilgiler… İlk notunu “Yeni not” ile yaz.')+'</p></div>')}
+  /* 4.2: sekme sarı not kâğıdı gibi görünür: her satırda bir notun ilk satırı; tarih yalnız açılan pencerede */
+  return '<div class="nt-kagit nt-defter"><div class="nt-bas"><b class="nt-baslik">Notlar</b><input class="nt-ara" type="search" placeholder="Ara" value="'+esc(NOT.ara)+'" oninput="A.ntAra(this.value)" aria-label="Notlarda ara"><button class="nt-x nt-arti" onclick="A.ntYeni()" aria-label="Yeni not" title="Yeni not">+</button></div>'+
+    '<div class="nt-satirlar">'+l.map(n=>'<button class="nt-sat2" onclick="A.ntGor(\''+n.id+'\')">'+(esc(ntIlk(n.metin))||'<i>Boş not</i>')+((n.baglar||[]).length?'<svg class="ic"><use href="#i-link"/></svg>':'')+'</button>').join('')+
+    (l.length?'':'<p class="nt-sat2 nt-ipucu">'+(q?'Aramaya uyan not yok.':'İlk notunu yazmak için + düğmesine dokun.')+'</p>')+'</div></div>'}
 function ntKapat(){const o=$('#ntKat');if(o)o.remove();document.documentElement.classList.remove('nt-acik');NOT.acik=NOT.duz=null}
 function ntKatman(html,cls){ntKapat();const o=document.createElement('div');o.id='ntKat';o.className='nt-kat '+(cls||'');o.innerHTML='<div class="nt-kapak" onclick="A.ntKapat()"></div><div class="nt-pen" role="dialog" aria-modal="true">'+html+'</div>';
   document.body.appendChild(o);document.documentElement.classList.add('nt-acik');
@@ -1819,7 +1836,7 @@ function ntSeciciAc(ifade,degis){NTS.ifade=ifade;NTS.degis=degis;NTS.ara='';
   const p=document.createElement('div');p.id='ntSec';p.className='nt-secici';p.innerHTML='<div class="nt-pen2"><div class="nt-bas"><span>“'+esc(ifade.length>40?ifade.slice(0,39)+'…':ifade)+'” neye bağlansın?</span><button class="nt-x" onclick="A.ntSecKapat()" aria-label="Kapat">×</button></div><div class="nt-sek"></div><input class="inp" type="search" placeholder="Ara" oninput="A.ntSecAra(this.value)"><div class="nt-sl"></div></div>';
   $('#ntKat').appendChild(p);ntSecici()}
 const NTA={
-  ntAra:v=>{NOT.ara=v;const y=document.activeElement&&document.activeElement.selectionStart;ciz();const i=$('.nt-ust input');if(i){i.focus();try{i.setSelectionRange(y,y)}catch(e){}}},
+  ntAra:v=>{NOT.ara=v;const y=document.activeElement&&document.activeElement.selectionStart;ciz();const i=$('.nt-ara');if(i){i.focus();try{i.setSelectionRange(y,y)}catch(e){}}},
   ntYeni:()=>{const n={id:yid('N'),metin:'',olusturma:Date.now(),duzenleme:Date.now(),baglar:[]};D.notlar.unshift(n);kaydet(true);ciz();ntDuzen(n.id)},
   ntGor,ntDuzen,
   ntKapat:()=>{if(NOT.duz){A.ntBitti();return}ntKapat()},
@@ -1835,7 +1852,7 @@ const NTA={
   ntSecBagla:h=>{const n=ntBul(NOT.duz);if(!n)return;if(!Array.isArray(n.baglar))n.baglar=[];
     if(NTS.degis>=0&&n.baglar[NTS.degis])n.baglar[NTS.degis].h=h;else n.baglar.push({m:NTS.ifade,h});n.duzenleme=Date.now();kaydet(true);A.ntSecKapat();ntBagCiz();toast('Bağlantı eklendi · notu açınca ifadeye dokununca gider')}
 };
-Object.assign(A,NTA);
+Object.assign(A,NTA);A.okuraGec=()=>{try{window.parent.OB.sec('okur')}catch(e){}};
 /* Okur & Bütçe kabuğundan: başlıktaki rastgele sözden ya da bağlantıdan not / zikir aç */
 window.bhNotAc=id=>{if(!ntBul(id)){toast('Bu not silinmiş');return}if(U.tab!=='notlar')sekme('notlar');setTimeout(()=>ntGor(id),60)};
 window.bhZikirAc=id=>{if(!D.zikirler.some(z=>z.id===id)){toast('Bu zikir silinmiş');return}U.zOne=id;if(U.tab!=='zikir')sekme('zikir');else ciz();window.scrollTo(0,0)};
