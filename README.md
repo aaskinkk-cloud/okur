@@ -3,6 +3,10 @@
 
 
 
+
+## 119 (06.11.2026) · Bütçe & Hedef'e "Karadeniz" görünümü
+- Başlıktaki **palet** düğmesi (ya da Menü › Görünüm) **Klasik ⇄ Karadeniz** arasında geçer; seçim hatırlanır (`bh.gorunum`). Varsayılan Klasik.
+- Karadeniz: resimli başlık (gün batımı, deniz, yeşil tepeler ve evler, ince belli çay bardağı, fındıklar), yeşil yuvarlak cüzdan simgesi, el yazısı alt başlık; dönem ve gelir cam kartta (yeşil dönem hapı, altın para simgesi, iri maaş); özet kartında simgeli Toplam/Ödenen/Kalan ve yeşil ilerleme çubuğu; Zikir Çek (turuncu) ve Alıntı (mor) kartları yan yana (açılan tam genişlik); bölümler renkli, yuvarlak, simgeli kartlar (Fatura, Ödeme, Bankalar, Alışveriş, Hedef); alt çubuk yüzen cam şerit. Notlar sekmesi kâğıt görünümünü korur. Bütçe sürümü 4.7.
 ## 118 (06.11.2026) · Notlar serbest satır · Android 1.9 tarayıcı
 - **Notlar:** her not kâğıtta kendi satırında durur; **hangi boş satıra dokunursan orada yazılır** (not o satırda kalır). Dolu satıra dokununca pencere açılır; pencerede **yazıya dokununca düzenleme** açılır (Düzenle düğmesi kaldırıldı).
 - Kâğıttaki yazı "Yeni not yaz…" tonunda yumuşak kahve; başlıkta **Düz / Yatık** (italik) seçimi (hatırlanır). Çizgiler daha ince. Notlar sekmesindeyken sayfa zemini, üst ve alt çubuk kâğıda uygun krem tonlarında. Bütçe sürümü 4.6.
