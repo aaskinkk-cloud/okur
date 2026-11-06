@@ -1,6 +1,11 @@
 # Okur & Bütçe
 
 
+
+## 117 (06.11.2026) · Notlar satırı geniş, dolu satır pencere açar
+- Notlar kâğıdında yazı satırı kâğıdın neredeyse tüm genişliğinde; satır sonundaki ⤢ (tam pencere) düğmesi kaldırıldı.
+- Boş "Yeni not yaz…" satırına dokununca yerinde yazılır; **yazısı olan satıra dokununca** not penceresi açılır (tarih, bağlantılar, Düzenle orada).
+- Kâğıttaki yazı bir tık küçük (15 px); pencerelerdeki yazı aynı. Bütçe sürümü 4.5.
 ## 116 (06.11.2026) · Notlar: + küçük pencere açar
 - Bütçe › Notlar'da **+** (ve tam pencere) artık ekranı kaplayan büyük kâğıt yerine üstte **küçük sarı not penceresi** açar (6 satır yükseklik, uzun notta içi kayar, klavye açılınca da görünür). Satıra dokunup yerinde yazma aynen sürer. Bütçe sürümü 4.4.
 ## 115 (06.11.2026) · İndir sekmesi Kitaplık'ın yerinde · eski sürümde takılma biter
