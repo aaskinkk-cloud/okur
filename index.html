@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <title>Okur &amp; Bütçe</title>
-<meta name="surum" content="113" data-ad="Okur &amp; Bütçe" data-tarih="06.11.2026">
+<meta name="surum" content="114" data-ad="Okur &amp; Bütçe" data-tarih="06.11.2026">
 <meta name="theme-color" content="#eef0ea">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
@@ -150,6 +150,7 @@ window.OB_KABUK=true;
     else if(t==='q'||t==='k'){sec('okur');bekle('okur',[h],'okurGit')}};
   const kitaplar=()=>{try{const w=F.okur.contentWindow;return typeof w.okurKitaplar==='function'?w.okurKitaplar():[]}catch(e){return[]}};
   window.OB={sec:sec,akt:()=>akt,git:git,kitaplar:kitaplar};
+  if(/[?&]taze=/.test(location.search)){try{history.replaceState(null,'',location.pathname)}catch(e){}}
   /* v113: APK'nın uygulama içi tarayıcısında indirilen kitap Okur'a iletilir */
   window.okurIndirildi=(a,b,c)=>{sec('okur');bekle('okur',[a,b,c],'okurIndirildi')};
 
@@ -164,7 +165,8 @@ window.OB_KABUK=true;
     navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!had){had=true;return}afis()});
     try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}}
   function afis(){if($('#obUpd'))return;const b=document.createElement('div');b.id='obUpd';b.setAttribute('role','status');
-    b.innerHTML='<span>Yeni sürüm hazır</span><button type="button">Yenile</button>';b.querySelector('button').onclick=()=>location.reload();body.appendChild(b)}
+    b.innerHTML='<span>Yeni sürüm hazır</span><button type="button">Yenile</button>';b.querySelector('button').onclick=tazeYukle;body.appendChild(b)}
+  function tazeYukle(){try{const c=navigator.serviceWorker&&navigator.serviceWorker.controller;if(c)c.postMessage('taze')}catch(e){}setTimeout(()=>{location.replace(location.pathname+'?taze='+Date.now())},150)}
 })();
 </script>
 </body>

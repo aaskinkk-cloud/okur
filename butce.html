@@ -1939,7 +1939,7 @@ window.bhZikirAc=id=>{if(!D.zikirler.some(z=>z.id===id)){toast('Bu zikir silinmi
     var b=document.createElement('div');b.id='swUpd';b.setAttribute('role','status');
     b.style.cssText='position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 16px);z-index:2147483000;background:#111;color:#fff;padding:10px 10px 10px 16px;border-radius:14px;display:flex;gap:12px;align-items:center;font:600 14px system-ui,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.35);max-width:calc(100% - 32px)';
     b.innerHTML='<span>Yeni sürüm hazır</span><button type="button" style="border:0;border-radius:10px;padding:8px 14px;font:inherit;background:#fff;color:#111;cursor:pointer">Yenile</button>';
-    b.querySelector('button').onclick=function(){location.reload()};
+    b.querySelector('button').onclick=function(){try{var c=navigator.serviceWorker&&navigator.serviceWorker.controller;if(c)c.postMessage('taze')}catch(e){}setTimeout(function(){location.replace(location.pathname+'?taze='+Date.now())},150)};
     document.body.appendChild(b);
   }
   try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}

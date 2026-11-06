@@ -1,5 +1,13 @@
 # Okur & Bütçe
 
+## 114 (06.11.2026) · "Yeni sürüm hazır" döngüsü düzeltildi
+- **Sebep 1:** 112'de sayfanın sürüm etiketi eski (111) kalmıştı. Sayfa kendini hep eski sanıyor, uyarı her açılışta geliyordu.
+- **Sebep 2:** Yenile'ye basınca sayfa 3 saniyede gelmezse önbellekteki eski kopya açılıyordu; büyük Okur sayfası yavaş ağda hep eski kalıyordu. Ayrıca önbelleğe alma tek bir dosya inmeyince tümden düşüyordu.
+- **Çözüm:**
+  - Yenile artık sayfaları önbellekten değil, ağdan bekliyor (30 sn'ye kadar). İnternet yoksa önbellek açılıyor.
+  - Önbelleğe alma tek dosya hatasında düşmüyor.
+  - Sürüm etiketleri (kabuk, Okur, Bütçe, önbellek) 114'te eşit.
+
 ## 113 (06.11.2026) · Kitap indir sekmesi
 - Alt gezinmeye **İndir** sekmesi eklendi (Kitaplık'ın yanında). Açılan pencerede yasal ve ücretsiz Türkçe kaynaklar var:
   - **Kültür Bakanlığı e-Kitap** (edebiyat bölümü)
