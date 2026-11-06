@@ -6,6 +6,9 @@
 
 
 
+
+## 122 (06.11.2026) · "Kaldığın yer" penceresi kâğıt kart
+- Kitap açılınca çıkan **Kaldığın yer** penceresi küçüldü ve yarı saydam oldu: ekranın altında yüzen krem kâğıt kart (ince kahve çerçeve, buzlu cam), başlık kitap yazı tipinde. Önerilen yer "Kaldığın yerden devam et" düğmesiyle aynı kâğıt kart biçiminde; "Burada kal" kesik çizgili, açıklamalar en çok 2 satır.
 ## 121 (06.11.2026) · Devam düğmesi · Notlar Okur'da · ana sayfa sadeleşti
 - **Kaldığın yerden devam et** yeni biçimde (A · kâğıt kart): krem zemin, ince kahve çerçeve, solda kitap simgesi, kitap yazı tipinde başlık ve altında bölüm · sayfa satırı (önceden görünmüyordu). Diğer temalarda aynı biçim temanın renkleriyle.
 - Okur alt gezinmesine **Notlar** sekmesi: Bütçe & Hedef › Notlar'ı açar (aynı notlar, aynı sayfa). Kabukta `OB.git('s:notlar')`, Bütçe'de `bhSekme`.

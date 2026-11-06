@@ -1,5 +1,5 @@
 /* Okur & Bütçe çevrimdışı önbelleği (kabuk + Okur + Bütçe & Hedef). Yalnızca kendi önbelleğini siler (aynı adresteki diğer uygulamalara dokunmaz). */
-const P='okur-',V=P+'121';
+const P='okur-',V=P+'122';
 const SHELL=['./','index.html','okur.html','butce.html','sifre.html','manifest.webmanifest','icon.svg','icon-192.png','icon-512.png','icon-maskable.png'];
 const SAYFA=['index.html','okur.html','butce.html','sifre.html'];
 /* v114: bir dosya inemezse kurulum düşmesin (eskiden addAll tek hatada tümden düşüyor, eski sürüm takılı kalıyordu) */
