@@ -1,5 +1,13 @@
 # Okur & Bütçe
 
+## 112 (06.11.2026) · Notlar yerinde yazılır · 1/2 satır
+- **Bütçe › Notlar:** bir not satırına dokununca pencere açılmıyor; o satır yazı alanına dönüyor ve doğrudan yazılıyor. Yazdıkça kaydediliyor, boş yere dokununca bitiyor.
+- En üstteki **"Yeni not yaz…"** satırına ya da kâğıdın boş yerine dokununca hemen yeni not başlıyor. Boş bırakılan not kaydedilmiyor.
+- Yazarken satırın sonundaki **⤢** notu tam pencerede açıyor (bağlantı ekleme, silme, kopyalama orada). Üstteki **+** da tam pencerede yeni not açıyor.
+- Ana sayfada yazılar bir tık küçüldü (18 → 16 px).
+- Başlıktaki **1 satır / 2 satır** düğmesi notların listede bir ya da iki satır görünmesini ve yazılmasını seçiyor; seçim hatırlanıyor.
+- Bütçe sürümü 4.3.
+
 ## 111 (06.11.2026) · Notlar defter görünümü · sekmeler arası geçiş
 - **Bütçe › Notlar** sekmesi sarı not kâğıdı gibi: çizgili sayfada her satırda bir notun ilk satırı, üstte "Notlar", arama ve +. Liste tarih göstermez; tarih yalnız dokununca açılan pencerede.
 - **Bütçe & Hedef alt sekmeleri** sıkışmaz; sığmazsa sağa kayar. Sonda **📖 Okur** sekmesi Okur'a geçer.
