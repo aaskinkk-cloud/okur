@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <title>Okur &amp; Bütçe</title>
-<meta name="surum" content="114" data-ad="Okur &amp; Bütçe" data-tarih="06.11.2026">
+<meta name="surum" content="115" data-ad="Okur &amp; Bütçe" data-tarih="06.11.2026">
 <meta name="theme-color" content="#eef0ea">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
@@ -122,7 +122,13 @@ window.OB_KABUK=true;
     if(k==='okur')okumaKontrol();
   }
   let _rt=0;const renkGec=()=>{clearTimeout(_rt);_rt=setTimeout(renk,60)};
-  function yukle(k){const f=F[k];if(!f.getAttribute('src')){f.addEventListener('load',()=>hazirla(k));f.src=f.dataset.src}}
+  function yukle(k){const f=F[k];if(!f.getAttribute('src')){f.addEventListener('load',()=>{hazirla(k);cerceveTaze(k)});f.src=f.dataset.src}}
+  /* v115: çerçeve (Okur) kabuktan eski sürümle açıldıysa (yavaş ağda önbellekten geldiyse) bir kez ağdan yeniden yüklenir */
+  function cerceveTaze(k){try{const m=F[k].contentDocument.querySelector('meta[name=surum]');if(!m)return;
+    const v=parseInt(m.content,10)||0,bu=parseInt(document.querySelector('meta[name=surum]').content,10)||0,an='taze_'+k;
+    if(v>=bu){sessionStorage.removeItem(an);return}if(sessionStorage.getItem(an))return;sessionStorage.setItem(an,'1');
+    try{const c=navigator.serviceWorker&&navigator.serviceWorker.controller;if(c)c.postMessage('taze')}catch(e){}
+    setTimeout(()=>{F[k].src=F[k].dataset.src+'?taze='+Date.now()},150)}catch(e){}}
 
   /* ---- sekme değiştir ---- */
   function sec(k){
@@ -160,7 +166,7 @@ window.OB_KABUK=true;
     navigator.serviceWorker.register('sw.js').then(reg=>{setInterval(()=>reg.update().catch(()=>{}),30*60*1000);
       let son=0;const kontrol=()=>{if(Date.now()-son<60000)return;son=Date.now();
         fetch('sw.js?k='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.text():'').then(t=>{const x=/V=P\+'(\d+)'/.exec(t||'');const bu=parseInt($('meta[name=surum]').content,10)||0;
-          if(x&&+x[1]>bu){reg.update().catch(()=>{});setTimeout(()=>{if(!$('#obUpd'))afis()},8000)}}).catch(()=>{})};
+          if(x&&+x[1]>bu){reg.update().catch(()=>{});if(!sessionStorage.getItem('tazeOto')){sessionStorage.setItem('tazeOto','1');setTimeout(tazeYukle,1500)}else setTimeout(()=>{if(!$('#obUpd'))afis()},8000)}else sessionStorage.removeItem('tazeOto')}).catch(()=>{})};
       kontrol();document.addEventListener('visibilitychange',()=>{if(!document.hidden)kontrol()})}).catch(()=>{});
     navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!had){had=true;return}afis()});
     try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}}

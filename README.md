@@ -1,5 +1,11 @@
 # Okur & Bütçe
 
+## 115 (06.11.2026) · İndir sekmesi Kitaplık'ın yerinde · eski sürümde takılma biter
+- Alt gezinmede **Kitaplık sekmesi kaldırıldı, yerine İndir** geldi. Sekmeler şöyle: Ana Sayfa · İndir · Alıntılar · İstatistik · Favoriler · Ayarlar. Kitaplık zaten Ana Sayfa'da.
+- Uygulama sunucuda yeni sürüm görürse "Yeni sürüm hazır" demeden önce **kendiliğinden bir kez** ağdan yeniden yükleniyor.
+- Okur çerçevesi kabuktan eski sürümle açılırsa (yavaş ağda önbellekten geldiyse) bir kez ağdan yeniden yükleniyor.
+- Afiş ancak bunlardan sonra hâlâ eski kalırsa çıkıyor.
+
 ## 114 (06.11.2026) · "Yeni sürüm hazır" döngüsü düzeltildi
 - **Sebep 1:** 112'de sayfanın sürüm etiketi eski (111) kalmıştı. Sayfa kendini hep eski sanıyor, uyarı her açılışta geliyordu.
 - **Sebep 2:** Yenile'ye basınca sayfa 3 saniyede gelmezse önbellekteki eski kopya açılıyordu; büyük Okur sayfası yavaş ağda hep eski kalıyordu. Ayrıca önbelleğe alma tek bir dosya inmeyince tümden düşüyordu.
