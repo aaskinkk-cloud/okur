@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <title>Okur &amp; Bütçe</title>
-<meta name="surum" content="120" data-ad="Okur &amp; Bütçe" data-tarih="06.11.2026">
+<meta name="surum" content="121" data-ad="Okur &amp; Bütçe" data-tarih="06.11.2026">
 <meta name="theme-color" content="#eef0ea">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
@@ -153,7 +153,8 @@ window.OB_KABUK=true;
   const git=h=>{h=String(h||'');const t=h.split(':')[0],id=h.slice(2);
     if(t==='n'){sec('butce');bekle('butce',[id],'bhNotAc')}
     else if(t==='z'){sec('butce');bekle('butce',[id],'bhZikirAc')}
-    else if(t==='q'||t==='k'){sec('okur');bekle('okur',[h],'okurGit')}};
+    else if(t==='q'||t==='k'){sec('okur');bekle('okur',[h],'okurGit')}
+    else if(t==='s'){sec('butce');bekle('butce',[id],'bhSekme')}};
   const kitaplar=()=>{try{const w=F.okur.contentWindow;return typeof w.okurKitaplar==='function'?w.okurKitaplar():[]}catch(e){return[]}};
   window.OB={sec:sec,akt:()=>akt,git:git,kitaplar:kitaplar};
   if(/[?&]taze=/.test(location.search)){try{history.replaceState(null,'',location.pathname)}catch(e){}}

@@ -5,6 +5,12 @@
 
 
 
+
+## 121 (06.11.2026) · Devam düğmesi · Notlar Okur'da · ana sayfa sadeleşti
+- **Kaldığın yerden devam et** yeni biçimde (A · kâğıt kart): krem zemin, ince kahve çerçeve, solda kitap simgesi, kitap yazı tipinde başlık ve altında bölüm · sayfa satırı (önceden görünmüyordu). Diğer temalarda aynı biçim temanın renkleriyle.
+- Okur alt gezinmesine **Notlar** sekmesi: Bütçe & Hedef › Notlar'ı açar (aynı notlar, aynı sayfa). Kabukta `OB.git('s:notlar')`, Bütçe'de `bhSekme`.
+- **Biten kitaplar** ana sayfada (Tümü) görünmez; Bitenler süzgecinde ve aramada çıkar.
+- **Favori Kitaplarım** rafı kaldırıldı (alt gezinmede Favoriler sekmesi var).
 ## 120 (06.11.2026) · İndir: Chrome'da aç · Android 1.10
 - İndir sayfasında her kaynağın ve kayıtlı sitenin yanında küçük **Chrome simgesi**: siteyi doğrudan Chrome'da açar.
 - **Kültür Bakanlığı e-Kitap** uygulama içi tarayıcıdan aramaya izin vermediği için ("The requested URL was rejected") doğrudan Chrome'da açılır; indirilen EPUB/PDF Kitap ekle ile eklenir.

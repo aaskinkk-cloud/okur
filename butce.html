@@ -2031,6 +2031,7 @@ grUygula();
 Object.assign(A,NTA);A.gorunum=()=>{const y=grOku()==='kd'?'klasik':'kd';try{localStorage.setItem('bh.gorunum',y)}catch(e){}grUygula();ciz();toast(y==='kd'?'Görünüm: Karadeniz':'Görünüm: Klasik')};A.okuraGec=()=>{try{window.parent.OB.sec('okur')}catch(e){}};
 /* Okur & Bütçe kabuğundan: başlıktaki rastgele sözden ya da bağlantıdan not / zikir aç */
 window.bhNotAc=id=>{if(!ntBul(id)){toast('Bu not silinmiş');return}if(U.tab!=='notlar')sekme('notlar');setTimeout(()=>ntGor(id),60)};
+window.bhSekme=t=>{if(SEKMELER.some(x=>x[0]===t)&&U.tab!==t)sekme(t)};
 window.bhZikirAc=id=>{if(!D.zikirler.some(z=>z.id===id)){toast('Bu zikir silinmiş');return}U.zOne=id;if(U.tab!=='zikir')sekme('zikir');else ciz();window.scrollTo(0,0)};
 
 /* ---------- Başlat ---------- */
