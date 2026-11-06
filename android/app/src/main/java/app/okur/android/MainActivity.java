@@ -21,6 +21,18 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
+import android.webkit.CookieManager;
+import android.webkit.URLUtil;
+import android.webkit.WebResourceRequest;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.view.Gravity;
+import android.util.TypedValue;
+import org.json.JSONObject;
+import java.io.InputStream;
+import java.io.RandomAccessFile;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -153,7 +165,99 @@ public class MainActivity extends Activity {
     @Override protected void onSaveInstanceState(Bundle o) { super.onSaveInstanceState(o); if (web != null) web.saveState(o); }
 
     @Override public void onBackPressed() {
+        if (tarKap != null && tarKap.getVisibility() == View.VISIBLE) { if (tar.canGoBack()) tar.goBack(); else tarayiciKapat(); return; }
         if (web != null && web.canGoBack()) web.goBack(); else super.onBackPressed();
+    }
+
+    /* ---------- v113: uygulama içi tarayıcı (Kitap indir) ----------
+       Site Okur'un üstünde açılır; sitede EPUB/PDF indirilince dosya alınır ve Okur kitaplığına eklenir. */
+    private LinearLayout tarKap; private WebView tar; private TextView tarBaslik;
+    private File indirDosya; private String indirAd, indirTur;
+    private int dp(int v) { return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v, getResources().getDisplayMetrics())); }
+    private TextView tarDugme(String t) {
+        TextView b = new TextView(this); b.setText(t); b.setTextColor(0xFFFFFFFF); b.setTextSize(22); b.setGravity(Gravity.CENTER);
+        b.setLayoutParams(new LinearLayout.LayoutParams(dp(48), dp(44))); return b;
+    }
+    private void tarayiciAc(String url) {
+        if (tarKap == null) {
+            tarKap = new LinearLayout(this); tarKap.setOrientation(LinearLayout.VERTICAL); tarKap.setBackgroundColor(0xFFFFFFFF);
+            LinearLayout bar = new LinearLayout(this); bar.setOrientation(LinearLayout.HORIZONTAL); bar.setGravity(Gravity.CENTER_VERTICAL);
+            bar.setBackgroundColor(0xFF2C6B3C); bar.setPadding(dp(2), kameraPx + dp(2), dp(2), dp(2));
+            TextView geri = tarDugme("‹"), kapat = tarDugme("✕");
+            geri.setOnClickListener(v -> { if (tar.canGoBack()) tar.goBack(); else tarayiciKapat(); });
+            kapat.setOnClickListener(v -> tarayiciKapat());
+            tarBaslik = new TextView(this); tarBaslik.setTextColor(0xFFFFFFFF); tarBaslik.setTextSize(15); tarBaslik.setSingleLine(true);
+            tarBaslik.setEllipsize(android.text.TextUtils.TruncateAt.END);
+            bar.addView(geri); bar.addView(tarBaslik, new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f)); bar.addView(kapat);
+            tar = new WebView(this);
+            WebSettings ts = tar.getSettings(); ts.setJavaScriptEnabled(true); ts.setDomStorageEnabled(true); ts.setLoadWithOverviewMode(true); ts.setUseWideViewPort(true);
+            ts.setSupportZoom(true); ts.setBuiltInZoomControls(true); ts.setDisplayZoomControls(false); ts.setAllowFileAccess(false);
+            try { CookieManager.getInstance().setAcceptThirdPartyCookies(tar, true); } catch (Exception e) { }
+            tar.setWebViewClient(new WebViewClient() {
+                @Override public boolean shouldOverrideUrlLoading(WebView v, WebResourceRequest r) {
+                    String sc = r.getUrl().getScheme();
+                    if ("http".equals(sc) || "https".equals(sc)) return false;
+                    try { startActivity(new Intent(Intent.ACTION_VIEW, r.getUrl())); } catch (Exception e) { }
+                    return true;
+                }
+                @Override public void onPageStarted(WebView v, String u, android.graphics.Bitmap f) { try { tarBaslik.setText(Uri.parse(u).getHost()); } catch (Exception e) { } }
+            });
+            tar.setWebChromeClient(new WebChromeClient() {
+                @Override public void onReceivedTitle(WebView v, String t) { if (t != null && !t.isEmpty()) tarBaslik.setText(t); }
+            });
+            tar.setDownloadListener((u, ua, cd, mt, len) -> indir(u, ua, cd, mt));
+            tarKap.addView(bar, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            tarKap.addView(tar, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f));
+            kap.addView(tarKap, new android.widget.FrameLayout.LayoutParams(-1, -1));
+        }
+        tarKap.setVisibility(View.VISIBLE);
+        if (url != null && !url.equals(tar.getUrl())) tar.loadUrl(url);
+    }
+    private void tarayiciKapat() { if (tarKap != null) tarKap.setVisibility(View.GONE); }
+    private void ileti(String m) { runOnUiThread(() -> Toast.makeText(MainActivity.this, m, Toast.LENGTH_LONG).show()); }
+    private void indir(String u, String ua, String cd, String mt) {
+        String ad0 = URLUtil.guessFileName(u, cd, mt);
+        ileti("İndiriliyor: " + ad0);
+        new Thread(() -> {
+            try {
+                HttpURLConnection c = (HttpURLConnection) new URL(u).openConnection();
+                c.setInstanceFollowRedirects(true); c.setConnectTimeout(20000); c.setReadTimeout(90000);
+                String ck = CookieManager.getInstance().getCookie(u); if (ck != null) c.setRequestProperty("Cookie", ck);
+                if (ua != null) c.setRequestProperty("User-Agent", ua);
+                int kod = c.getResponseCode(); if (kod >= 400) throw new Exception("sunucu " + kod + " döndü");
+                File dir = new File(getCacheDir(), "indir"); dir.mkdirs();
+                File[] eski = dir.listFiles(); if (eski != null) for (File x : eski) x.delete();
+                File f = new File(dir, "kitap.bin"); long top = 0;
+                try (InputStream in = c.getInputStream(); FileOutputStream o = new FileOutputStream(f)) {
+                    byte[] b = new byte[65536]; int n;
+                    while ((n = in.read(b)) > 0) { o.write(b, 0, n); top += n; if (top > 150L * 1024 * 1024) throw new Exception("dosya 150 MB'tan büyük"); }
+                }
+                byte[] h = new byte[64]; int hn;
+                try (InputStream in = new java.io.FileInputStream(f)) { hn = in.read(h); }
+                String bas = hn > 0 ? new String(h, 0, hn, "ISO-8859-1") : "";
+                String tur = bas.startsWith("%PDF") ? "application/pdf" : (bas.startsWith("PK") && bas.contains("epub")) ? "application/epub+zip" : null;
+                String ad = ad0 == null || ad0.isEmpty() ? "kitap" : ad0;
+                if (tur == null) {
+                    if (Build.VERSION.SDK_INT >= 29) {
+                        ContentValues cv = new ContentValues(); cv.put(MediaStore.Downloads.DISPLAY_NAME, ad);
+                        cv.put(MediaStore.Downloads.MIME_TYPE, mt == null || mt.isEmpty() ? "application/octet-stream" : mt);
+                        Uri du = getContentResolver().insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, cv);
+                        try (OutputStream o = getContentResolver().openOutputStream(du); InputStream in = new java.io.FileInputStream(f)) { byte[] b = new byte[65536]; int n; while ((n = in.read(b)) > 0) o.write(b, 0, n); }
+                        ileti("Bu dosya EPUB ya da PDF değil; İndirilenler'e kaydedildi: " + ad);
+                    } else ileti("Bu dosya EPUB ya da PDF değil; Okur açamaz.");
+                    f.delete(); return;
+                }
+                if (tur.endsWith("pdf") && !ad.toLowerCase().endsWith(".pdf")) ad = ad.replaceAll("\\.(bin|php|aspx?)$", "") + ".pdf";
+                if (tur.endsWith("zip") && !ad.toLowerCase().endsWith(".epub")) ad = ad.replaceAll("\\.(bin|zip|php|aspx?)$", "") + ".epub";
+                indirDosya = f; indirAd = ad; indirTur = tur;
+                final String a = ad, t = tur; final long boy = f.length();
+                runOnUiThread(() -> {
+                    tarayiciKapat();
+                    Toast.makeText(MainActivity.this, "Kitaplığa ekleniyor: " + a, Toast.LENGTH_SHORT).show();
+                    web.evaluateJavascript("window.okurIndirildi&&window.okurIndirildi(" + JSONObject.quote(a) + "," + boy + "," + JSONObject.quote(t) + ")", null);
+                });
+            } catch (Exception e) { ileti("İndirilemedi: " + e.getMessage()); }
+        }).start();
     }
 
     @Override protected void onActivityResult(int req, int res, Intent d) {
@@ -198,6 +302,18 @@ public class MainActivity extends Activity {
 
     /** Sayfadan gelen dosyaları (yedek, dışa aktarım) İndirilenler klasörüne yazar. */
     class Kopru {
+        @JavascriptInterface public void tarayici(String url) { runOnUiThread(() -> tarayiciAc(url)); }
+        /** İndirilen dosyanın i. parçası (base64, 768 KB'lık); bitince boş döner. */
+        @JavascriptInterface public String indirParca(int i) {
+            try {
+                if (indirDosya == null || !indirDosya.exists()) return "";
+                final int P = 786432; long bas = (long) i * P; if (bas >= indirDosya.length()) return "";
+                int n = (int) Math.min(P, indirDosya.length() - bas); byte[] b = new byte[n];
+                try (RandomAccessFile r = new RandomAccessFile(indirDosya, "r")) { r.seek(bas); r.readFully(b); }
+                return Base64.encodeToString(b, Base64.NO_WRAP);
+            } catch (Exception e) { return ""; }
+        }
+        @JavascriptInterface public void indirTemizle() { try { if (indirDosya != null) indirDosya.delete(); } catch (Exception e) { } indirDosya = null; }
         @JavascriptInterface public void renk(String c) { runOnUiThread(() -> renkUygula(c)); }
         /** Sayfa vurguları (alıntıları) buraya yazar; Bütçe & Hedef AlintiSaglayici üzerinden okur. */
         @JavascriptInterface public void alintilar(String json) {

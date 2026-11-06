@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <title>Okur &amp; Bütçe</title>
-<meta name="surum" content="111" data-ad="Okur &amp; Bütçe" data-tarih="01.11.2026">
+<meta name="surum" content="113" data-ad="Okur &amp; Bütçe" data-tarih="06.11.2026">
 <meta name="theme-color" content="#eef0ea">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
@@ -150,6 +150,8 @@ window.OB_KABUK=true;
     else if(t==='q'||t==='k'){sec('okur');bekle('okur',[h],'okurGit')}};
   const kitaplar=()=>{try{const w=F.okur.contentWindow;return typeof w.okurKitaplar==='function'?w.okurKitaplar():[]}catch(e){return[]}};
   window.OB={sec:sec,akt:()=>akt,git:git,kitaplar:kitaplar};
+  /* v113: APK'nın uygulama içi tarayıcısında indirilen kitap Okur'a iletilir */
+  window.okurIndirildi=(a,b,c)=>{sec('okur');bekle('okur',[a,b,c],'okurIndirildi')};
 
   /* ---- çevrimdışı önbellek ve "Yeni sürüm hazır" (tek yerden) ---- */
   const swOk=(location.protocol==='https:'||/^(localhost|127\.0\.0\.1)$/.test(location.hostname))&&('serviceWorker' in navigator)&&!/claude|googleusercontent|script\.google/.test(location.hostname);

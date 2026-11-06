@@ -1,5 +1,18 @@
 # Okur & Bütçe
 
+## 113 (06.11.2026) · Kitap indir sekmesi
+- Alt gezinmeye **İndir** sekmesi eklendi (Kitaplık'ın yanında). Açılan pencerede yasal ve ücretsiz Türkçe kaynaklar var:
+  - **Kültür Bakanlığı e-Kitap** (edebiyat bölümü)
+  - **Vikikaynak** (telifi bitmiş eserler)
+  - **Project Gutenberg · Türkçe**
+  - **Internet Archive · Türkçe**
+- **Kendi adresin:** bir site ya da kitap bağlantısı yapıştırılıp açılabiliyor. İstenirse **Sitelerim**'e kaydediliyor, ✕ ile siliniyor.
+- **Android uygulamasında** site Okur'un içinde açılıyor; üstte geri, başlık ve kapat çubuğu var. Sitede bir EPUB/PDF indirme bağlantısına dokununca dosya alınıyor ve **kitaplığa kendiliğinden ekleniyor**.
+  - Dosya EPUB ya da PDF değilse İndirilenler'e kaydediliyor.
+  - Bunun için yeni APK gerekiyor: https://github.com/aaskinkk-cloud/okur/releases/download/android/okur.apk
+- **Tarayıcıda** site yeni sekmede açılıyor; indirilen dosya **Kitap ekle** ile ekleniyor. Doğrudan .epub/.pdf bağlantılarını Okur, site izin veriyorsa kendisi alıyor.
+- Sürüm bilgisi (112'de eski kalmıştı) düzeltildi: "Yeni sürüm" uyarısı boşuna çıkmıyor.
+
 ## 112 (06.11.2026) · Notlar yerinde yazılır · 1/2 satır
 - **Bütçe › Notlar:** bir not satırına dokununca pencere açılmıyor; o satır yazı alanına dönüyor ve doğrudan yazılıyor. Yazdıkça kaydediliyor, boş yere dokununca bitiyor.
 - En üstteki **"Yeni not yaz…"** satırına ya da kâğıdın boş yerine dokununca hemen yeni not başlıyor. Boş bırakılan not kaydedilmiyor.
