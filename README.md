@@ -4,6 +4,11 @@
 
 
 
+
+## 120 (06.11.2026) · İndir: Chrome'da aç · Android 1.10
+- İndir sayfasında her kaynağın ve kayıtlı sitenin yanında küçük **Chrome simgesi**: siteyi doğrudan Chrome'da açar.
+- **Kültür Bakanlığı e-Kitap** uygulama içi tarayıcıdan aramaya izin vermediği için ("The requested URL was rejected") doğrudan Chrome'da açılır; indirilen EPUB/PDF Kitap ekle ile eklenir.
+- Android 1.10: sayfanın Chrome'u açabilmesi için `OkurAndroid.disAc(adres)`. Eski APK'da simge uygulama içinde açar ve yeni APK'yı kurmanı söyler.
 ## 119 (06.11.2026) · Bütçe & Hedef'e "Karadeniz" görünümü
 - Başlıktaki **palet** düğmesi (ya da Menü › Görünüm) **Klasik ⇄ Karadeniz** arasında geçer; seçim hatırlanır (`bh.gorunum`). Varsayılan Klasik.
 - Karadeniz: resimli başlık (gün batımı, deniz, yeşil tepeler ve evler, ince belli çay bardağı, fındıklar), yeşil yuvarlak cüzdan simgesi, el yazısı alt başlık; dönem ve gelir cam kartta (yeşil dönem hapı, altın para simgesi, iri maaş); özet kartında simgeli Toplam/Ödenen/Kalan ve yeşil ilerleme çubuğu; Zikir Çek (turuncu) ve Alıntı (mor) kartları yan yana (açılan tam genişlik); bölümler renkli, yuvarlak, simgeli kartlar (Fatura, Ödeme, Bankalar, Alışveriş, Hedef); alt çubuk yüzen cam şerit. Notlar sekmesi kâğıt görünümünü korur. Bütçe sürümü 4.7.

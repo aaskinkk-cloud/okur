@@ -308,6 +308,9 @@ public class MainActivity extends Activity {
     /** Sayfadan gelen dosyaları (yedek, dışa aktarım) İndirilenler klasörüne yazar. */
     class Kopru {
         @JavascriptInterface public void tarayici(String url) { runOnUiThread(() -> tarayiciAc(url)); }
+        /** 1.10: siteyi Chrome'da açar (uygulama içi tarayıcıyı reddeden siteler için) */
+        @JavascriptInterface public void disAc(String url) { runOnUiThread(() -> { Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url)); i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            try { i.setPackage("com.android.chrome"); startActivity(i); } catch (Exception e) { try { i.setPackage(null); startActivity(i); } catch (Exception e2) { } } }); }
         /** İndirilen dosyanın i. parçası (base64, 768 KB'lık); bitince boş döner. */
         @JavascriptInterface public String indirParca(int i) {
             try {
