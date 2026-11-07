@@ -16,6 +16,7 @@
 - **Arşiv:** not silinmez, ana listeden kalkar; Arşiv filtresinde "Geri yükle" ile döner. Arşivleyince "Geri al" çıkar.
 - En üstteki **"Yeni not yaz…"** kartında yerinde yazma ve Enter davranışı aynen sürer; sağ altta sabit **+** düğmesi yeni notu düzenleme ekranında açar (Favoriler filtresindeyken favori olarak).
 - Veri: `D.notlar` kayıtlarına isteğe bağlı alanlar eklendi — `kat`, `renk`, `fav`, `bitti`, `arsiv` (zaman). Eski notlar ve yedekler değişmeden okunur; bağlantılar, arama ve tema seçenekleri aynı.
+- **Düzeltme — sürekli "Yeni sürüm hazır":** 124 gönderilirken sayfalardaki sürüm etiketi 123 kalmıştı; uygulama her açılışta kendini eski sanıp afiş gösteriyordu. Etiketler 124 yapıldı ve denetim artık sunucudaki sayfanın kendi sürümüyle yapılıyor (sw.js ile değil), böylece numaralar eşleşmese bile afiş döngüye girmez.
 
 ## 123 (06.11.2026) · Kitaptan geri ok · Notlar en yeniden eskiye · Enter ile sonraki satır
 - Kitap okurken alttaki **Konum** çubuğunun sonunda **← geri ok**: dokununca kitap kapanır, ana sayfaya dönülür.

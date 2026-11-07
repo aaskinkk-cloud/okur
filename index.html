@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <title>Okur &amp; Bütçe</title>
-<meta name="surum" content="123" data-ad="Okur &amp; Bütçe" data-tarih="06.11.2026">
+<meta name="surum" content="124" data-ad="Okur &amp; Bütçe" data-tarih="07.11.2026">
 <meta name="theme-color" content="#eef0ea">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
@@ -166,7 +166,8 @@ window.OB_KABUK=true;
   if(swOk){let had=!!navigator.serviceWorker.controller;
     navigator.serviceWorker.register('sw.js').then(reg=>{setInterval(()=>reg.update().catch(()=>{}),30*60*1000);
       let son=0;const kontrol=()=>{if(Date.now()-son<60000)return;son=Date.now();
-        fetch('sw.js?k='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.text():'').then(t=>{const x=/V=P\+'(\d+)'/.exec(t||'');const bu=parseInt($('meta[name=surum]').content,10)||0;
+        /* v124: sunucudaki SAYFANIN kendi sürümüyle karşılaştır (sw.js ile değil): sürüm numaraları elle eşitlenmese de "Yeni sürüm hazır" döngüye girmez */
+        fetch('index.html?k='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.text():'').then(t=>{const x=/<meta name="surum" content="(\d+)"/.exec(t||'');const bu=parseInt($('meta[name=surum]').content,10)||0;
           if(x&&+x[1]>bu){reg.update().catch(()=>{});if(!sessionStorage.getItem('tazeOto')){sessionStorage.setItem('tazeOto','1');setTimeout(tazeYukle,1500)}else setTimeout(()=>{if(!$('#obUpd'))afis()},8000)}else sessionStorage.removeItem('tazeOto')}).catch(()=>{})};
       kontrol();document.addEventListener('visibilitychange',()=>{if(!document.hidden)kontrol()})}).catch(()=>{});
     navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!had){had=true;return}afis()});
