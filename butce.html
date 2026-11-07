@@ -766,10 +766,6 @@ html.gr-kd .tabs button{border-radius:20px;color:#3d3a33}
 html.gr-kd .tabs button.on{background:linear-gradient(180deg,#d8f0dd,#bfe5c8);color:#1b5e3b;box-shadow:inset 0 1px 0 #fff}
 html.gr-kd main{padding-bottom:110px}
 /* koyu tema seçiliyken de bu görünüm aydınlık kalır; Notlar sekmesinin kâğıt zemini korunur */
-html.gr-kd.nt-sekme body{background:#f4ead0}
-html.gr-kd.nt-sekme header.top{min-height:0;padding-bottom:10px}
-html.gr-kd.nt-sekme .kd-sahne{display:none}
-html.gr-kd.nt-sekme main{margin-top:0}
 
 /* 4.8: Notlar başlığı üst çubukta (Okur'un yanında); kâğıttaki arama geniş; boş satırlar üstte yazdırır */
 .nt-ust-ad{display:none}
@@ -778,6 +774,18 @@ html.nt-sekme .nt-ust-ad{display:block;flex:none;font:700 19px/1 Georgia,"Iowan 
 .nt-defter .nt-bas .nt-ara{flex:1 1 auto;min-width:0}
 .nt-yeni-sat:not(.nt-sat-yaz){color:#a08a64;font-style:italic}
 .nt-bosluk{cursor:text}
+/* 4.9: Karadeniz görünümünde Notlar da resimli başlık + yeşil vurgu + cam kartlarla açılır (Klasik: krem + turkuaz) */
+html.gr-kd.nt-sekme{--tq:#1f6b45;--tq2:#e2f1e6;--nkb:rgba(255,253,249,.94)}
+html.gr-kd.nt-sekme body{background:linear-gradient(180deg,#f8eadb 0,#f6efe4 320px)}
+html.gr-kd.nt-sekme header.top{background:none}
+html.gr-kd .nk,html.gr-kd .nk-ara,html.gr-kd .nk-ib,html.gr-kd .nk-fil button,html.gr-kd .nk-ayar button{border-color:rgba(255,255,255,.95);box-shadow:0 12px 26px -18px rgba(70,45,10,.55),inset 0 1px 0 rgba(255,255,255,.8)}
+html.gr-kd .nk{border-radius:20px;border-left:5px solid var(--nr,#d9cdb2);background:linear-gradient(100deg,color-mix(in srgb,var(--nr,#d9cdb2) 9%,#fffdf9) 0,#fffdf9 70%)}
+html.gr-kd .nk-ic{border-radius:50%}
+html.gr-kd .nk-fil button,html.gr-kd .nk-ara,html.gr-kd .nk-ib{border-radius:18px}
+html.gr-kd .nk-fil button.on{background:linear-gradient(180deg,#3c9a62,#1b5e3b);border-color:transparent;color:#fff}
+html.gr-kd .nk-fab{background:radial-gradient(circle at 35% 30%,#3c9a62,#1b5e3b);box-shadow:0 10px 24px -8px rgba(20,70,40,.7)}
+html.gr-kd.nt-sekme .tabs{background:rgba(255,251,244,.88);border-color:rgba(255,255,255,.9)}
+html.gr-kd.nt-sekme .tabs button.on{background:linear-gradient(180deg,#d8f0dd,#bfe5c8);color:#1b5e3b}
 /* 4.9: Notlar — kart görünümü (krem + turkuaz), filtreler, kategori/renk, favori, tamamlandı çizgisi, arşiv, + düğmesi */
 html.nt-sekme{--tq:#1f8f8a;--tq2:#e2f1ee;--nkb:#fffaf0;--nky:#3b3226;--nks:#8a7d68}
 .nk-ust{display:flex;gap:8px;align-items:center;margin:2px 0 10px}
