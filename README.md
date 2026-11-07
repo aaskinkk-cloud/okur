@@ -7,6 +7,16 @@
 
 
 
+## 124 (07.11.2026) · Notlar: kart görünümü, filtreler, tamamlandı çizgisi, arşiv, TXT indir
+- **Notlar** (Bütçe 4.9) yeni görünüm: krem zemin + turkuaz vurgu; her not yuvarlatılmış, hafif gölgeli **kart** (kategori ikonu, ilk satır başlık, ikinci satır önizleme, tarih: Bugün / Dün / gün adı / tarih).
+- Üstte **arama** ve **Aa** (Yazı: Düz/Yatık · Önizleme: Kısa/Uzun — eski "1/2 satır" ayarı).
+- **Filtreler:** Tümü · Favoriler · Tarih (Bugün / Dün / Bu hafta / Bu ay / aylar, başlıklar açılır-kapanır) · Etiketler (kategoriye göre gruplar + renk süzgeci) · Arşiv (sayı rozeti).
+- Kartta **✓ Tamam**: tamamlanan notun üstü hafif çizgiyle çizilir (tekrar dokununca kalkar). **☆ Favori**.
+- Karta **tek dokunuş** sarı not kâğıdında düzenlemeyi açar. Alt bölüm: Kategori (Not, İş, Plan, Fikir, Liste, Kitap, Müzik, Önemli + 7 renk etiketi) · Bağlantı · Favori · Tamam / **İndir (TXT, UTF-8)** · **Arşivle** (arşivdeyken Geri yükle) · Sil · Bitti.
+- **Arşiv:** not silinmez, ana listeden kalkar; Arşiv filtresinde "Geri yükle" ile döner. Arşivleyince "Geri al" çıkar.
+- En üstteki **"Yeni not yaz…"** kartında yerinde yazma ve Enter davranışı aynen sürer; sağ altta sabit **+** düğmesi yeni notu düzenleme ekranında açar (Favoriler filtresindeyken favori olarak).
+- Veri: `D.notlar` kayıtlarına isteğe bağlı alanlar eklendi — `kat`, `renk`, `fav`, `bitti`, `arsiv` (zaman). Eski notlar ve yedekler değişmeden okunur; bağlantılar, arama ve tema seçenekleri aynı.
+
 ## 123 (06.11.2026) · Kitaptan geri ok · Notlar en yeniden eskiye · Enter ile sonraki satır
 - Kitap okurken alttaki **Konum** çubuğunun sonunda **← geri ok**: dokununca kitap kapanır, ana sayfaya dönülür.
 - **Notlar** (Bütçe 4.8): en üstte her zaman **"Yeni not yaz…"** satırı; yazılan notlar onun altında **en yeniden eskiye** dizilir. Aşağıdaki boş satırlara dokununca da üstteki satırda yazılır.
