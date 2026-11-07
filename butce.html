@@ -63,7 +63,7 @@ body{margin:0;background:var(--bg);color:var(--yazi);font:16px/1.45 system-ui,-a
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer}
 [hidden]{display:none!important}
-.top{display:flex;align-items:center;gap:8px;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 8px}
+.top{display:flex;align-items:center;gap:8px;padding:calc(env(safe-area-inset-top,0px) + var(--kamera,0px) + 10px) 14px 8px}
 .brand{flex:1;min-width:0}.brand b{display:block;font:700 21px/1.15 var(--serif);letter-spacing:-.01em}
 .brand small{display:block;color:var(--soluk);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ib{width:44px;height:44px;border-radius:14px;border:1px solid var(--kenar);background:var(--kart);font-size:20px;display:grid;place-items:center}
@@ -93,7 +93,7 @@ select.inp{padding-right:4px}
 .ozet b{display:block;font-size:16.5px;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ozet .eksi b{color:var(--kirmizi)}.ozet .arti b{color:var(--yesil)}
 .ozet small{display:block;font-size:10.5px;color:var(--soluk);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.yapiskan{position:sticky;top:0;z-index:20;background:var(--bg);padding:6px 0 6px;margin:0 -2px}
+.yapiskan{position:sticky;top:var(--kamera,0px);z-index:20;background:var(--bg);padding:6px 0 6px;margin:0 -2px}
 .ozet.uc{grid-template-columns:repeat(3,1fr)}
 @media (max-width:380px){.ozet b{font-size:15px}}
 /* bölümler */
@@ -686,12 +686,12 @@ html.ob-kabukta .brand b{font-size:25px}
 .bandlar{display:contents}
 html.gr-kd.gr-kd{--bg:#f6efe4;--kart:#fffdf9;--yazi:#1d2a22;--soluk:#6f6a5e;--kenar:#eadfcd;--ana:#1f6b45;--ana2:#e2f1e6;color-scheme:light}
 html.gr-kd body{background:linear-gradient(180deg,#f8eadb 0,#f6efe4 320px)}
-html.gr-kd header.top{position:relative;overflow:hidden;align-items:flex-start;min-height:calc(env(safe-area-inset-top,0px) + 168px);padding:calc(env(safe-area-inset-top,0px) + 14px) 14px 80px;background:none;border:0}
+html.gr-kd header.top{position:relative;overflow:hidden;align-items:flex-start;min-height:calc(env(safe-area-inset-top,0px) + var(--kamera,0px) + 168px);padding:calc(env(safe-area-inset-top,0px) + var(--kamera,0px) + 14px) 14px 80px;background:none;border:0}
 html.gr-kd .kd-sahne{display:block;position:absolute;inset:0;z-index:0}
 html.gr-kd .kd-sahne svg{width:100%;height:100%;display:block}
 html.gr-kd .kd-sahne::after{content:"";position:absolute;inset:auto 0 0 0;height:60px;background:linear-gradient(180deg,transparent,#f6efe4)}
 html.gr-kd header.top>*:not(.kd-sahne){position:relative;z-index:1}
-html.gr-kd header.top{flex-wrap:wrap;justify-content:flex-end;row-gap:10px;min-height:calc(env(safe-area-inset-top,0px) + 206px);padding-bottom:96px}
+html.gr-kd header.top{flex-wrap:wrap;justify-content:flex-end;row-gap:10px;min-height:calc(env(safe-area-inset-top,0px) + var(--kamera,0px) + 206px);padding-bottom:96px}
 html.gr-kd header.top>.ib{width:40px;height:40px}
 html.gr-kd header.top::before{content:"";order:9;flex-basis:100%;height:0}
 html.gr-kd .kd-logo{order:10}
@@ -774,6 +774,7 @@ html.nt-sekme .nt-ust-ad{display:block;flex:none;font:700 19px/1 Georgia,"Iowan 
 .nt-defter .nt-bas .nt-ara{flex:1 1 auto;min-width:0}
 .nt-yeni-sat:not(.nt-sat-yaz){color:#a08a64;font-style:italic}
 .nt-bosluk{cursor:text}
+#kamSerit{display:none;position:fixed;left:0;right:0;top:0;height:var(--kamera,0px);z-index:2147482000;pointer-events:none;background:var(--bg)}html.kam-kaydi #kamSerit{display:block}html.nt-sekme #kamSerit{background:#f4ead0}html.gr-kd #kamSerit{background:#f6efe4}
 /* 4.9: Karadeniz görünümünde Notlar da resimli başlık + yeşil vurgu + cam kartlarla açılır (Klasik: krem + turkuaz) */
 html.gr-kd.nt-sekme{--tq:#1f6b45;--tq2:#e2f1e6;--nkb:rgba(255,253,249,.94)}
 html.gr-kd.nt-sekme body{background:linear-gradient(180deg,#f8eadb 0,#f6efe4 320px)}
@@ -880,7 +881,7 @@ html.nt-acik .nk-fab{display:none}
 <script>
 (function(){
 'use strict';
-const SURUM='4.9';
+const SURUM='5.0';
 const KEY='butceHedef.v1',UKEY='butceHedef.ui';
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -2269,5 +2270,8 @@ window.bhZikirAc=id=>{if(!D.zikirler.some(z=>z.id===id)){toast('Bu zikir silinmi
 })();
 </script>
 
+<script>/* 125: kamera şeridi — üst sistem bölgesi uygulamanın kendi başlığıyla boyanır; sayfa kayınca o bölge sayfa renginde düz bir şeritle örtülür (yazı kameranın altına girmez) */
+(function(){var r=document.documentElement,s=null;function f(){var k=(window.scrollY||r.scrollTop||0)>6;if(k&&!s){s=document.createElement('div');s.id='kamSerit';s.setAttribute('aria-hidden','true');document.body.appendChild(s)}
+  if(k!==r.classList.contains('kam-kaydi'))r.classList.toggle('kam-kaydi',k)}addEventListener('scroll',f,{passive:true});if(document.body)f();else addEventListener('DOMContentLoaded',f)})();</script>
 </body>
 </html>

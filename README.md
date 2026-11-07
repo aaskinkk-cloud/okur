@@ -7,6 +7,11 @@
 
 
 
+## 125 (07.11.2026) · Üst sistem bölgesi temaya dahil
+- Ayrı düz renkli üst bant kaldırıldı. Ön kamera / sistem çubuğu bölgesini artık uygulamanın **kendi başlığı** boyar: Okur'da kitaplık teması (turkuaz, göl, orman, kâğıt…), Bütçe'de Klasik zemin ya da Karadeniz resmi. Başlık en üstten kesintisiz başlar.
+- Sayfa aşağı kaydırılınca bu bölge sayfa renginde ince bir şeritle örtülür; yazı kameranın altına girmez. Bütçe'deki yapışkan özet çubuğu da şeridin altında durur.
+- Kitap okurken (Okur) davranış değişmedi. Bütçe sürümü 5.0.
+
 ## 124 (07.11.2026) · Notlar: kart görünümü, filtreler, tamamlandı çizgisi, arşiv, TXT indir
 - **Notlar** (Bütçe 4.9) yeni görünüm: krem zemin + turkuaz vurgu; her not yuvarlatılmış, hafif gölgeli **kart** (kategori ikonu, ilk satır başlık, ikinci satır önizleme, tarih: Bugün / Dün / gün adı / tarih).
 - Üstte **arama** ve **Aa** (Yazı: Düz/Yatık · Önizleme: Kısa/Uzun — eski "1/2 satır" ayarı).
