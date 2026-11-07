@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <title>Okur &amp; Bütçe</title>
-<meta name="surum" content="125" data-ad="Okur &amp; Bütçe" data-tarih="07.11.2026">
+<meta name="surum" content="126" data-ad="Okur &amp; Bütçe" data-tarih="07.11.2026">
 <meta name="theme-color" content="#eef0ea">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
@@ -94,6 +94,8 @@ window.OB_KABUK=true;
     let tc=bg;R.style.removeProperty('--ustbg');
     if(akt==='okur'&&!body.classList.contains('okumada')){try{const u=doc.querySelector('meta[name=okur-ust-renk]');if(u&&u.content){tc=u.content;R.style.setProperty('--ustbg',tc)}}catch(e){}}
     if(body.classList.contains('okumada')){try{const m=doc.querySelector('meta[name=theme-color]');if(m&&m.content)tc=m.content}catch(e){}}
+    /* 126: Bütçe kendi en üst rengini (Karadeniz gökyüzü, Notlar kâğıdı…) theme-color ile bildirir; sistem çubuğu da o renge boyanır */
+    if(akt==='butce'){try{const m=doc.querySelector('meta[name=theme-color]');if(m&&m.content)tc=m.content}catch(e){}}
     const meta=$('meta[name=theme-color]');if(meta.content!==tc)meta.content=tc;
   }
 

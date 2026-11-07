@@ -7,6 +7,13 @@
 
 
 
+## 126 (07.11.2026) · Karadeniz başlığı sadeleşti · Notlar'da Defter görünümü · Güncelleme denetimi · Tasarım standartları
+- **Sistem çubuğu:** Bütçe kendi en üst rengini bildirir (Karadeniz: gökyüzü, Notlar: kâğıt, Klasik: zemin); kabuk sistem çubuğunu bu renge boyar — gri bant kalmaz.
+- **Karadeniz başlığı:** yeşil cüzdan logosu kaldırıldı; Notlar'da logonun bıraktığı boş satır da kalktı, başlık kısaldı.
+- **Notlar › Aa › Kart / Defter:** ilk sarı çizgili defter görünümü seçenek olarak geri geldi. Filtreler, favori (★), tamamlandı çizgisi, arşiv, yerinde yazma ve Enter iki görünümde de çalışır.
+- **Güncellemeyi denetle** (Bütçe › menü) Okur & Bütçe kurulu uygulamasında da çalışır: sunucudaki sürümü açık olanla karşılaştırır, yeniyse kendini yeniler, değilse "Uygulama güncel · sürüm 126 · Bütçe 5.0" der.
+- **TASARIM-STANDARTLARI.md** eklendi: her düzenlemede sorulmadan uygulanan tasarım kuralları (tam ekran, sistem çubuğu temaya dahil, açılır başlıklar, hizalı düğmeler, eski görünümleri seçenek olarak koruma…).
+
 ## 125 (07.11.2026) · Üst sistem bölgesi temaya dahil
 - Ayrı düz renkli üst bant kaldırıldı. Ön kamera / sistem çubuğu bölgesini artık uygulamanın **kendi başlığı** boyar: Okur'da kitaplık teması (turkuaz, göl, orman, kâğıt…), Bütçe'de Klasik zemin ya da Karadeniz resmi. Başlık en üstten kesintisiz başlar.
 - Sayfa aşağı kaydırılınca bu bölge sayfa renginde ince bir şeritle örtülür; yazı kameranın altına girmez. Bütçe'deki yapışkan özet çubuğu da şeridin altında durur.
