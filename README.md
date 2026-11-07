@@ -7,6 +7,12 @@
 
 
 
+## 127 (07.11.2026) · Notlar: başlık sırası, arama ve filtreler varsayılan kapalı
+- Üst çubukta **"Notlar" solda, Okur düğmesi hemen sağında**; diğer düğmeler sağa yaslı.
+- **Arama kutusu, Aa ve filtre düğmeleri varsayılan kapalı.** Üst çubuktaki **🔍** düğmesiyle açılır/kapanır (açıkken turkuaz).
+- Kapalıyken bir filtre ya da arama etkinse liste üstünde **"Gösterilen: Favoriler"** şeridi ve 🔍 üzerinde turuncu nokta çıkar; **Tümü** ile tek dokunuşta sıfırlanır (gizli filtre yüzünden notlar kaybolmuş gibi görünmez).
+- Bütçe sürümü 5.1.
+
 ## 126 (07.11.2026) · Karadeniz başlığı sadeleşti · Notlar'da Defter görünümü · Güncelleme denetimi · Tasarım standartları
 - **Sistem çubuğu:** Bütçe kendi en üst rengini bildirir (Karadeniz: gökyüzü, Notlar: kâğıt, Klasik: zemin); kabuk sistem çubuğunu bu renge boyar — gri bant kalmaz.
 - **Karadeniz başlığı:** yeşil cüzdan logosu kaldırıldı; Notlar'da logonun bıraktığı boş satır da kalktı, başlık kısaldı.

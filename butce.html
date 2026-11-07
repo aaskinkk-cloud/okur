@@ -800,6 +800,15 @@ html.nt-sekme{--tq:#1f8f8a;--tq2:#e2f1ee;--nkb:#fffaf0;--nky:#3b3226;--nks:#8a7d
 .nk-ara input::placeholder{color:#b0a38a}
 .nk-ib{flex:none;width:44px;height:44px;border-radius:14px;border:1px solid #efe4cb;background:var(--nkb);color:var(--nky);font:700 15px Georgia,serif;display:grid;place-items:center;box-shadow:0 1px 2px rgba(60,45,20,.06)}
 .nk-ib[aria-pressed="true"]{background:var(--tq2);color:var(--tq);border-color:color-mix(in srgb,var(--tq) 30%,transparent)}
+.nt-ara-b{display:none!important;position:relative}html.nt-sekme .nt-ara-b{display:grid!important}
+.nt-ara-b[aria-pressed="true"]{background:var(--tq2,#e2f1ee)!important;color:var(--tq,#1f8f8a)!important;border-color:color-mix(in srgb,var(--tq,#1f8f8a) 35%,transparent)!important}
+.nt-ara-b i{display:none;position:absolute;top:6px;right:6px;width:9px;height:9px;border-radius:50%;background:#e8892b;box-shadow:0 0 0 2px #fff}.nt-ara-b.nokta i{display:block}
+html.nt-sekme .nt-ust-ad{order:-2;margin:0 8px 0 4px!important}
+html.nt-sekme header.top .ob-gec{order:-1;margin-right:auto}
+.nk-aktif{display:flex;align-items:center;gap:8px;margin:2px 0 10px;padding:6px 6px 6px 12px;border-radius:14px;background:var(--tq2);color:#3b3226;font:13.5px system-ui,sans-serif}
+.nk-aktif span{flex:1;min-width:0;display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.nk-aktif svg{width:15px;height:15px;flex:none;color:var(--tq)}
+.nk-aktif b{overflow:hidden;text-overflow:ellipsis}
+.nk-aktif button{flex:none;height:32px;padding:0 12px;border-radius:10px;border:0;background:var(--tq);color:#fff;font:600 13px system-ui}
 .nk-ayar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:-2px 0 10px}
 .nk-defter{min-height:0!important;margin-bottom:96px!important}.nk-defter .nt-satirlar{padding-top:6px}
 .nk-cizik{text-decoration:line-through;text-decoration-thickness:1.2px;text-decoration-color:rgba(90,59,30,.42);opacity:.7}
@@ -889,7 +898,7 @@ html.nt-acik .nk-fab{display:none}
 <script>
 (function(){
 'use strict';
-const SURUM='5.0';
+const SURUM='5.1';
 const KEY='butceHedef.v1',UKEY='butceHedef.ui';
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -990,7 +999,9 @@ function sekme(t){
   U.tab=t;uiKaydet();if(t==='butce'){zSec();aSec()}if(t==='alinti')setTimeout(()=>okurAl(),0);
   ciz();window.scrollTo(0,0);
 }
-function ciz(){try{document.documentElement.classList.toggle('nt-sekme',U.tab==='notlar');grUygula();if(!document.querySelector('.nt-ust-ad')){const t=document.querySelector('header.top'),o=t&&(t.querySelector('.ob-gec')||t.querySelector('.brand'));if(o){const e=document.createElement('b');e.className='nt-ust-ad';e.textContent='Notlar';o.after(e)}}}catch(e){}
+function ciz(){try{document.documentElement.classList.toggle('nt-sekme',U.tab==='notlar');grUygula();if(!document.querySelector('.nt-ust-ad')){const t=document.querySelector('header.top'),o=t&&(t.querySelector('.ob-gec')||t.querySelector('.brand'));if(o){const e=document.createElement('b');e.className='nt-ust-ad';e.textContent='Notlar';o.after(e);
+    const k=document.createElement('button');k.type='button';k.className='ib nt-ara-b';k.setAttribute('aria-label','Arama ve filtreler');k.title='Arama ve filtreler';k.setAttribute('onclick','A.ntArac()');
+    k.innerHTML='<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><i aria-hidden="true"></i>';e.after(k)}}}catch(e){}
   tabsCiz();
   if(U.tab==='sifre'){sifreCiz();return}
   const f={butce:butceHtml,findik:findikHtml,hedef:hedefHtml,dugun:dugunHtml,zikir:zikirHtml,alinti:alintiHtml,notlar:notlarHtml}[U.tab]||butceHtml;
@@ -2009,7 +2020,7 @@ function anaDugme(){const b=$('#anaBtn');if(b)b.hidden=false}
 /* ---------- 4.1: Notlar — sarı not kâğıdı ----------
    D.notlar=[{id,metin,olusturma,duzenleme,baglar:[{m:'ifade',h:'q:ALINTI|n:NOT|k:KİTAP|z:ZİKİR'}]}] — Bütçe yedeğine dahildir.
    Bağlantı metne işaret konmadan ayrı tutulur: not metni temiz kalır, ifadenin metindeki ilk geçtiği yer tıklanabilir olur. */
-const NOT={ara:'',acik:null,duz:null,sel:[0,0],t:0,f:'tum',renk:'',kap:new Set(),ayar:false,etk:false};
+const NOT={ara:'',acik:null,duz:null,sel:[0,0],t:0,f:'tum',renk:'',kap:new Set(),ayar:false,etk:false,arac:false}; /* 5.1: arama + filtreler varsayılan kapalı */
 const ntTarih=t=>t?new Date(t).toLocaleDateString('tr-TR',{day:'numeric',month:'long',year:'numeric'}):'';
 const ntSaat=t=>t?new Date(t).toLocaleString('tr-TR',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}):'';
 const ntIlk=m=>(String(m||'').split('\n').map(x=>x.trim()).find(Boolean)||'');
@@ -2091,12 +2102,17 @@ function notlarHtml(){const q=NOT.ara.trim().toLocaleLowerCase('tr'),F=NOT.f||'t
   const kullR=F==='etiket'?NK_RENK.filter(r=>l.some(n=>n.renk===r[0])):[];
   if(F==='etiket'&&NOT.renk)l=l.filter(n=>n.renk===NOT.renk);
   if(q)l=l.filter(n=>String(n.metin||'').toLocaleLowerCase('tr').includes(q));
-  let h='<div class="nk-ust"><label class="nk-ara">'+nkSvg(NKI.ara)+'<input class="nk-q" type="search" placeholder="Notlarda ara" value="'+esc(NOT.ara)+'" oninput="A.ntAra(this.value)" aria-label="Notlarda ara"></label>'+
+  const sz=F!=='tum'||!!q||!!NOT.renk;
+  try{const k=document.querySelector('.nt-ara-b');if(k){k.setAttribute('aria-pressed',String(!!NOT.arac));k.classList.toggle('nokta',sz&&!NOT.arac)}}catch(e){}
+  let h='';
+  if(!NOT.arac){if(sz)h+='<div class="nk-aktif"><span>'+nkSvg(NKI.etiket)+'Gösterilen: <b>'+esc([({fav:'Favoriler',tarih:'Tarih',etiket:'Etiketler',arsiv:'Arşiv'})[F],NOT.renk?(NK_RENK.find(r=>r[0]===NOT.renk)||[])[2]:'',q?'“'+NOT.ara.trim()+'”':''].filter(Boolean).join(' · '))+'</b></span><button onclick="A.ntSifirla()">Tümü</button></div>'}
+  else{h+='<div class="nk-ust"><label class="nk-ara">'+nkSvg(NKI.ara)+'<input class="nk-q" type="search" placeholder="Notlarda ara" value="'+esc(NOT.ara)+'" oninput="A.ntAra(this.value)" aria-label="Notlarda ara"></label>'+
     '<button class="nk-ib" onclick="A.ntAyar()" aria-pressed="'+!!NOT.ayar+'" aria-label="Görünüm" title="Görünüm">Aa</button></div>';
   if(NOT.ayar)h+='<div class="nk-ayar"><button onclick="A.ntGorunum()">'+(ntDefter()?'Defter':'Kart')+'</button><button onclick="A.ntYatik()">'+(ntYatik()?'<i>Yatık</i>':'Düz yazı')+'</button><button onclick="A.ntSatir()">'+(ntIki()?'Uzun önizleme':'Kısa önizleme')+'</button></div>';
   h+='<div class="nk-fil" role="tablist">'+[['tum','Tümü',NKI.tum],['fav','Favoriler',NKI.yildiz],['tarih','Tarih',NKI.tarih],['etiket','Etiketler',NKI.etiket],['arsiv','Arşiv',NKI.arsiv]].map(x=>
     '<button role="tab" class="'+(F===x[0]?'on':'')+'" aria-selected="'+(F===x[0])+'" onclick="A.ntFiltre(\''+x[0]+'\')">'+nkSvg(x[2])+'<span>'+x[1]+'</span>'+(x[0]==='arsiv'&&ark?'<i>'+ark+'</i>':'')+'</button>').join('')+'</div>';
-  if(kullR.length)h+='<div class="nk-renkler"><button class="'+(!NOT.renk?'on':'')+'" onclick="A.ntRenkF(\'\')">Tüm renkler</button>'+kullR.map(r=>'<button class="dot'+(NOT.renk===r[0]?' on':'')+'" style="--r:'+r[1]+'" onclick="A.ntRenkF(\''+r[0]+'\')" aria-label="'+r[2]+'" title="'+r[2]+'"></button>').join('')+'</div>';
+  }
+  if(NOT.arac&&kullR.length)h+='<div class="nk-renkler"><button class="'+(!NOT.renk?'on':'')+'" onclick="A.ntRenkF(\'\')">Tüm renkler</button>'+kullR.map(r=>'<button class="dot'+(NOT.renk===r[0]?' on':'')+'" style="--r:'+r[1]+'" onclick="A.ntRenkF(\''+r[0]+'\')" aria-label="'+r[2]+'" title="'+r[2]+'"></button>').join('')+'</div>';
   let g='';const DF=ntDefter(),kart=DF?nkSatir:nkKart;
   if(F==='tum'&&!q)g+=DF?'<div class="nt-sat2 nt-yeni-sat" role="button" tabindex="0" onclick="A.ntYerinde(\'\',this)">Yeni not yaz…</div>':'<div class="nk nk-yeni" role="button" tabindex="0" onclick="A.ntYerinde(\'\',this)">'+nkYeniIc()+'</div>';
   const grup=(anah,ad,dizi)=>{const k=F+':'+anah,kp=NOT.kap.has(k);
@@ -2201,6 +2217,8 @@ const NTA={
   ntRenkF:r=>{NOT.renk=NOT.renk===r?'':r;ciz()},
   ntGrup:k=>{NOT.kap.has(k)?NOT.kap.delete(k):NOT.kap.add(k);ciz()},
   ntAyar:()=>{NOT.ayar=!NOT.ayar;ciz()},
+  ntArac:()=>{ntYerindeBitir();NOT.arac=!NOT.arac;if(!NOT.arac)NOT.ayar=false;ciz();if(NOT.arac)window.scrollTo(0,0)},
+  ntSifirla:()=>{ntYerindeBitir();NOT.f='tum';NOT.renk='';NOT.ara='';ciz()},
   ntGorunum:()=>{ntYerindeBitir();try{localStorage.setItem('nt.gorunum',ntDefter()?'kart':'defter')}catch(e){}ciz();toast(ntDefter()?'Notlar: Defter görünümü':'Notlar: Kart görünümü')},
   ntEtk:()=>{NOT.etk=!NOT.etk;ntAltCiz()},
   ntKatSec:k=>{const n=ntBul(NOT.duz);if(!n)return;if(k==='not')delete n.kat;else n.kat=k;kaydet(true);ntAltCiz();ciz()},
