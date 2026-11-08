@@ -7,6 +7,18 @@
 
 
 
+## 128 (08.11.2026) · Klasik sayfa başlığı · Alıntıya dokun → kopyala · Menüler kendiliğinden gizlenir · Tek tip geri tuşu
+- **Sayfa başlığı** (Görünüm ve okuma › Görünüm › Sayfa başlığı; **kitaba özel**):
+  - **Kitabın kendi** (varsayılan, eskisi gibi) · **Yazar · Kitap** · **Kendi yazım** (kutuya yazılan metin).
+  - Seçilince her sayfanın üstünde klasik başlık durur: yazar adı küçük büyük harfle, kitap adı yatık, altında ince çizgi. İki sayfa yan yanayken solda yazar, sağda kitap.
+  - Bu kitapta kitabın içindeki başlıklar **düz yazı** olur (yanlış bölünmüş "başlık" cümleler metne karışır). Kitabın dosyası değişmez; "Kitabın kendi"ne dönünce eski görünüm geri gelir.
+  - Başlığa yer açılır, metin başlığın altında kalmaz. Yalnız EPUB, sayfalı okumada.
+- **Alıntıya (vurguya) dokununca kopyalanır**, sayfa çevrilmez: "Alıntı kopyalandı" yazar. 3 sn içinde **tekrar dokununca** alıntı menüsü açılır (renk, not, sil, paylaş). Okuma kilidi açıkken de çalışır. Uzun alıntı kesilmeden, tamamı kopyalanır.
+- **Menülerin gizlenmesi** (Ayarlar › Menülerin gizlenmesi): üst ve alt menü açıkken **5 sn** (0–30 sn, 0 = kapalı) dokunulmazsa kendiliğinden gizlenir. Menüde her dokunuş/kaydırma süreyi baştan başlatır; ayar sayfası, içindekiler ya da alıntı menüsü açıkken gizlenmez. Yüzen üst bant da aynı süreye uyar.
+- **Alt menüdeki geri tuşu** artık sol üstteki "Kitaplığa dön" tuşuyla aynı simge (‹).
+- Küçük düzeltme: vurgunun üzerine dokununca konsola düşen hata giderildi.
+- Test (sunucuda, 412×915 ve 1280×800): başlık üç modda, alıntıya dokunma (kopyalandı, sayfa yerinde, ikinci dokunuşta menü), 3 sn'de gizlenme ve dokununca uzama, ayar kartları. Hata yok. Telefonda denenmedi.
+
 ## 127 (07.11.2026) · Notlar: başlık sırası, arama ve filtreler varsayılan kapalı
 - Üst çubukta **"Notlar" solda, Okur düğmesi hemen sağında**; diğer düğmeler sağa yaslı.
 - **Arama kutusu, Aa ve filtre düğmeleri varsayılan kapalı.** Üst çubuktaki **🔍** düğmesiyle açılır/kapanır (açıkken turkuaz).
