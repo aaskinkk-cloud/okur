@@ -7,6 +7,21 @@
 
 
 
+## 129 (08.11.2026) · Giriş sayfası gibi başlık · Büyük ilk harf · Baskı teması · Kıvrım süsü
+- **Sayfa başlığı** (Görünüm › Sayfa başlığı, kitaba özel) genişledi:
+  - Kaynak: **Kitabın kendi · Yazar · Kitap · İlk kelimeler** (o bölümün ilk 5–6 kelimesi) **· Kendi yazım** (en çok **2 satır**; Enter ile alt satır).
+  - Boyut: **Büyük** (varsayılan; giriş sayfası gibi: yuvarlak çerçevede bölüm numarası ya da küçük büyük harfle yazar adı, iki satıra kadar büyük başlık, altında silik kıvrım süsü) · **Sade** (tek satır, altında küçük süs).
+  - Başlığa sabit yer ayrılır, sayfa değişince metin kaymaz.
+- **Büyük ilk harf** (Görünüm › Süsleme): Kapalı · Bölüm başında · **Her sayfada** (sayfanın üst yarısında başlayan ilk paragraf).
+  - Yalnız büyük harfle başlayan paragraflara konur (yarım kalan cümlenin devamına konmaz).
+  - Paragraf ya da ilk cümle 3+ satırsa üç satırlık, 2 satırsa iki satırlık harf; tek satırsa konmaz (alttaki paragrafı itip bozmasın).
+  - Kitaba yalnız sınıf eklenir: metin, yer imleri, alıntılar ve kaldığın yer etkilenmez.
+- **Baskı teması** ve **"Baskı · Kitap sayfası"** hazır görünümü: açık gri-kâğıt zemin, koyu siyah yazı, yeni **Baskı** yazı tipi (Tinos; Times benzeri, ücretsiz, uygulamaya gömülü — internetsiz çalışır), bölüm başında büyük harf, kıvrım süsü.
+- **Kıvrım** süsü (kendi çizimim) Süsleme'deki süs seçeneklerine eklendi ve varsayılan oldu. Kitabın kendi başlıklarının altındaki düz çizgi de artık bu silik süs.
+- **Bölüm sonunda süs** (Süsleme; varsayılan kapalı): her bölüm bitişine ortalı silik süs.
+- Ayar düğmeleri 2×2 hizalı (boş hücre yok).
+- Test (sunucuda, 412×915 ve 1280×800): dört başlık kaynağı, iki boyut, iki satırlık giriş (3. satır alınmaz), büyük harf iki modda ve iki paragraf düzeninde, Baskı görünümü; 128'deki alıntı kopyalama ve menü gizleme yeniden denendi. Hata yok. Telefonda denenmedi.
+
 ## 128 (08.11.2026) · Klasik sayfa başlığı · Alıntıya dokun → kopyala · Menüler kendiliğinden gizlenir · Tek tip geri tuşu
 - **Sayfa başlığı** (Görünüm ve okuma › Görünüm › Sayfa başlığı; **kitaba özel**):
   - **Kitabın kendi** (varsayılan, eskisi gibi) · **Yazar · Kitap** · **Kendi yazım** (kutuya yazılan metin).
