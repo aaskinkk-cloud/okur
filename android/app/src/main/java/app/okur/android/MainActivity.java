@@ -110,7 +110,8 @@ public class MainActivity extends Activity {
         web.setWebViewClient(new WebViewClient() {
             @Override public void onPageStarted(WebView v, String url, android.graphics.Bitmap fav) { if (url != null && url.startsWith("http")) sayfaHata = false; }
             @Override public void onPageFinished(WebView v, String url) {
-                if (url != null && url.startsWith("http") && !sayfaHata) { deneme = 0; otoDeneme = 0; v.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT); }
+                if (url != null && url.startsWith("http") && !sayfaHata) { deneme = 0; otoDeneme = 0; v.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
+                    sayfaHazir = true; if (bekleyen != null) { final Runnable r = bekleyen; bekleyen = null; v.postDelayed(r, 600); } }
                 v.evaluateJavascript(INDIR_JS, null); kameraYaz(); tamEkran(); }
             @Override public void onReceivedHttpError(WebView v, android.webkit.WebResourceRequest r, android.webkit.WebResourceResponse res) {
                 if (r.isForMainFrame() && res != null && (res.getStatusCode() == 404 || res.getStatusCode() >= 500)) { sayfaHata = true; yedegeGec(v, "HTTP " + res.getStatusCode()); }
@@ -133,6 +134,7 @@ public class MainActivity extends Activity {
         });
         if (b != null) web.restoreState(b); else web.loadUrl(ADRES);
         tamEkran();
+        gelenIsle(getIntent());
     }
 
     /** Kalıcı tam ekran: sistem çubukları gizli; kaydırınca geçici görünür ve sayfanın üstüne biner.
@@ -237,31 +239,73 @@ public class MainActivity extends Activity {
                     byte[] b = new byte[65536]; int n;
                     while ((n = in.read(b)) > 0) { o.write(b, 0, n); top += n; if (top > 150L * 1024 * 1024) throw new Exception("dosya 150 MB'tan büyük"); }
                 }
-                byte[] h = new byte[64]; int hn;
-                try (InputStream in = new java.io.FileInputStream(f)) { hn = in.read(h); }
-                String bas = hn > 0 ? new String(h, 0, hn, "ISO-8859-1") : "";
-                String tur = bas.startsWith("%PDF") ? "application/pdf" : (bas.startsWith("PK") && bas.contains("epub")) ? "application/epub+zip" : null;
-                String ad = ad0 == null || ad0.isEmpty() ? "kitap" : ad0;
-                if (tur == null) {
-                    if (Build.VERSION.SDK_INT >= 29) {
-                        ContentValues cv = new ContentValues(); cv.put(MediaStore.Downloads.DISPLAY_NAME, ad);
-                        cv.put(MediaStore.Downloads.MIME_TYPE, mt == null || mt.isEmpty() ? "application/octet-stream" : mt);
-                        Uri du = getContentResolver().insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, cv);
-                        try (OutputStream o = getContentResolver().openOutputStream(du); InputStream in = new java.io.FileInputStream(f)) { byte[] b = new byte[65536]; int n; while ((n = in.read(b)) > 0) o.write(b, 0, n); }
-                        ileti("Bu dosya EPUB ya da PDF değil; İndirilenler'e kaydedildi: " + ad);
-                    } else ileti("Bu dosya EPUB ya da PDF değil; Okur açamaz.");
-                    f.delete(); return;
-                }
-                if (tur.endsWith("pdf") && !ad.toLowerCase().endsWith(".pdf")) ad = ad.replaceAll("\\.(bin|php|aspx?)$", "") + ".pdf";
-                if (tur.endsWith("zip") && !ad.toLowerCase().endsWith(".epub")) ad = ad.replaceAll("\\.(bin|zip|php|aspx?)$", "") + ".epub";
-                indirDosya = f; indirAd = ad; indirTur = tur;
-                final String a = ad, t = tur; final long boy = f.length();
-                runOnUiThread(() -> {
-                    tarayiciKapat();
-                    Toast.makeText(MainActivity.this, "Kitaplığa ekleniyor: " + a, Toast.LENGTH_SHORT).show();
-                    web.evaluateJavascript("window.okurIndirildi&&window.okurIndirildi(" + JSONObject.quote(a) + "," + boy + "," + JSONObject.quote(t) + ")", null);
-                });
+                teslim(f, ad0, mt, false);
             } catch (Exception e) { ileti("İndirilemedi: " + e.getMessage()); }
+        }).start();
+    }
+
+    /** İndirilen ya da dışarıdan açılan dosyayı tanır (PDF/EPUB) ve Okur kitaplığına aktarır; değilse İndirilenler'e bırakır. Arka iş parçacığında çağrılır. */
+    private void teslim(File f, String ad0, String mt, boolean disaridan) throws Exception {
+        byte[] h = new byte[64]; int hn;
+        try (InputStream in = new java.io.FileInputStream(f)) { hn = in.read(h); }
+        String bas = hn > 0 ? new String(h, 0, hn, "ISO-8859-1") : "";
+        String tur = bas.startsWith("%PDF") ? "application/pdf" : (bas.startsWith("PK") && bas.contains("epub")) ? "application/epub+zip" : null;
+        String ad = ad0 == null || ad0.isEmpty() ? "kitap" : ad0;
+        if (tur == null && disaridan) { ileti("Okur yalnız EPUB ve PDF açar: " + ad); f.delete(); return; }
+        if (tur == null) {
+            if (Build.VERSION.SDK_INT >= 29) {
+                ContentValues cv = new ContentValues(); cv.put(MediaStore.Downloads.DISPLAY_NAME, ad);
+                cv.put(MediaStore.Downloads.MIME_TYPE, mt == null || mt.isEmpty() ? "application/octet-stream" : mt);
+                Uri du = getContentResolver().insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, cv);
+                try (OutputStream o = getContentResolver().openOutputStream(du); InputStream in = new java.io.FileInputStream(f)) { byte[] b = new byte[65536]; int n; while ((n = in.read(b)) > 0) o.write(b, 0, n); }
+                ileti("Bu dosya EPUB ya da PDF değil; İndirilenler'e kaydedildi: " + ad);
+            } else ileti("Bu dosya EPUB ya da PDF değil; Okur açamaz.");
+            f.delete(); return;
+        }
+        if (tur.endsWith("pdf") && !ad.toLowerCase().endsWith(".pdf")) ad = ad.replaceAll("\\.(bin|php|aspx?)$", "") + ".pdf";
+        if (tur.endsWith("zip") && !ad.toLowerCase().endsWith(".epub")) ad = ad.replaceAll("\\.(bin|zip|php|aspx?)$", "") + ".epub";
+        indirDosya = f; indirAd = ad; indirTur = tur;
+        final String a = ad, t = tur; final long boy = f.length();
+        final Runnable gonder = () -> {
+            tarayiciKapat();
+            Toast.makeText(MainActivity.this, "Kitaplığa ekleniyor: " + a, Toast.LENGTH_SHORT).show();
+            web.evaluateJavascript("window.okurIndirildi&&window.okurIndirildi(" + JSONObject.quote(a) + "," + boy + "," + JSONObject.quote(t) + ")", null);
+        };
+        runOnUiThread(() -> { if (sayfaHazir) gonder.run(); else bekleyen = gonder; }); // soğuk açılışta sayfa yüklenince gönderilir
+    }
+
+    /* ---------- 1.11: "Şununla aç" ve "Paylaş" ile gelen EPUB/PDF ----------
+       Dosyalar, Chrome indirmeleri, WhatsApp vb. Okur'u seçince dosya kitaplığa eklenir. */
+    private boolean sayfaHazir = false;
+    private Runnable bekleyen = null;
+    @Override protected void onNewIntent(Intent i) { super.onNewIntent(i); setIntent(i); gelenIsle(i); }
+    private void gelenIsle(Intent i) {
+        if (i == null) return;
+        String a = i.getAction(); Uri u = null;
+        if (Intent.ACTION_VIEW.equals(a)) u = i.getData();
+        else if (Intent.ACTION_SEND.equals(a)) { try { u = i.getParcelableExtra(Intent.EXTRA_STREAM); } catch (Exception e) { } }
+        if (u == null) return;
+        setIntent(new Intent(this, MainActivity.class)); // döndürme/yeniden açılışta aynı kitap ikinci kez eklenmesin
+        final Uri kaynak = u; final String mt = i.getType();
+        String ad = null;
+        try (android.database.Cursor c = getContentResolver().query(kaynak, new String[]{ android.provider.OpenableColumns.DISPLAY_NAME }, null, null, null)) {
+            if (c != null && c.moveToFirst()) ad = c.getString(0);
+        } catch (Exception e) { }
+        if (ad == null || ad.isEmpty()) ad = kaynak.getLastPathSegment();
+        final String ad0 = ad == null ? "kitap" : ad.replaceAll(".*/", "");
+        ileti("Okur'a alınıyor: " + ad0);
+        new Thread(() -> {
+            try {
+                File dir = new File(getCacheDir(), "indir"); dir.mkdirs();
+                File[] eski = dir.listFiles(); if (eski != null) for (File x : eski) x.delete();
+                File f = new File(dir, "kitap.bin"); long top = 0;
+                try (InputStream in = getContentResolver().openInputStream(kaynak); FileOutputStream o = new FileOutputStream(f)) {
+                    if (in == null) throw new Exception("dosya okunamadı");
+                    byte[] b = new byte[65536]; int n;
+                    while ((n = in.read(b)) > 0) { o.write(b, 0, n); top += n; if (top > 150L * 1024 * 1024) throw new Exception("dosya 150 MB'tan büyük"); }
+                }
+                teslim(f, ad0, mt, true);
+            } catch (Exception e) { ileti("Açılamadı: " + e.getMessage()); }
         }).start();
     }
 

@@ -7,6 +7,12 @@
 
 
 
+## Android 1.11 (08.11.2026) · "Şununla aç" ve "Paylaş" listesinde Okur
+- Okur APK'sı artık telefonun **"Şununla aç"** listesinde (Moon+ Reader, Play Kitaplar'ın yanında) ve **Paylaş** menüsünde görünür: Chrome indirmesi, Dosyalar, WhatsApp, Telegram vb. yerden EPUB/PDF açılınca **Okur & Bütçe** seçilir → kitap doğrudan Okur kitaplığına eklenir.
+- Dosya türü içeriğinden tanınır (PDF/EPUB imzası); site dosyayı "application/octet-stream" diye gönderse de çalışır. Bu yüzden Okur bazı başka indirmelerde de listede görünebilir; EPUB/PDF olmayan dosyada "Okur yalnız EPUB ve PDF açar" der, hiçbir şey eklemez.
+- Uygulama kapalıyken açılırsa sayfa yüklenince eklenir; açıkken aynı pencerede eklenir. Döndürmede aynı kitap ikinci kez eklenmez. Sınır 150 MB (uygulama içi indirmeyle aynı).
+- Web sayfaları değişmedi (sürüm 129 kalır). Yalnız yeni APK kurulmalı: https://github.com/aaskinkk-cloud/okur/releases/download/android/okur.apk
+
 ## 129 (08.11.2026) · Giriş sayfası gibi başlık · Büyük ilk harf · Baskı teması · Kıvrım süsü
 - **Sayfa başlığı** (Görünüm › Sayfa başlığı, kitaba özel) genişledi:
   - Kaynak: **Kitabın kendi · Yazar · Kitap · İlk kelimeler** (o bölümün ilk 5–6 kelimesi) **· Kendi yazım** (en çok **2 satır**; Enter ile alt satır).
