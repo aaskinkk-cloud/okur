@@ -7,6 +7,30 @@
 
 
 
+## 131 (13.11.2026) · Doğru açılış ve yer imi · Bağlantıdan geri dönüş · Sayfalar arası seçim · PDF bant vurgu · Kelime kelime takip
+**Yer imi ve okuma konumu (EPUB)**
+- **Kök neden giderildi:** Bir konum sayfaya çevrilirken (açılış, yer imi, bağlantı, tam ekran) konum bir paragrafın başını gösteriyorsa paragrafın başladığı sayfaya, metin parçasının sonundaysa önceki harflere bakılıyordu. Bu yüzden kitap bir, uzun paragrafta birkaç sayfa önce açılıyordu ve kayma her açılışta birikiyordu. Artık her zaman konumdaki **gerçek harfin ekrandaki yeri** esas alınıyor.
+- Kaydedilen konum ve yeni yer imleri, sütun sınırı değil **sayfadaki ilk görünür harftir**. "Cümleyi bölme" düzeni sonradan oturunca hedef yeniden doğrulanır.
+- Son konum kaydından **sonra** konmuş bir yer imi varsa (ör. okuma kilidi bitince) kitap o yer iminden açılır.
+- Test (1280×800 sağ sayfa ve 412×915 telefon): 3–16 sayfa ilerleyip 3 kez kapat-aç → her seferinde aynı ilk satır. Eski sürüm aynı testte 1–10 sayfa önce açılıyordu. Yer imleri listesinden gitme de aynı sayfayı açıyor.
+
+**Sayfa içi bağlantılar (dipnot vb.)**
+- Bağlantıya dokununca okunan tam yer, yer imlerinden ayrı bir **bağlantı geçmişine** yazılır. Altta **↩ Okuduğun yere dön** düğmesi çıkar (× ile kapanır).
+- Dipnottaki ↩ / "metne dön" bağlantısı, telefonun **geri tuşu** ve düğme, bağlantıya basmadan önceki **aynı sayfaya** döner (iç içe bağlantılarda sırayla geri gider). Geri tuşu artık kitabı kapatmaz.
+
+**Sayfalar arası seçim (EPUB)**
+- Seçerken parmağını ya da fareyi **sayfanın alt (veya sağ) kenarında ~0,5 sn tut** → sonraki sayfaya geçilir, seçim kesilmeden oradan sürer. Kaydırmalı okumada sayfa kendiliğinden aşağı kayar. Vurgu/bağlantı doğru başlangıç-bitiş konumuyla kaydedilir; menü görünen kısmın üstünde açılır. Bölüm sonunda "Seçim bölüm sonunda biter" der.
+- Birden çok paragrafa yayılan vurgularda paragraf aralıkları boyanmaz; her satır tek bant.
+
+**PDF**
+- **Görsel akış:** harf aralığı geniş ya da iki yana yaslı satırlarda harf arası boşluk kelime sanılıp kelimeler bölünüyordu ("Şim di", satır sonunda yarım kelime). Boşluklar artık satırın kendi istatistiğiyle harf arası / kelime arası diye ayrılıyor. PDF metninde boşluk yoksa harfler görüntüdeki kelimelere paylaştırılıyor; alıntı metni ve sesli okuma kelime kelime geliyor.
+- **Bant vurgu:** alıntı ve seçim kelime kelime değil, satır satır tek parça bant (kelime aralıkları dahil), kelimelerin ekrandaki gerçek yerinden çiziliyor. Orijinal sayfa görünümünde de metin katmanı parçaları satır bandına birleşiyor. Eski vurgular da böyle görünür; kayıt değişmez.
+- Orijinal sayfa (kaydırmalı) görünümünde seçim sonraki sayfaya taşabilir; vurgu iki sayfada da çizilir (yeni isteğe bağlı alan `ek`).
+
+**Kelime kelime takip çizgisi** (bilgisayarda, sayfalı EPUB; Ayarlar › Satır takibi › **Kelime kelime takip**, varsayılan açık)
+- Satır çizgisinin üstünde ince, tema renginde ilerleme çizgisi var. Satırın ilk kelimesinin altından başlar, kelime kelime sağa uzar, alt satıra geçince yeniden ilk kelimeden başlar.
+- Fareyle: imlecin olduğu kelimeye kadar uzar. **Otomatik satır** açıkken satır süresi kelimelere bölünür (uzun kelime biraz daha uzun kalır). ↑ ↓ eskisi gibi satır satır gider. Kapatınca yalnız eski satır çizgisi kalır.
+
 ## 130 · Bütçe 5.2 · Android 1.12 (12.11.2026) · Notlar yenilendi · Alıntılar sekmesi · Ürün linki
 **Notlar**
 - **Akıllı sıralama:** en son düzenlenen not en üstte (kartlarda ve Tarih filtresinde son düzenleme tarihi).
