@@ -367,6 +367,21 @@ public class MainActivity extends Activity {
         }
         @JavascriptInterface public void indirTemizle() { try { if (indirDosya != null) indirDosya.delete(); } catch (Exception e) { } indirDosya = null; }
         @JavascriptInterface public void renk(String c) { runOnUiThread(() -> renkUygula(c)); }
+        /** 1.12: Bütçe › Hedef › "Ürün linki ekle" — ürün sayfasını uygulama indirir (tarayıcı CORS yüzünden okuyamaz).
+         *  urunBasla(url) bir iş numarası döndürür; sayfa urunSonuc(no) ile sorar: hazır değilse "", bitince {ok,kod,url,html} JSON'u. */
+        @JavascriptInterface public String urunBasla(String url) {
+            final String no = Long.toString(System.nanoTime(), 36);
+            urunIsler.put(no, "");
+            new Thread(() -> urunIsler.put(no, urunIndir(url))).start();
+            return no;
+        }
+        @JavascriptInterface public String urunSonuc(String no) {
+            String r = urunIsler.get(no);
+            if (r == null) return "{\"ok\":false,\"hata\":\"iş bulunamadı\"}";
+            if (r.isEmpty()) return "";
+            urunIsler.remove(no);
+            return r;
+        }
         /** Sayfa vurguları (alıntıları) buraya yazar; Bütçe & Hedef AlintiSaglayici üzerinden okur. */
         @JavascriptInterface public void alintilar(String json) {
             try {
@@ -395,6 +410,49 @@ public class MainActivity extends Activity {
                 runOnUiThread(() -> Toast.makeText(MainActivity.this, "Kaydedilemedi: " + e.getMessage(), Toast.LENGTH_LONG).show());
             }
         }
+    }
+
+    private final java.util.concurrent.ConcurrentHashMap<String, String> urunIsler = new java.util.concurrent.ConcurrentHashMap<>();
+    /** Ürün sayfasını indirir: yönlendirmeleri (ty.gl gibi kısa bağlantılar) izler, çerezleri WebView ile paylaşır, en çok 4 MB okur. */
+    private String urunIndir(String adres) {
+        JSONObject j = new JSONObject();
+        HttpURLConnection c = null;
+        try {
+            String u = adres; int kod = 0;
+            String ua = WebSettings.getDefaultUserAgent(this).replace("; wv", "");
+            CookieManager cm = CookieManager.getInstance();
+            for (int i = 0; i < 8; i++) {
+                c = (HttpURLConnection) new URL(u).openConnection();
+                c.setInstanceFollowRedirects(false);
+                c.setConnectTimeout(12000); c.setReadTimeout(15000);
+                c.setRequestProperty("User-Agent", ua);
+                c.setRequestProperty("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+                c.setRequestProperty("Accept-Language", "tr-TR,tr;q=0.9,en;q=0.6");
+                String ck = cm.getCookie(u); if (ck != null) c.setRequestProperty("Cookie", ck);
+                kod = c.getResponseCode();
+                java.util.List<String> sc = c.getHeaderFields().get("Set-Cookie");
+                if (sc != null) for (String x : sc) cm.setCookie(u, x);
+                if (kod >= 300 && kod < 400) {
+                    String yer = c.getHeaderField("Location"); c.disconnect(); c = null;
+                    if (yer == null) break;
+                    u = new URL(new URL(u), yer).toString();
+                    continue;
+                }
+                break;
+            }
+            if (c == null) { j.put("ok", false); j.put("hata", "Yönlendirme çözülemedi"); return j.toString(); }
+            InputStream in = kod >= 400 ? c.getErrorStream() : c.getInputStream();
+            String cs = "UTF-8", ct = c.getContentType();
+            if (ct != null) { int k = ct.toLowerCase().indexOf("charset="); if (k >= 0) cs = ct.substring(k + 8).replace("\"", "").split(";")[0].trim(); }
+            java.io.ByteArrayOutputStream bo = new java.io.ByteArrayOutputStream();
+            if (in != null) { byte[] b = new byte[16384]; int n; while ((n = in.read(b)) > 0 && bo.size() < 4 * 1024 * 1024) bo.write(b, 0, n); in.close(); }
+            String html;
+            try { html = new String(bo.toByteArray(), cs); } catch (Exception e) { html = new String(bo.toByteArray(), "UTF-8"); }
+            j.put("ok", kod > 0 && kod < 400); j.put("kod", kod); j.put("url", u); j.put("html", html);
+        } catch (Exception e) {
+            try { j.put("ok", false); j.put("hata", String.valueOf(e.getMessage())); } catch (Exception e2) { }
+        } finally { try { if (c != null) c.disconnect(); } catch (Exception e) { } }
+        return j.toString();
     }
 
     /** <a download href="blob:..."> tıklamalarını yakalayıp dosyayı Kopru.kaydet'e gönderir. */

@@ -7,6 +7,30 @@
 
 
 
+## 130 · Bütçe 5.2 · Android 1.12 (12.11.2026) · Notlar yenilendi · Alıntılar sekmesi · Ürün linki
+**Notlar**
+- **Akıllı sıralama:** en son düzenlenen not en üstte (kartlarda ve Tarih filtresinde son düzenleme tarihi).
+- **Sabitle / Başa tuttur** (not › Araçlar › İşlemler): sabitlenenler listenin üstünde **Sabitlenenler** bölümünde durur; *Başa tuttur* notu sabitlenenlerin de en üstüne koyar. Bölümler açılır-kapanır.
+- **Tam sayfa düzenleme:** not ekranı tüm ekranı kaplar, alt düğmeler altta sabit.
+- **Başlık satırı:** notun ilk satırı ayrı, kalın **Başlık** alanında düzenlenir (Enter → metne geçer; metnin başında Geri → başlığa döner). Kayıt yine tek metin; eski notlar ve yedekler aynen açılır.
+- **Tek "Araçlar" bölümü** (varsayılan kapalı): Konu · Etiketler · Renk · İşlemler (Sabitle, Başa tuttur, Favori, Tamam, Bağlantı, İndir, Arşivle, Sil). **Bitti** her zaman görünür.
+- **Uygulamalarım** konusu ve **etiketler**: hazır Okur, Tını, Stüdyo, İndeks, Bütçe; "+ Yeni etiket" ile eklenir, "Düzenle" ile silinir (notlar silinmez). Etiketler filtresinde etiket çipleriyle süzülür.
+- **Pastel renkler:** kartlarda konu ve etiketler ayrı pastel çiplerle; Defter görünümünde küçük renk noktaları.
+- **Madde imi:** Defter görünümünde her not • ile başlar, ilk satır kalın; Klasik temada kart başlıklarının önünde konu renginde küçük nokta.
+- Sağ üstteki düğmeler (ara, görünüm, hesap makinesi, menü) Notlar'da tek, sade bir kapsülde.
+
+**Alıntılar** (Bütçe'de **Alıntı** sekmesi; Okur › Alıntılar ve alıntı bağlantıları da buraya açılır)
+- Açılır pencere yerine Zikir sayfası düzeninde ayrı sayfa. Üstte **Rastgele alıntı** kartı: **Yeni Alıntı Getir** (yalnız gösterileni değiştirir, hiçbir alıntı silinmez), **Önceki** (geri döner), ★ favori, kitaptan gelen alıntıda **Kitapta** (Okur'da vurgulandığı yerde açar). Seçili filtre/kategori varsa o filtreden getirir.
+- Okur tek başına (kabuksuz) açılırsa eski Alıntılar penceresi çalışmaya devam eder.
+
+**Hedef › Ürün linki ekle**
+- Bağlantıyı yapıştır (paylaşım metninin içinden de ayıklar; ty.gl gibi kısa bağlantılar açılır) → ad, fiyat ve görsel otomatik gelir, açılır pencerede düzenlenir → **Listeye ekle**.
+- Kayıtta görsel + tıklanır ad (siteyi açar), site adı ve **fiyat tarihi**. Aynı ürün bağlantısı ikinci kez eklenirse uyarır (O kaydı aç / Yine de ayrı ekle).
+- ⋯ menüsü: **Ürün bilgilerini düzenle**, **Fiyatı siteden yenile** (eski → yeni fark gösterilir), son 12 fiyatlık **fiyat geçmişi**.
+- Otomatik alma **yalnız Android uygulamasında** (tarayıcı başka sitenin sayfasını okuyamaz). Fiyat bulunamazsa ya da tarayıcıdaysan elle yazılır. Bot engeli olan sitelerde (ör. bazen Hepsiburada) alma başarısız olabilir.
+- Yeni alanlar isteğe bağlıdır (gorsel, site, fiyatTarih, fiyatKaynak, fiyatGecmis); eski hedefler ve yedekler değişmez.
+- **Yeni APK gerekir:** https://github.com/aaskinkk-cloud/okur/releases/download/android/okur.apk
+
 ## Android 1.11 (08.11.2026) · "Şununla aç" ve "Paylaş" listesinde Okur
 - Okur APK'sı artık telefonun **"Şununla aç"** listesinde (Moon+ Reader, Play Kitaplar'ın yanında) ve **Paylaş** menüsünde görünür: Chrome indirmesi, Dosyalar, WhatsApp, Telegram vb. yerden EPUB/PDF açılınca **Okur & Bütçe** seçilir → kitap doğrudan Okur kitaplığına eklenir.
 - Dosya türü içeriğinden tanınır (PDF/EPUB imzası); site dosyayı "application/octet-stream" diye gönderse de çalışır. Bu yüzden Okur bazı başka indirmelerde de listede görünebilir; EPUB/PDF olmayan dosyada "Okur yalnız EPUB ve PDF açar" der, hiçbir şey eklemez.
