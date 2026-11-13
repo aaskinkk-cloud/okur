@@ -7,6 +7,11 @@
 
 
 
+## 132 (13.11.2026) · İki parmakla sayfa büyüyüp küçülmez
+- **Sebep:** Telefonda ana ekrana Chrome'dan kurulan Okur & Bütçe'de sayfa yakınlaştırması kapatılmamıştı. İki parmak hareketi tüm uygulamayı (Bütçe, Okur, Notlar) büyütüp küçültüyordu. APK'da (Android uygulamasında) bu yakınlaştırma zaten kapalıdır.
+- **Kalıcı çözüm:** Dört sayfada (kabuk, Okur, Bütçe, Şifre) ve kitap çerçevelerinde sayfa yakınlaştırması kapatıldı. Kural TASARIM-STANDARTLARI.md'ye eklendi (3a).
+- Test (412×915, iki parmak hareketi ×2,2): önce ölçek 2,2 → şimdi 1 (kabuk, Bütçe, Okur, EPUB okuma). PDF'nin kendi sayfa yakınlaştırması çalışmaya devam ediyor (1 → 3).
+
 ## 131 (13.11.2026) · Doğru açılış ve yer imi · Bağlantıdan geri dönüş · Sayfalar arası seçim · PDF bant vurgu · Kelime kelime takip
 **Yer imi ve okuma konumu (EPUB)**
 - **Kök neden giderildi:** Bir konum sayfaya çevrilirken (açılış, yer imi, bağlantı, tam ekran) konum bir paragrafın başını gösteriyorsa paragrafın başladığı sayfaya, metin parçasının sonundaysa önceki harflere bakılıyordu. Bu yüzden kitap bir, uzun paragrafta birkaç sayfa önce açılıyordu ve kayma her açılışta birikiyordu. Artık her zaman konumdaki **gerçek harfin ekrandaki yeri** esas alınıyor.

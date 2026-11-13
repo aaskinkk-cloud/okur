@@ -6,6 +6,7 @@ Bu kurallar Okur & Bütçe ve Ahmet'in diğer uygulamaları (Tını, Karanlık O
 1. Uygulama açılışta **tam ekran** açılır.
 2. Chrome'un **"Tam ekrandan çıkmak için…"** uyarısı çıkmaz (tam ekran isteği kendiliğinden gönderilmez).
 3. Bir kelimeye dokununca Google **"Dokunarak ara"** paneli açılmaz.
+3a. **İki parmakla sayfa büyüyüp küçülmez** (APK'da da, Chrome'dan kurulan uygulamada da): `viewport` → `maximum-scale=1,user-scalable=no` + `html,body{touch-action:pan-x pan-y}`; kitap çerçevelerinde de. Yakınlaştırma yalnız uygulamanın kendi düğmeleri/hareketiyle (ör. PDF sayfası) olur.
 4. Alt gezinme çubuğu yukarı itilince **titreme / kararma / kayma olmaz** (örnek: Bütçe & Hedef'in kararlı davranışı).
 5. **Üstteki sistem çubuğu / ön kamera bölgesi temanın parçasıdır:** ayrı düz renkli bant olmaz; bölgeyi uygulamanın kendi başlığı (tema resmi/degradesi) boyar. Sayfa kayınca o bölge sayfa renginde ince bir şeritle örtülür. `theme-color` her zaman başlığın en üst rengini bildirir.
 6. Başlıkta **boş satır, işlevsiz logo/ikon** bırakılmaz; dikey boşluk dengeli tutulur.
