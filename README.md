@@ -7,6 +7,24 @@
 
 
 
+## 133 (19.11.2026) · Defter görünümü · Titremeden açılış · Alıntıdan doğru yere gitme · Açılışta son kitap
+**Kitaba dönüşte yanıp sönme (EPUB)**
+- **Kök neden:** Kitap ilk kez ekrana çizildikten *sonra* sayfa payı (menü/kenar boşluğu) hesaplanıyor, "cümleyi bölme" düzeni ve yazı tipleri sonradan oturuyordu. epub.js bu boyut değişiminde bir önceki sayfaya atlıyor, 0,6–3,6 sn arasındaki düzeltmeler de geri getiriyordu: açılışta art arda 4–6 sayfa değişimi.
+- **Kalıcı çözüm (açılış perdesi):** Sayfa payı ilk çizimden önce hesaplanır; kitap "Kitap açılıyor" örtüsünün arkasında çizilir, yazı tipleri ve düzen sakinleşip kayıtlı harf sayfada görünene kadar beklenir, örtü tek seferde yumuşakça kalkar. Açılış sırasında boyut/tam ekran düzeltmeleri ara sayfayı değil kayıtlı konumu esas alır. Eski zamanlayıcılı düzeltmeler kaldırıldı.
+- Test (412×915 ve 1280×800 sağ sayfa, sayfalı ve kaydırmalı): örtü kalktıktan sonra yeniden çizim **0** (eskisi 5–6); 3 kez kapat-aç → hep aynı ilk satır, konum kayması yok (eskisi her açılışta birkaç paragraf geri kayıyordu).
+
+**Alıntılar › Kitapta göster**
+- **Kök neden:** Kitap kapalıyken önce kaldığın yer açılıyor, ardından alıntıya gidiliyordu; açılış düzeltmeleri 3,6 sn boyunca kayıtlı konumu yeniden göstererek alıntıdan geri götürüyordu (yanlış sayfa).
+- **Çözüm:** Kitap doğrudan alıntının yerinde (CFI) açılır; kitap açıksa o yere gidip doğrulanır. Varınca alıntı ~3,5 sn turuncu nabızla parlar ve altı çizilir. Alıntılar sayfası, Rastgele alıntı, Bütçe › Alıntılar › Kitapta ve Notlar'daki bağlantılar aynı yolu kullanır.
+- Bütçe'den gelen "Kitapta" isteği Okur henüz yüklenmeden gelirse kitaplık hazır olunca işlenir (önceden "Bu vurgu kitapta bulunamadı" diyordu).
+- Test: kitap açık / kapalı / Alıntılar sayfasından / Okur & Bütçe'de Bütçe sekmesinden → alıntı her seferinde ekranda; eski sürüm kapalı kitapta yanlış sayfada kalıyordu.
+
+**Defter görünümü (EPUB)**
+- Ayarlar › Satır ve paragraf › **Defter görünümü** (aç/kapa). Her metin satırının altında çok ince, silik çizgi; çizgi her bloğun kendi satır yüksekliğiyle (1lh) yinelenir, sayfa/sütun geçişlerinde de satırın altında kalır. Sayfa düzeni, kaldığın yer, vurgular değişmez; tüm temalarda (koyu dahil) uyumlu renk.
+
+**Açılışta son kitap**
+- Okur açılınca (Okur & Bütçe'de Okur sekmesi görünür olunca) en son okunan kitap, kaldığın yerden kendiliğinden açılır. Bütçe sekmesindeyken arka planda açılmaz; sekmeye geçince açılır. Bağlantıdan gelen istek (Kitapta, paylaşılan kitap) önceliklidir. Ayarlar › Yer imleri › **Açılışta son kitabı aç** ile kapatılabilir.
+
 ## 132 (13.11.2026) · İki parmakla sayfa büyüyüp küçülmez
 - **Sebep:** Telefonda ana ekrana Chrome'dan kurulan Okur & Bütçe'de sayfa yakınlaştırması kapatılmamıştı. İki parmak hareketi tüm uygulamayı (Bütçe, Okur, Notlar) büyütüp küçültüyordu. APK'da (Android uygulamasında) bu yakınlaştırma zaten kapalıdır.
 - **Kalıcı çözüm:** Dört sayfada (kabuk, Okur, Bütçe, Şifre) ve kitap çerçevelerinde sayfa yakınlaştırması kapatıldı. Kural TASARIM-STANDARTLARI.md'ye eklendi (3a).
