@@ -7,6 +7,11 @@
 
 
 
+## 135 (23.11.2026) · Alt menü düzeni · Kalan sayfa yazısı görünür
+- **Not tuşu alt satıra düşüyordu — kök neden:** alt çubuğun ızgarası 4 sütunluktu, 5. öğe (not) yeni satıra kayıyordu. Izgara 5 sütun yapıldı: Geri ve Not aynı satırda, kaydırıcının sağında; ikisi de zeminsiz, silik (göz tırmalamaz), dokununca belirginleşir.
+- **Sayfadaki "Bölümde N sayfa kaldı" telefonda görünmüyordu:** yazı ekranın en dibindeydi (Android'de sistem çubuğu bölgesi). Artık son satırın hemen altında, ayrılmış alt payın içinde; satır sayısı yine değişmez.
+- Alt çubuktaki "Bölüm 19 s." yazısı açık hâle getirildi: "Bölümde 19 sayfa kaldı · Kitapta ≈498 s.".
+
 ## 134 (23.11.2026) · Bölümde kalan sayfa · Okurken not · Seçince sarı vurgu · Sesli okuma hızlı başlar · Sayfalar arası seçim
 **Sesli okuma geç başlıyordu (1–1,5 dk)**
 - **Kök neden:** `sw.js` her sürüm güncellemesinde adı `okur-` ile başlayan tüm önbellekleri siliyordu; indirilen Okur sesi (`okur-ses-1`, ~100 MB) de gidiyor, güncellemeden sonraki ilk okumada ses dosyaları sessizce yeniden iniyordu.
