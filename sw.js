@@ -1,17 +1,17 @@
 /* Okur & Bütçe çevrimdışı önbelleği (kabuk + Okur + Bütçe & Hedef). Yalnızca kendi önbelleğini siler (aynı adresteki diğer uygulamalara dokunmaz). */
-const P='okur-',V=P+'133';
+const P='okur-',V=P+'134';
 const SHELL=['./','index.html','okur.html','butce.html','sifre.html','manifest.webmanifest','icon.svg','icon-192.png','icon-512.png','icon-maskable.png'];
 const SAYFA=['index.html','okur.html','butce.html','sifre.html'];
 /* v114: bir dosya inemezse kurulum düşmesin (eskiden addAll tek hatada tümden düşüyor, eski sürüm takılı kalıyordu) */
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>Promise.all(SHELL.map(f=>c.add(new Request(f,{cache:'reload'})).catch(()=>{})))).then(()=>self.skipWaiting()))});
 /* "Yenile"den sonraki 60 sn sayfalar önbellekten değil, ağdan beklenir (eski sayfa geri gelmesin) */
 let taze=0;self.addEventListener('message',e=>{if(e.data==='taze')taze=Date.now()});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.indexOf(P)===0&&k!==V).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k.indexOf(P)===0&&k!==V&&k.indexOf('okur-ses')!==0) /* 134: indirilen Okur sesi (okur-ses-*) silinmez */.map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
   const r=e.request;if(r.method!=='GET')return;
   const u=new URL(r.url);
   if(/youtube\.com|ytimg\.com|googlevideo\.com|googleapis\.com/.test(u.hostname))return; /* her zaman ağdan */
-  if(/\/ses\/|\/ocr-studyo\/motor\//.test(u.pathname))return; /* büyük ses/OCR dosyaları: uygulama kendi önbelleğinde tutar */
+  if(/\/ses\/|\/ocr-studyo\/motor\/|\.onnx(\.json)?$|piper_phonemize|ort-wasm|ort\.wasm|piper-[\w-]+\.js$/.test(u.pathname))return; /* büyük ses/OCR dosyaları: uygulama kendi önbelleğinde tutar */
   if(r.mode==='navigate'){
     /* Sayfa adı (kabuk, Okur, Bütçe, Şifre Kasası) kendi adıyla önbelleğe yazılır — çerçeveler birbirinin yerine geçmez */
     const son=u.pathname.split('/').pop(),ad=SAYFA.indexOf(son)>-1?son:'index.html';

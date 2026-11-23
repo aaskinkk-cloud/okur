@@ -7,6 +7,25 @@
 
 
 
+## 134 (23.11.2026) · Bölümde kalan sayfa · Okurken not · Seçince sarı vurgu · Sesli okuma hızlı başlar · Sayfalar arası seçim
+**Sesli okuma geç başlıyordu (1–1,5 dk)**
+- **Kök neden:** `sw.js` her sürüm güncellemesinde adı `okur-` ile başlayan tüm önbellekleri siliyordu; indirilen Okur sesi (`okur-ses-1`, ~100 MB) de gidiyor, güncellemeden sonraki ilk okumada ses dosyaları sessizce yeniden iniyordu.
+- **Kalıcı çözüm:** `okur-ses*` önbelleği artık silinmez; ses dosyaları servis çalışanının önbelleğine ikinci kez yazılmaz; tarayıcıdan kalıcı depolama istenir.
+- Kitap açılınca motor (ses indirilmişse) arka planda hazırlanır; uzun cümlede önce kısa ilk parça (≈20–70 harf) seslendirilir, kalanı o çalarken hazırlanır. İlk kurulumda ekranda "Okur sesi hazırlanıyor / indiriliyor %" görünür.
+- Ayarlar › Sesli okuma: **Okur sesini kitap açılınca hazırla** (aç/kapa) ve son hazırlık ölçümü (süre, dosyalar cihazdan mı internetten mi).
+
+**Bölümde kalan sayfa:** Sayfanın en altında küçük yazı "Bölümde N sayfa kaldı" (PDF: kitabın bitmesine). Mevcut alt payın içinde durur, satır sayısı değişmez. Ayarlar › Yer imleri › Bölümde kalan sayfa.
+
+**Okurken not:** Alttaki menüde "Kitaplığa dön" tuşunun yanında not tuşu. Yazılan fikir Bütçe › Notlar'a kitap adı/bölümle ve kitaba bağlantıyla kaydedilir; yarım kalan yazı taslak olarak saklanır. "Notlarım" ile Notlar açılır.
+
+**Seçince sarı vurgu:** Seçilen yer kendiliğinden sarı boyanır; açılan menüden renk değiştirilir, not eklenir, kopyalanır ya da silinir (iptal). Vurguya dokununca kopyalanır ve aynı menü hemen açılır (renk değiştir / sil). Ayarlar › Alıntılar › Seçince sarıya boya.
+
+**Sayfalar arası seçim**
+- **Kök neden:** Parmak son satırlara yaklaşınca geniş kenar bölgesine giriyor, 0,5 sn sonra istemeden sayfa çevriliyor; çevrilince parmağın altındaki (yeni sayfanın sonundaki) kelime seçildiği için tüm sayfa seçiliyor, parmak kenarda kaldıkça ardı ardına sayfa çevriliyordu.
+- **Çözüm:** Geçiş yalnız parmak yazının altına/sağına taşınca (0,65 sn); geçişten sonra seçim yeni sayfanın ilk kelimesine uzar, parmak kenardan çıkmadan ikinci geçiş olmaz ve sayfa sonu seçilmez; parmağı istediğin kelimeye götürünce seçim orada biter.
+- Yeni seçenek: seçim menüsünde **›** (Sonraki sayfaya uzat): sayfa çevrilir, bitireceğin kelimeye dokunursun, vurgu oraya kadar uzar.
+- Test (412×915 dokunmatik): kalan sayfa yazısı çerçevenin altında, metinle çakışmıyor; not kaydı Notlar'da bağlantılı; seçim → sarı, renk → yeşil, tek vurgu; Ayarlar'da üç yeni anahtar; konsol hatası yok.
+
 ## 133 (19.11.2026) · Defter görünümü · Titremeden açılış · Alıntıdan doğru yere gitme · Açılışta son kitap
 **Kitaba dönüşte yanıp sönme (EPUB)**
 - **Kök neden:** Kitap ilk kez ekrana çizildikten *sonra* sayfa payı (menü/kenar boşluğu) hesaplanıyor, "cümleyi bölme" düzeni ve yazı tipleri sonradan oturuyordu. epub.js bu boyut değişiminde bir önceki sayfaya atlıyor, 0,6–3,6 sn arasındaki düzeltmeler de geri getiriyordu: açılışta art arda 4–6 sayfa değişimi.
