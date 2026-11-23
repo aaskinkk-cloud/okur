@@ -7,6 +7,12 @@
 
 
 
+## 136 (23.11.2026) · Kısa alt menü · Not tuşu Notlar'ı açar · Aa solda
+- Sayfanın altındaki "Bölümde N sayfa kaldı" yazısı kaldırıldı; bilgi yalnız alt menüde.
+- Alt menü kısaltıldı: tek satır kısa yazı "Bölüm 19 s. kaldı · kitap 498 s. · 2 sa 14 dk"; kenar boşlukları azaltıldı, 380 px ekrana taşmadan sığar.
+- Not tuşu doğrudan Bütçe › Notlar sayfasını açar (Okur tek başına açıksa eski not penceresi).
+- Üst menüde Aa (görünüm ayarları) sabit olarak solda, "Kitaplığa dön"ün hemen yanında.
+
 ## 135 (23.11.2026) · Alt menü düzeni · Kalan sayfa yazısı görünür
 - **Not tuşu alt satıra düşüyordu — kök neden:** alt çubuğun ızgarası 4 sütunluktu, 5. öğe (not) yeni satıra kayıyordu. Izgara 5 sütun yapıldı: Geri ve Not aynı satırda, kaydırıcının sağında; ikisi de zeminsiz, silik (göz tırmalamaz), dokununca belirginleşir.
 - **Sayfadaki "Bölümde N sayfa kaldı" telefonda görünmüyordu:** yazı ekranın en dibindeydi (Android'de sistem çubuğu bölgesi). Artık son satırın hemen altında, ayrılmış alt payın içinde; satır sayısı yine değişmez.
