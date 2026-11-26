@@ -7,6 +7,11 @@
 
 
 
+## 137 (27.11.2026) · Alt menüye Bütçe ve Ayarlar tuşu
+- Kitap okurken alt menüde Geri ve Notlar'ın yanına **Bütçe** (cüzdan simgesi → Bütçe sekmesi) ve **Ayarlar** (Aa → görünüm ayarları) tuşları; dördü aynı silik görünümde, tek satırda.
+- Soldaki konum yazısı kısaldı: "Konum 34" → "34" (PDF: "s. 12/300" → "12/300").
+- 380 px ekranda tek satıra sığar, yatay taşma yok.
+
 ## 136 (23.11.2026) · Kısa alt menü · Not tuşu Notlar'ı açar · Aa solda
 - Sayfanın altındaki "Bölümde N sayfa kaldı" yazısı kaldırıldı; bilgi yalnız alt menüde.
 - Alt menü kısaltıldı: tek satır kısa yazı "Bölüm 19 s. kaldı · kitap 498 s. · 2 sa 14 dk"; kenar boşlukları azaltıldı, 380 px ekrana taşmadan sığar.
