@@ -7,6 +7,10 @@
 
 
 
+## 139 (27.11.2026) · 138 düzeltmesi
+- 138'deki "yükseklik serbest" kuralı Okur'un kendi cümle arası boşluklarını (Cümle bitince yeni satır) da sıfırlıyordu; bu boşluk öğeleri (span.okb) kuraldan çıkarıldı, boşluklar eskisi gibi.
+- Üst üste binen satırlar: örnek kitaplarla (2 yazı tipi × 2 boyut × paragraf/girinti × cümle bölme açık/kapalı) yeniden üretilemedi; kullanıcının kitabıyla incelenecek.
+
 ## 138 (27.11.2026) · Etkin ayarlar ✓ · Görünüm silmeden önce sorar · Üst üste binen kelimeler · Geri tuşu en sağda
 - Ayarlar: seçili tema ✓ ile gösterilir ve başlıkta adı yazar ("Tema ve parlaklık · Kâğıt"); seçenek düğmelerinde etkin olan ✓; o an uygulanmış hazır görünüm / kayıtlı görünüm ✓ ve çerçeveyle işaretlenir.
 - Kayıtlı görünümlerde × artık hemen silmez: "Görünüm silinsin mi?" onayı sorulur.
