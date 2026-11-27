@@ -7,6 +7,12 @@
 
 
 
+## 138 (27.11.2026) · Etkin ayarlar ✓ · Görünüm silmeden önce sorar · Üst üste binen kelimeler · Geri tuşu en sağda
+- Ayarlar: seçili tema ✓ ile gösterilir ve başlıkta adı yazar ("Tema ve parlaklık · Kâğıt"); seçenek düğmelerinde etkin olan ✓; o an uygulanmış hazır görünüm / kayıtlı görünüm ✓ ve çerçeveyle işaretlenir.
+- Kayıtlı görünümlerde × artık hemen silmez: "Görünüm silinsin mi?" onayı sorulur.
+- **Üst üste binen kelimeler — kök neden [tahmin, örnek kitapla doğrulandı]:** Bazı kitaplarda (çoğu PDF'den EPUB'a çevrilmiş) kelimeler kitabın kendi stiliyle sabit konuma (position:absolute), sabit yüksekliğe, dar satır aralığına ya da eksi harf/kelime aralığına yerleştirilmiş; yazı boyutu Okur'da değişince birbirinin üstüne biniyordu. Yayıncı stili kapalıyken bu değerler etkisizleştirilir, metin normal akar. Okur'un kendi başlık, süs ve büyük ilk harf düzeni etkilenmez.
+- Alt menüde Kitaplığa dön tuşu en sağa alındı (sıra: Notlar · Bütçe · Aa · Geri).
+
 ## 137 (27.11.2026) · Alt menüye Bütçe ve Ayarlar tuşu
 - Kitap okurken alt menüde Geri ve Notlar'ın yanına **Bütçe** (cüzdan simgesi → Bütçe sekmesi) ve **Ayarlar** (Aa → görünüm ayarları) tuşları; dördü aynı silik görünümde, tek satırda.
 - Soldaki konum yazısı kısaldı: "Konum 34" → "34" (PDF: "s. 12/300" → "12/300").
